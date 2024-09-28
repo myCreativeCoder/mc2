@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="en" class="" data-bs-theme="dark">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="generator" content="MyCreativeCoder">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--
+  <script>
+    localStorage.getItem('darkMode') === 'true' && document.documentElement.setAttribute('data-bs-theme', 'dark');
+  </script>
+-->
+
+
+
+
+  <style data-tippy-stylesheet="">
+    .tippy-box[data-animation=fade][data-state=hidden] {
+      opacity: 0
+    }
+
+    [data-tippy-root] {
+      max-width: calc(100vw - 10px)
+    }
+
+    .tippy-box {
+      position: relative;
+      background-color: #333;
+      color: #fff;
+      border-radius: 4px;
+      font-size: 14px;
+      line-height: 1.4;
+      outline: 0;
+      transition-property: transform, visibility, opacity
+    }
+
+    .tippy-box[data-placement^=top]>.tippy-arrow {
+      bottom: 0
+    }
+
+    .tippy-box[data-placement^=top]>.tippy-arrow:before {
+      bottom: -7px;
+      left: 0;
+      border-width: 8px 8px 0;
+      border-top-color: initial;
+      transform-origin: center top
+    }
+
+    .tippy-box[data-placement^=bottom]>.tippy-arrow {
+      top: 0
+    }
+
+    .tippy-box[data-placement^=bottom]>.tippy-arrow:before {
+      top: -7px;
+      left: 0;
+      border-width: 0 8px 8px;
+      border-bottom-color: initial;
+      transform-origin: center bottom
+    }
+
+    .tippy-box[data-placement^=left]>.tippy-arrow {
+      right: 0
+    }
+
+    .tippy-box[data-placement^=left]>.tippy-arrow:before {
+      border-width: 8px 0 8px 8px;
+      border-left-color: initial;
+      right: -7px;
+      transform-origin: center left
+    }
+
+    .tippy-box[data-placement^=right]>.tippy-arrow {
+      left: 0
+    }
+
+    .tippy-box[data-placement^=right]>.tippy-arrow:before {
+      left: -7px;
+      border-width: 8px 8px 8px 0;
+      border-right-color: initial;
+      transform-origin: center right
+    }
+
+    .tippy-box[data-inertia][data-state=visible] {
+      transition-timing-function: cubic-bezier(.54, 1.5, .38, 1.11)
+    }
+
+    .tippy-arrow {
+      width: 16px;
+      height: 16px;
+      color: #333
+    }
+
+    .tippy-arrow:before {
+      content: "";
+      position: absolute;
+      border-color: transparent;
+      border-style: solid
+    }
+
+    .tippy-content {
+      position: relative;
+      padding: 5px 9px;
+      z-index: 1
+    }
+  </style>
+  <link rel="stylesheet"
+    href="src/config.min.79228e3a8a4896b37b64d1613da4129709a82af37fe215e50.css">
+  <link rel="stylesheet"
+    href="src/style.min.a2403ee5557e31a64dee669c90b299d05ce980da40e88f6147.css">
+
+
+
+
+
+  
+
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="mask-icon" href="safari-pinned-tab.svg" color="#7622d5">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="theme-color" content="#320a68">
+
+
+
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mycreativecoder.com">
+
+  <meta property="og:title" content="MyCreativeCoder">
+  <meta property="og:image" content="https://mycreativecoder.com/images/gen/content/content-1-thumbnail.png">
+  <meta property="og:description" content="Front-end web development">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@xdevzone">
+  <meta name="twitter:creator" content="@xdevzone">
+  <title>MyCreativeCoder.com - web development</title>
+
+
+  <meta name="description" content="MyCreativeCoder.com - web development">
+
+
+
+  <link rel="prefetch" as="image" href="src/media/project-1-4-thumbnail.png" />
+  <link rel="prefetch" as="image" href="src/media/project-4-1-thumbnail.png" />
+  <link rel="prefetch" as="image" href="src/media/project-2-6-thumbnail.png" />
+  <link rel="prefetch" as="image" href="src/media/project-3-3-thumbnail.png" />
+  <link rel="prefetch" as="image" href="src/media/project-5-1-thumbnail.png" />
+  
+
+
+
+  <link href="src/fonts.css" rel="stylesheet">
+
+  <link href="src/custom.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">
+
+  <!--<script src="https://unpkg.com/scrollreveal"></script>-->
+
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script> 
+
+  <script type="text/javascript" src="src/custom.js"></script> 
+
+   
+  
+
+</head>
+
+<body class="page page-home grid js-hidden ">
+
+<div class="loading"></div>
+
+<!-- Modal Structure -->
+<div id="modal" class="modal" data-lenis-prevent="true">
+  <span class="close">&#x2715;</span>
+  <div id="btn-modal-prev">&lsaquo;</div>
+  <div id="btn-modal-next">&rsaquo;</div>
+  <div class="modal-content">
+    <div class="modal-media-content-container">
+      <div class="modal-prev-content"></div>
+      <div class="modal-next-content"></div>
+      <div class="modal-main-content">
+        <img class="modal-slide modal-img" src="" alt="">
+        <div class="modal-slide modal-video"></div>
+      </div>
+      
+      
+    </div>
+    <div id="modal-description" class="modal-description"></div>
+    
+  </div>
+</div>
+
+  <div class="menu-main-mobile " id="menu-main-mobile">
+
+    <div class="menu-main-mobile-top">
+      <div id="close-overlay" class="menu-main-close">
+        <div class="hamburger hamburger-close"></div>
+      </div>
+    </div>
+
+    <div class="menu-main-mobile-center">
+
+      <ul class="menu">
+
+
+        <li class="menu-item-home active">
+          <a href="#wrapper">Home</a>
+        </li>
+
+        <li class="menu-item-projects">
+          <a href="https://mycreativecoder.com/projects/">Projects</a>
+        </li>
+
+        <li class="menu-item-blog">
+          <a href="https://mycreativecoder.com/blog/">Blog</a>
+        </li>
+
+        <li class="menu-item-about">
+          <a href="https://mycreativecoder.com/about/">About</a>
+        </li>
+
+        <li class="menu-item-contact">
+          <a onclick="javascript:void(Tawk_API.toggle());">Contact</a>
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="menu-main-mobile-bottom">
+
+
+      <!--  
+<div id="social" class="social">
+  
+    <a href="https://www.zerostatic.io/" target="blank" title="Twitter">
+      <i class="fab fa-twitter"></i>
+    </a>
+  
+    <a href="https://www.zerostatic.io/" target="blank" title="Github">
+      <i class="fab fa-github"></i>
+    </a>
+  
+    <a href="https://www.zerostatic.io/" target="blank" title="Discord">
+      <i class="fab fa-discord"></i>
+    </a>
+  
+    <a href="https://www.zerostatic.io/" target="blank" title="Tiktok">
+      <i class="fab fa-tiktok"></i>
+    </a>
+  
+    <a href="https://www.zerostatic.io/" target="blank" title="Facebook">
+      <i class="fab fa-facebook-square"></i>
+    </a>
+  
+    <a href="https://www.zerostatic.io/" target="blank" title="Instagram">
+      <i class="fab fa-instagram-square"></i>
+    </a>
+  
+    <a href="https://www.zerostatic.io/" target="blank" title="Linkedin">
+      <i class="fab fa-linkedin"></i>
+    </a>
+  
+    <a href="https://www.zerostatic.io/" target="blank" title="Mailchimp">
+      <i class="fab fa-mailchimp"></i>
+    </a>
+  
+  </div>
+-->
+
+
+
+
+
+      <div class="dark-mode-switcher" id="dark-mode-container">
+        <div class="dark-mode-switch animated dark">
+          <svg class="dark-mode-icon-dark" data-name="Layer 1" fill="#000000" height="20px" viewBox="0 0 64 64"
+            width="20px" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px">
+            <title>essential</title>
+            <path
+              d="M33.28,58.24A26.95,26.95,0,0,1,24,6l.39-.13a2,2,0,0,1,2.4,2.87,22.42,22.42,0,0,0-1.51,18.75h0A22.47,22.47,0,0,0,54.09,40.8l.76-.3a2,2,0,0,1,2.24.48,2,2,0,0,1,.35,2.24,27,27,0,0,1-24.16,15ZM21.11,11.85a22.94,22.94,0,1,0,30,33.91A26.46,26.46,0,0,1,21.53,28.87h0A26.4,26.4,0,0,1,21.11,11.85Z">
+            </path>
+          </svg>
+          <svg class="dark-mode-icon-light" fill="#000000" height="20px" style="enable-background: new 0 0 100 100;"
+            version="1.1" viewBox="0 0 100 100" width="20px" x="0px" xml:space="preserve"
+            xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" y="0px">
+            <g>
+              <path
+                d="M50,75c-13.8,0-25-11.2-25-25s11.2-25,25-25s25,11.2,25,25S63.8,75,50,75z M50,33.3c-9.2,0-16.7,7.5-16.7,16.7   c0,9.2,7.5,16.7,16.7,16.7c9.2,0,16.7-7.5,16.7-16.7C66.7,40.8,59.2,33.3,50,33.3z">
+              </path>
+            </g>
+            <g>
+              <path
+                d="M50,100c-2.3,0-4.2-1.9-4.2-4.2v-8.3c0-2.3,1.9-4.2,4.2-4.2c2.3,0,4.2,1.9,4.2,4.2v8.3C54.2,98.1,52.3,100,50,100z    M17.5,86.7c-1.1,0-2.1-0.4-2.9-1.2c-1.6-1.6-1.6-4.3,0-5.9l5.8-5.8c1.6-1.6,4.3-1.6,5.9,0c1.6,1.6,1.6,4.3,0,5.9l-5.8,5.8   C19.6,86.3,18.6,86.7,17.5,86.7z M82.5,86.7c-1.1,0-2.1-0.4-2.9-1.2l-5.8-5.8c-1.6-1.6-1.6-4.3,0-5.9s4.3-1.6,5.9,0l5.8,5.8   c1.6,1.6,1.6,4.3,0,5.9C84.6,86.3,83.6,86.7,82.5,86.7z M95.8,54.2h-8.3c-2.3,0-4.2-1.9-4.2-4.2c0-2.3,1.9-4.2,4.2-4.2h8.3   c2.3,0,4.2,1.9,4.2,4.2C100,52.3,98.1,54.2,95.8,54.2z M12.5,54.2H4.2C1.9,54.2,0,52.3,0,50c0-2.3,1.9-4.2,4.2-4.2h8.3   c2.3,0,4.2,1.9,4.2,4.2C16.7,52.3,14.8,54.2,12.5,54.2z M76.7,27.5c-1.1,0-2.1-0.4-2.9-1.2c-1.6-1.6-1.6-4.3,0-5.9l5.8-5.8   c1.6-1.6,4.3-1.6,5.9,0c1.6,1.6,1.6,4.3,0,5.9l-5.8,5.8C78.8,27.1,77.7,27.5,76.7,27.5z M23.3,27.5c-1.1,0-2.1-0.4-2.9-1.2   l-5.8-5.8c-1.6-1.6-1.6-4.3,0-5.9c1.6-1.6,4.3-1.6,5.9,0l5.8,5.8c1.6,1.6,1.6,4.3,0,5.9C25.5,27.1,24.4,27.5,23.3,27.5z M50,16.7   c-2.3,0-4.2-1.9-4.2-4.2V4.2C45.8,1.9,47.7,0,50,0c2.3,0,4.2,1.9,4.2,4.2v8.3C54.2,14.8,52.3,16.7,50,16.7z">
+              </path>
+            </g>
+          </svg>
+          <div class="ball"></div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+
+
+
+  <header id="header" class="header sticky">
+    <div class="container">
+      <div class="logos">
+        <div class="logo logo-desktop">
+          <a href="#wrapper">
+            <div class="logo-image">
+
+              <img height="44px" width="44px" alt="Creative Coder Logo" src="src/logo.png">
+
+
+            </div>
+            <span class="logospan"><i><small>my</small><b style=" font-variant: small-caps;"><span class="gradtext-rainbow animate">Creative</span><span>Coder</span></b><small></small></i><i style="font-size: 2em;margin-left: .05em;line-height: 0em;">.</i><small style="opacity: 0.8; line-height: 2em;">com</small></span>
+          </a>
+
+
+        </div>
+
+        <div class="logo logo-desktop-invert">
+
+          <a href="#wrapper">
+            <div class="logo-image">
+
+              <img height="44px" width="44px" alt="Creative Coder Logo" src="src/logo.png">
+
+
+            </div>
+            <span class="logospan"><i><small>my</small><b style=" font-variant: small-caps;"><span class="gradtext-rainbow animate">Creative</span><span>Coder</span></b><small></small></i><i style="font-size: 2em;margin-left: .05em;line-height: 0em;">.</i><small style="opacity: 0.8; line-height: 2em;">com</small></span>
+          </a>
+
+
+
+        </div>
+
+        <div class="logo logo-mobile">
+
+
+          <a href="#wrapper">
+            <div class="logo-image">
+
+              <img height="44px" width="44px" alt="Creative Coder Logo" src="src/logo.png">
+
+
+            </div>
+            <span class="logospan"><i><small>my</small><b style=" font-variant: small-caps;"><span class="gradtext-rainbow animate">Creative</span><span>Coder</span></b><small></small></i><i style="font-size: 2em;margin-left: .05em;line-height: 0em;">.</i><small style="opacity: 0.8; line-height: 2em;">com</small></span>
+          </a>
+
+
+
+
+
+        </div>
+
+
+        <div class="logo logo-mobile-invert">
+
+
+          <a href="#wrapper">
+            <div class="logo-image">
+
+              <img height="44px" width="44px" alt="Creative Coder Logo" src="src/logo.png">
+
+
+            </div>
+            <span class="logospan"><i><small>my</small><b style=" font-variant: small-caps;"><span class="gradtext-rainbow animate">Creative</span><span>Coder</span></b><small></small></i><i style="font-size: 2em;margin-left: .05em;line-height: 0em;">.</i><small style="opacity: 0.8; line-height: 2em;">com</small></span>
+          </a>
+
+
+
+
+        </div>
+
+      </div>
+
+
+      <div class="menu-main">
+        <ul>
+        
+        
+        
+        
+          <li class="active ">
+            <a href="#wrapper">Home</a>
+          </li>
+        
+        
+          <!--
+                    
+                        <li class="menu-item-dropdown ">
+                            <a href="https://mycreativecoder.com/projects/" class="dropdown-parent">Projects <i class="fa-solid fa-chevron-down"></i></a>
+                            <div class="dropdown-menu">
+                                
+                                    
+                                    <a href="https://mycreativecoder.com/projects/project-1/" class="dropdown-item ">
+                                        
+                                            <div class="dropdown-item-icon icon-large"><img alt="Project Layout 1" width="20" height="20" src="src/wireframe-7.svg"></div>
+                                        
+                                        
+                                            <div class="dropdown-item-icon icon-invert icon-large"><img alt="Project Layout 1" width="20" height="20" src="src/wireframe-7-white.svg"></div>
+                                        
+                                        
+                                        <div class="dropdown-item-content">
+                                            <div class="dropdown-item-name dropdown-item-heading">Project Layout 1</div>
+                                            <div class="dropdown-item-description">Default Project layout</div>
+                                        </div>
+                                    </a>
+                                
+                                    
+                                    <a href="https://mycreativecoder.com/projects/project-2/" class="dropdown-item ">
+                                        
+                                            <div class="dropdown-item-icon icon-large"><img alt="Project Layout 2" width="20" height="20" src="src/wireframe-5.svg"></div>
+                                        
+                                        
+                                            <div class="dropdown-item-icon icon-invert icon-large"><img alt="Project Layout 2" width="20" height="20" src="src/wireframe-5-white.svg"></div>
+                                        
+                                        
+                                        <div class="dropdown-item-content">
+                                            <div class="dropdown-item-name dropdown-item-heading">Project Layout 2</div>
+                                            <div class="dropdown-item-description">Right side layout</div>
+                                        </div>
+                                    </a>
+                                
+                                    
+                                    <a href="https://mycreativecoder.com/projects/project-3/" class="dropdown-item ">
+                                        
+                                            <div class="dropdown-item-icon icon-large"><img alt="Project Layout 3" width="20" height="20" src="src/wireframe-6.svg"></div>
+                                        
+                                        
+                                            <div class="dropdown-item-icon icon-invert icon-large"><img alt="Project Layout 3" width="20" height="20" src="src/wireframe-6-white.svg"></div>
+                                        
+                                        
+                                        <div class="dropdown-item-content">
+                                            <div class="dropdown-item-name dropdown-item-heading">Project Layout 3</div>
+                                            <div class="dropdown-item-description">Left side layout</div>
+                                        </div>
+                                    </a>
+                                
+                                    
+                                    <a href="https://mycreativecoder.com/projects/project-4/" class="dropdown-item ">
+                                        
+                                            <div class="dropdown-item-icon icon-large"><img alt="Project Layout 4" width="20" height="20" src="src/wireframe-8.svg"></div>
+                                        
+                                        
+                                            <div class="dropdown-item-icon icon-invert icon-large"><img alt="Project Layout 4" width="20" height="20" src="src/wireframe-8-white.svg"></div>
+                                        
+                                        
+                                        <div class="dropdown-item-content">
+                                            <div class="dropdown-item-name dropdown-item-heading">Project Layout 4</div>
+                                            <div class="dropdown-item-description">Top layout</div>
+                                        </div>
+                                    </a>
+                                
+                            </div>
+                        </li>
+                      -->
+        
+        
+        
+          <li class="">
+            <a href="#projects-reel" id="linkProjects">Projects</a>
+          </li>
+        
+        
+        
+        
+          <li class="">
+            <a href="#about-us" id="linkAbout">About</a>
+          </li>
+        
+        
+        
+        
+          <li class="">
+            <a id="linkContact" class="btn-sm btn-primary"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16" width="24" height="24" style="margin-top: -5px;margin-right: 2px;margin-left: 2px;">
+              <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"></path>
+            </svg> Contact</a>
+          </li>
+        
+        
+        
+        
+        
+        
+        </ul>
+      </div>
+
+      <div id="toggle-menu-main-mobile" class="hamburger-trigger">
+        <button class="hamburger">Menu</button>
+      </div>
+
+
+
+      <div class="dark-mode-switcher" id="dark-mode-container">
+        <div class="dark-mode-switch animated dark">
+          <svg class="dark-mode-icon-dark" data-name="Layer 1" fill="#000000" height="20px" viewBox="0 0 64 64"
+            width="20px" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px">
+            <title>Toggle light / dark theme</title>
+            <path
+              d="M33.28,58.24A26.95,26.95,0,0,1,24,6l.39-.13a2,2,0,0,1,2.4,2.87,22.42,22.42,0,0,0-1.51,18.75h0A22.47,22.47,0,0,0,54.09,40.8l.76-.3a2,2,0,0,1,2.24.48,2,2,0,0,1,.35,2.24,27,27,0,0,1-24.16,15ZM21.11,11.85a22.94,22.94,0,1,0,30,33.91A26.46,26.46,0,0,1,21.53,28.87h0A26.4,26.4,0,0,1,21.11,11.85Z">
+            </path>
+          </svg>
+          <svg class="dark-mode-icon-light" fill="#000000" height="20px" style="enable-background: new 0 0 100 100;"
+            version="1.1" viewBox="0 0 100 100" width="20px" x="0px" xml:space="preserve"
+            xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" y="0px">
+            <g>
+              <path
+                d="M50,75c-13.8,0-25-11.2-25-25s11.2-25,25-25s25,11.2,25,25S63.8,75,50,75z M50,33.3c-9.2,0-16.7,7.5-16.7,16.7   c0,9.2,7.5,16.7,16.7,16.7c9.2,0,16.7-7.5,16.7-16.7C66.7,40.8,59.2,33.3,50,33.3z">
+              </path>
+            </g>
+            <g>
+              <path
+                d="M50,100c-2.3,0-4.2-1.9-4.2-4.2v-8.3c0-2.3,1.9-4.2,4.2-4.2c2.3,0,4.2,1.9,4.2,4.2v8.3C54.2,98.1,52.3,100,50,100z    M17.5,86.7c-1.1,0-2.1-0.4-2.9-1.2c-1.6-1.6-1.6-4.3,0-5.9l5.8-5.8c1.6-1.6,4.3-1.6,5.9,0c1.6,1.6,1.6,4.3,0,5.9l-5.8,5.8   C19.6,86.3,18.6,86.7,17.5,86.7z M82.5,86.7c-1.1,0-2.1-0.4-2.9-1.2l-5.8-5.8c-1.6-1.6-1.6-4.3,0-5.9s4.3-1.6,5.9,0l5.8,5.8   c1.6,1.6,1.6,4.3,0,5.9C84.6,86.3,83.6,86.7,82.5,86.7z M95.8,54.2h-8.3c-2.3,0-4.2-1.9-4.2-4.2c0-2.3,1.9-4.2,4.2-4.2h8.3   c2.3,0,4.2,1.9,4.2,4.2C100,52.3,98.1,54.2,95.8,54.2z M12.5,54.2H4.2C1.9,54.2,0,52.3,0,50c0-2.3,1.9-4.2,4.2-4.2h8.3   c2.3,0,4.2,1.9,4.2,4.2C16.7,52.3,14.8,54.2,12.5,54.2z M76.7,27.5c-1.1,0-2.1-0.4-2.9-1.2c-1.6-1.6-1.6-4.3,0-5.9l5.8-5.8   c1.6-1.6,4.3-1.6,5.9,0c1.6,1.6,1.6,4.3,0,5.9l-5.8,5.8C78.8,27.1,77.7,27.5,76.7,27.5z M23.3,27.5c-1.1,0-2.1-0.4-2.9-1.2   l-5.8-5.8c-1.6-1.6-1.6-4.3,0-5.9c1.6-1.6,4.3-1.6,5.9,0l5.8,5.8c1.6,1.6,1.6,4.3,0,5.9C25.5,27.1,24.4,27.5,23.3,27.5z M50,16.7   c-2.3,0-4.2-1.9-4.2-4.2V4.2C45.8,1.9,47.7,0,50,0c2.3,0,4.2,1.9,4.2,4.2v8.3C54.2,14.8,52.3,16.7,50,16.7z">
+              </path>
+            </g>
+          </svg>
+          <div class="ball"></div>
+        </div>
+      </div>
+
+
+    </div>
+  </header>
+
+  
+
+    <div id="wrapper" class="wrapper">
+
+      <div class="section" id="splash">
+        <div class="container">
+
+          <div class="row" style="display: flex;justify-content: center;align-items: center;">
+            <h2 class="shout">
+              <span>&gt;</span>
+              <span class="animonItem reveal-prehide reveal-2" id="we-make">We Make</span>
+              <div class="animonItem reveal-prehide reveal-3 gradtext-rainbow great animate">
+                <div>G</div><div>R</div><div>E</div><div>A</div><div>T</div>&nbsp;
+              </div>
+              <span class="animonItem reveal-prehide reveal-4 reverse">Web
+                <div id=flip>
+                  <div><div>sites</div></div>
+                  <div><div>apps</div></div>
+                  <div><div>games</div></div>
+                </div>
+
+              </span>
+              <!--<span class="text_gradient">.</span>-->
+              <span>&lt;</span>
+
+            </h2>
+            <div class="animonItem reveal-prehide reveal-5 reverse" style="display: block;">
+              <a class="arrow scrolly" id="hand" style="display: block;">
+                <svg class="hand" xmlns="http://www.w3.org/2000/svg" version="1.1" width="512px" height="512px"
+                  viewBox="0 0 512 512"
+                  style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                  xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <g>
+                    <path style="opacity:0.979" fill="#fefffe"
+                      d="M 100.5,-0.5 C 167.167,-0.5 233.833,-0.5 300.5,-0.5C 314.379,3.54471 323.546,12.5447 328,26.5C 329.273,58.4731 329.939,90.4731 330,122.5C 330.806,125.446 332.139,128.112 334,130.5C 363.565,164.551 399.065,190.718 440.5,209C 452.269,215.295 462.102,223.795 470,234.5C 479.03,261.869 475.363,287.536 459,311.5C 446.341,328.132 429.507,336.965 408.5,338C 393.818,338.799 379.485,336.965 365.5,332.5C 365.667,371.168 365.5,409.835 365,448.5C 358.21,482.455 338.043,503.455 304.5,511.5C 296.5,511.5 288.5,511.5 280.5,511.5C 245.952,503.783 225.452,482.45 219,447.5C 218.5,428.503 218.333,409.503 218.5,390.5C 207.151,389.662 196.484,386.495 186.5,381C 169.959,382.086 153.959,379.753 138.5,374C 132.83,371.167 127.497,367.834 122.5,364C 69.9394,362.776 41.1061,335.942 36,283.5C 35.3043,272.804 35.6377,262.137 37,251.5C 42.4129,219.926 51.0796,189.26 63,159.5C 66.2806,149.325 68.9473,138.991 71,128.5C 72.268,94.8576 72.9346,61.1909 73,27.5C 77.0159,12.985 86.1825,3.65168 100.5,-0.5 Z M 123.5,36.5 C 135.934,36.2671 143.267,42.2671 145.5,54.5C 141.657,70.2536 132.324,75.0869 117.5,69C 105.721,55.6175 107.721,44.7842 123.5,36.5 Z M 109.5,109.5 C 170.167,109.5 230.833,109.5 291.5,109.5C 290.115,126.639 294.615,141.972 305,155.5C 328.092,180.274 353.592,202.107 381.5,221C 397.325,229.079 412.992,237.412 428.5,246C 431.63,248.128 434.463,250.628 437,253.5C 438.026,291.805 419.86,306.639 382.5,298C 376.051,295.609 369.718,292.942 363.5,290C 355.828,284.829 347.828,280.162 339.5,276C 335.986,274.438 332.319,273.605 328.5,273.5C 328.972,331.195 328.472,388.862 327,446.5C 318.704,469.064 302.871,477.564 279.5,472C 268.087,466.922 260.587,458.422 257,446.5C 255.723,412.193 255.056,377.86 255,343.5C 232.572,357.633 211.405,355.967 191.5,338.5C 169.317,347.246 150.484,342.579 135,324.5C 122.628,326.395 110.462,325.561 98.5,322C 84.0736,314.206 75.9069,302.04 74,285.5C 72.4556,263.977 75.1222,242.977 82,222.5C 90.6051,197.685 98.6051,172.685 106,147.5C 108.952,135.003 110.119,122.336 109.5,109.5 Z" />
+                  </g>
+                </svg>
+
+              </a>
+            </div> 
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="section pt-0" data-scroll-section-id="section1">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+
+
+              <div id="projects-reel" class="col-12">
+                <div id="parallax_wrapper" class="col-12">
+                  <div class="rellax astrodude" data-rellax-speed="3" style="z-index: 2;">
+                    <a onclick="javascript:void(Tawk_API.toggle());">
+                    <img id="astrodude" src="src/astrodude.png"
+                      style="width:100%;">
+                    </a>
+                  </div>
+                  <div class="rellax donut" data-rellax-speed="10">
+                    <img id="donut" src="src/donut.png"
+                      style="width:100%;">
+                  </div>
+                  <div class="rellax device" data-rellax-speed="3">
+                    <img src="src/mbp2.png">
+                  </div>
+
+                </div>
+
+              </div>
+
+
+
+              <div class="heading animonItem reveal-prehide reveal-1" style=" padding-top: 5em; z-index: 1; position: relative;">
+
+
+
+                <h1 style="font-size: 2em;text-align: center;width: 100%; " >&nbsp;&nbsp;Making it <i
+                    class="gradtext-rainbow animate pop" style="padding: 0 .2em 0 0.1em; 
+                    font-size: 1.35em;">POP</i><br><small style="font-family: serif;"> – &nbsp;<i>since
+                      2009</i>&nbsp;&nbsp;–</small></h1>
+
+
+
+                <p style="display: none;">Some projects we have been working on</p>
+
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section pt-0 projects-sliders" data-scroll-section-id="section2" style="z-index: 3; position: relative;">
+        <div class="container">
+          <div class="row">
+
+
+
+
+
+
+            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-0 mt-md-0">
+
+
+
+
+
+
+
+
+              <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide reveal-2">
+
+                <div class="summary-thumbnail">
+
+                  <img alt="Editions Exprimerie" class="placeholder"
+                    src="src/media/placeholder-thumbnail.png">
+
+                </div>
+
+                <div class="summary-thumbnail crossfaded" id="crossfaded-1">
+                  <a href="https://mycreativecoder.com/projects/project-2/">
+                    <img class="slide lazyload" alt="Editions Exprimerie" loading="lazy"
+                      data-src="src/media/project-1-1-thumbnail.png">
+                    <img class="slide lazyload" alt="Editions Exprimerie" loading="lazy"
+                      data-src="src/media/project-1-2-thumbnail.png">
+                    <img class="slide" alt="Editions Exprimerie" 
+                      src="src/media/project-1-3-thumbnail.png">
+                    <img class="slide shown" alt="Editions Exprimerie"
+                      src="src/media/project-1-4-thumbnail.png">
+                  </a>
+                </div>
+
+
+                <div class="summary-content">
+                  <div class="summary-title">
+                    <h2>
+                      <a href="https://mycreativecoder.com/projects/project-2/">l'Exprimerie</a>
+                    </h2>
+                  </div>
+
+                  <span class="summary-client">
+                    Maison d'edition | site eCommerce
+                  </span>
+
+                  <div class="summary-description">
+                    E-commerce Site (multilingual) for online sales of physical books, DVDs, with a catalog of over 100
+                    products :
+                    <ul>
+                      <li>Graphic Identity</li>
+                      <li>web design</li>
+                      <li>web development</li>
+                      <li>technical and editorial maintenance</li>
+                      <li>newsletter (1000+ adresses listing, 100k+ mails sent) and transactional mailing</li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-md-0">
+
+
+
+
+
+
+
+
+              <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide reveal-3">
+
+
+                <div class="summary-thumbnail ">
+
+                  <img class="placeholder" alt="AirAir - Online multiplayer game"
+                    src="src/media/placeholder-thumbnail.png">
+
+                </div>
+
+                <div class="summary-thumbnail crossfaded" id="crossfaded-4">
+                  <a href="https://mycreativecoder.com/projects/project-1/">
+                    <img class="slide lazyload" alt="AirAir - Online multiplayer game" loading="lazy" style="opacity:0;"
+                      data-src="src/media/project-4-6-thumbnail.png">
+                    <video class="slide" alt="AirAir - Online multiplayer game" style="opacity:0;"
+                      title="AirAir - Online multiplayer game" preload="auto">
+                      <source alt="AirAir - Online multiplayer game" title="AirAir - Online multiplayer game"
+                        src="src/airair.mp4" type="video/mp4" />
+                    </video>
+                    <img class="slide shown" alt="AirAir - Online multiplayer game"
+                      src="src/media/project-4-1-thumbnail.png">
+                  </a>
+                </div>
+
+                <div class="summary-content">
+                  <div class="summary-title">
+                    <h2>
+                      <a href="https://mycreativecoder.com/projects/project-4/">AirAir</a>
+                    </h2>
+                  </div>
+
+                  <span class="summary-client">
+                    Online multiplayer game
+                  </span>
+
+                  <div class="summary-description">
+                    TypeScript, NodeJS, BabylonJS, WebGL, WebGPU, GLSL, CSS3, HTML5, Web APIs, WebSockets, Gamepad API,
+                    Vibration API, Push notifications <br />
+                    User Interface, game engine, renderer, game assets, shaders, animation, inputs, camera behavior,
+                    day-night cycle, cloud system, post-process, avatars
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mt-md-0">
+
+
+
+
+
+
+
+
+              <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide">
+
+
+                <div class="summary-thumbnail">
+
+                  <img alt="Crises et Société" class="placeholder"
+                    src="src/media/placeholder-thumbnail.png">
+
+                </div>
+
+                <div class="summary-thumbnail crossfaded" id="crossfaded-2">
+                  <a href="https://mycreativecoder.com/projects/project-1/">
+                    <img class="slide lazyload" alt="Crises et Société" loading="lazy"
+                    data-src="src/media/project-2-1-thumbnail.png">
+                    <img class="slide lazyload" alt="Crises et Société" loading="lazy"
+                    data-src="src/media/project-2-2-thumbnail.png">
+                    <img class="slide lazyload" alt="Crises et Société" loading="lazy"
+                    data-src="src/media/project-2-3-thumbnail.png">
+                    <img class="slide lazyload" alt="Crises et Société" loading="lazy"
+                    data-src="src/media/project-2-4-thumbnail.png">
+                    <img class="slide" alt="Crises et Société" 
+                      src="src/media/project-2-5-thumbnail.png">
+                    <img class="slide shown" alt="Crises et Société"
+                      src="src/media/project-2-6-thumbnail.png">
+                  </a>
+                </div>
+
+                <div class="summary-content">
+                  <div class="summary-title">
+                    <h2>
+                      <a href="https://mycreativecoder.com/projects/project-1/">Crises et Société</a>
+                    </h2>
+                  </div>
+
+                  <span class="summary-client">
+                    Multidisciplinary magazine centered on the study of crises
+                  </span>
+
+                  <div class="summary-description">
+                    <ul>
+                      <li>Graphic Identity</li>
+                      <li>web design</li>
+                      <li>web development</li>
+                      <li>technical and editorial maintenance</li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mt-md-0">
+
+
+
+
+
+
+
+
+              <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide">
+
+                <div class="summary-thumbnail">
+
+                  <img class="placeholder" alt="Institut Français de Gestalt-thérapie" class="placeholder"
+                    src="src/media/placeholder-thumbnail.png">
+
+                </div>
+
+                <div class="summary-thumbnail crossfaded" id="crossfaded-3">
+                  <a href="https://mycreativecoder.com/projects/project-3/">
+                    <img class="slide lazyload" alt="Institut Français de Gestalt-thérapie" loading="lazy"
+                      data-src="src/media/project-3-1-thumbnail.png">
+                    <img class="slide" alt="Institut Français de Gestalt-thérapie" 
+                      src="src/media/project-3-2-thumbnail.png">
+                    <img class="slide shown" alt="Institut Français de Gestalt-thérapie"
+                      src="src/media/project-3-3-thumbnail.png"
+                  </a>
+                </div>
+
+
+                <div class="summary-content">
+                  <div class="summary-title">
+                    <h2>
+                      <a href="https://mycreativecoder.com/projects/project-3/">Institut Français de
+                        Gestalt-thérapie</a>
+                    </h2>
+                  </div>
+
+                  <span class="summary-client">
+                    Formations de Psychothérapeute
+                  </span>
+
+                  <div class="summary-description">
+                    Website for the IfGt training institute (Qualiopi certified) :
+                    <ul>
+                      <li>Graphic Identity</li>
+                      <li>web design</li>
+                      <li>web development</li>
+                      <li>technical and editorial maintenance</li>
+                      <li>newsletter (4k+ adresses listing, 300k+ mails sent) and transactional mailing</li>
+                      <li>Development of an online professionnal directory (100+ pros) (cartography GIS, Leaflet,
+                        OpenStreetMap)
+                        (JS/PHP/SPIP)</li>
+                      <li>Cloud Platform (Nextcloud) and collaborative work tools for students and trainers : Logo
+                        design,
+                        branding,
+                        integration, access management, file system tree, transactional mailing, technical maintenance,
+                        print communication.
+                        (100+ users)</li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            
+
+
+
+
+            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mt-md-0">
+
+
+              <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide">
+
+
+                <div class="summary-thumbnail ">
+
+                  <img class="placeholder" alt="Illustration (Vector / Bitmap)"
+                    src="src/media/placeholder-thumbnail.png">
+
+                </div>
+
+                <div class="summary-thumbnail crossfaded" id="crossaded-5">
+                  <a href="https://mycreativecoder.com/projects/project-3/">
+                    <img class="slide shown" alt="Illustration (Vector / Bitmap)"
+                      src="src/media/project-5-1-thumbnail.png">
+                  </a>
+                </div>
+
+
+
+                <div class="summary-content">
+                  <div class="summary-title">
+                    <h2>
+                      <a href="https://mycreativecoder.com/projects/project-3/">Illustration – Vector / Bitmap</a>
+                    </h2>
+                  </div>
+
+                  <span class="summary-client">
+                    Illustration – Vector / Bitmap
+                  </span>
+
+                </div>
+              </div>
+            </div>
+
+
+           
+            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mt-md-0 ">
+
+
+              <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide pt-12">
+
+                <div style="filter: drop-shadow(22px 34px 0px #1d1c456b);text-align: center;">
+                  <div class="lightbulb">
+                <svg class="animonItem reveal-prehide reveal-3" style="filter: drop-shadow(0px 0px 54px #00f3ff);" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-lightbulb-fill" viewBox="0 0 16 16" style="/*! margin-top: -150px; */text-align: center;" width="64" height="64">
+      <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5"></path>
+              </svg>
+            </div>
+              <div class="full-bleed mx-auto animonItem reveal-prehide reveal-2" style="font-weight: bold;">Making awesome ideas <br>go from <i><quote>« impossible »</quote></i> <br>to <strong><strong>INEVITABLE.</strong></strong></div>
+              </div>
+
+
+              </div>
+
+            </div>
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div id="about-us" class="section  pt-16" style="padding-top: 0;">
+        <div class="container">
+          <!--
+          <div class="row">
+            <div style="filter: drop-shadow(22px 34px 0px #1d1c456b);text-align: center;">
+              <div class="lightbulb">
+            <svg class="animonItem reveal-prehide reveal-3" style="filter: drop-shadow(0px 0px 54px #00f3ff);" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-lightbulb-fill" viewBox="0 0 16 16" style="/*! margin-top: -150px; */text-align: center;" width="64" height="64">
+  <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5"></path>
+          </svg>
+        </div>
+          <div class="full-bleed mx-auto animonItem reveal-prehide reveal-2" style="font-weight: bold;">Making awesome ideas <br>go from <i><quote>« impossible »</quote></i> <br>to <strong><strong>INEVITABLE.</strong></strong></div>
+          </div>
+          </div>
+          -->
+          <div class="row">
+
+            <div class="col-md-8 col-xl-5 mx-auto  pb-12">
+
+              <div class="about-info">
+
+
+                <div class="logos animonItem reveal-prehide">
+                  
+          
+                  <div class="logo logo-desktop-invert">
+          
+                    
+                      <div class="logo-image">
+          
+                        <img height="44px" width="44px" alt="Creative Coder Logo" src="src/logo.png">
+          
+          
+                      </div>
+                      <span class="logospan"><i><small>my</small><b style=" font-variant: small-caps;"><span class="gradtext-rainbow animate">Creative</span><span>Coder</span></b><small></small></i><i style="font-size: 2em;margin-left: .05em;line-height: 0em;">.</i><small style="opacity: 0.8; line-height: 2em;">com</small></span>
+                   
+          
+          
+          
+                  </div>
+    
+                </div>
+                <p class="animonItem reveal-prehide">creative web development studio with 15 years of experience in making awesome projects </p>
+
+                
+    
+              
+              </div>
+            </div>
+            
+          </div>
+          
+          
+
+
+          <div class="row animonItem reveal-prehide">
+            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-0 mt-md-0 mb-0">
+              <div class="techstack-halo">
+                <!--col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mb-0 mt-md-0 
+                            <ul class="actions special">
+                              <li><a href="#URL_RUBRIQUE" class="button"><:info_articles_tous:></a></li>
+                            </ul>-->
+
+                <ul class="techstack">
+                  <li class="techstack_item">
+                    <div class="techstack_icon">
+                      <svg viewBox="0 0 128 128">
+                        <path fill="#E44D26" d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z">
+                        </path>
+                        <path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z"></path>
+                        <path fill="#EBEBEB"
+                          d="M64 52.455H45.788L44.53 38.361H64V24.599H29.489l.33 3.692 3.382 37.927H64zm0 35.743l-.061.017-15.327-4.14-.979-10.975H33.816l1.928 21.609 28.193 7.826.063-.017z">
+                        </path>
+                        <path fill="#fff"
+                          d="M63.952 52.455v13.763h16.947l-1.597 17.849-15.35 4.143v14.319l28.215-7.82.207-2.325 3.234-36.233.335-3.696h-3.708zm0-27.856v13.762h33.244l.276-3.092.628-6.978.329-3.692z">
+                        </path>
+                      </svg>
+                    </div>
+                    HTML 5
+                  </li>
+                  <li class="techstack_item">
+                    <div class="techstack_icon">
+                      <svg viewBox="0 0 128 128">
+                        <path fill="#1572B6"
+                          d="M18.814 114.123L8.76 1.352h110.48l-10.064 112.754-45.243 12.543-45.119-12.526z">
+                        </path>
+                        <path fill="#33A9DC" d="M64.001 117.062l36.559-10.136 8.601-96.354h-45.16v106.49z"></path>
+                        <path fill="#fff"
+                          d="M64.001 51.429h18.302l1.264-14.163H64.001V23.435h34.682l-.332 3.711-3.4 38.114h-30.95V51.429z">
+                        </path>
+                        <path fill="#EBEBEB"
+                          d="M64.083 87.349l-.061.018-15.403-4.159-.985-11.031H33.752l1.937 21.717 28.331 7.863.063-.018v-14.39z">
+                        </path>
+                        <path fill="#fff"
+                          d="M81.127 64.675l-1.666 18.522-15.426 4.164v14.39l28.354-7.858.208-2.337 2.406-26.881H81.127z">
+                        </path>
+                        <path fill="#EBEBEB"
+                          d="M64.048 23.435v13.831H30.64l-.277-3.108-.63-7.012-.331-3.711h34.646zm-.047 27.996v13.831H48.792l-.277-3.108-.631-7.012-.33-3.711h16.447z">
+                        </path>
+                      </svg>
+                    </div>
+                    CSS 3
+                  </li>
+                  <li class="techstack_item">
+                    <div class="techstack_icon">
+                      <svg viewBox="0 0 128 128">
+                        <path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z"></path>
+                        <path fill="#323330"
+                          d="M116.347 96.736c-.917-5.711-4.641-10.508-15.672-14.981-3.832-1.761-8.104-3.022-9.377-5.926-.452-1.69-.512-2.642-.226-3.665.821-3.32 4.784-4.355 7.925-3.403 2.023.678 3.938 2.237 5.093 4.724 5.402-3.498 5.391-3.475 9.163-5.879-1.381-2.141-2.118-3.129-3.022-4.045-3.249-3.629-7.676-5.498-14.756-5.355l-3.688.477c-3.534.893-6.902 2.748-8.877 5.235-5.926 6.724-4.236 18.492 2.975 23.335 7.104 5.332 17.54 6.545 18.873 11.531 1.297 6.104-4.486 8.08-10.234 7.378-4.236-.881-6.592-3.034-9.139-6.949-4.688 2.713-4.688 2.713-9.508 5.485 1.143 2.499 2.344 3.63 4.26 5.795 9.068 9.198 31.76 8.746 35.83-5.176.165-.478 1.261-3.666.38-8.581zM69.462 58.943H57.753l-.048 30.272c0 6.438.333 12.34-.714 14.149-1.713 3.558-6.152 3.117-8.175 2.427-2.059-1.012-3.106-2.451-4.319-4.485-.333-.584-.583-1.036-.667-1.071l-9.52 5.83c1.583 3.249 3.915 6.069 6.902 7.901 4.462 2.678 10.459 3.499 16.731 2.059 4.082-1.189 7.604-3.652 9.448-7.401 2.666-4.915 2.094-10.864 2.07-17.444.06-10.735.001-21.468.001-32.237z">
+                        </path>
+                      </svg>
+
+                    </div>
+                    JavaScript
+                  </li>
+
+                  <li class="techstack_item">
+                    <div class="techstack_icon">
+                      <svg viewBox="0 0 128 128">
+                        <path fill="#fff" d="M22.67 47h99.67v73.67H22.67z"></path>
+                        <path data-name="original" fill="#007acc"
+                          d="M1.5 63.91v62.5h125v-125H1.5zm100.73-5a15.56 15.56 0 017.82 4.5 20.58 20.58 0 013 4c0 .16-5.4 3.81-8.69 5.85-.12.08-.6-.44-1.13-1.23a7.09 7.09 0 00-5.87-3.53c-3.79-.26-6.23 1.73-6.21 5a4.58 4.58 0 00.54 2.34c.83 1.73 2.38 2.76 7.24 4.86 8.95 3.85 12.78 6.39 15.16 10 2.66 4 3.25 10.46 1.45 15.24-2 5.2-6.9 8.73-13.83 9.9a38.32 38.32 0 01-9.52-.1 23 23 0 01-12.72-6.63c-1.15-1.27-3.39-4.58-3.25-4.82a9.34 9.34 0 011.15-.73L82 101l3.59-2.08.75 1.11a16.78 16.78 0 004.74 4.54c4 2.1 9.46 1.81 12.16-.62a5.43 5.43 0 00.69-6.92c-1-1.39-3-2.56-8.59-5-6.45-2.78-9.23-4.5-11.77-7.24a16.48 16.48 0 01-3.43-6.25 25 25 0 01-.22-8c1.33-6.23 6-10.58 12.82-11.87a31.66 31.66 0 019.49.26zm-29.34 5.24v5.12H56.66v46.23H45.15V69.26H28.88v-5a49.19 49.19 0 01.12-5.17C29.08 59 39 59 51 59h21.83z">
+                        </path>
+                      </svg>
+
+                    </div>
+                    TypeScript
+                  </li>
+                  <!--
+                                    <li>
+                                      <div class="techstack_item">
+                                        <i class="devicon-nodejs-plain"></i>
+                                        
+                                      </div>
+                                      NodeJS
+                                    </li>
+                                    <li>
+                                      <div class="techstack_item">
+                                         <i class="devicon-electron-original"></i>
+                                        
+                                      </div>
+                                      Electron
+                                    </li>
+                                    
+                                    <li>
+                                      <div class="techstack_item">
+                                        <i class="devicon-jquery-plain"></i>
+                                        
+                                      </div>  
+                                      Jquery
+                                    </li>
+                                    -->
+                  <li class="techstack_item techstack_main">
+                    <div class="techstack_icon">
+                      <img height="44px" width="44px" alt="MyCreativeCoder.com Logo"
+                        src="src/logo.png">
+                    </div>
+                    <i>mc<sup>2</sup></i>
+                  </li>
+
+                  <li class="techstack_item">
+                    <div class="techstack_icon">
+                      <svg viewBox="0 0 128 128" style="margin-left: -4px;" width="48">
+                        <path fill="#6181B6"
+                          d="M64 33.039C30.26 33.039 2.906 46.901 2.906 64S30.26 94.961 64 94.961 125.094 81.099 125.094 64 97.74 33.039 64 33.039zM48.103 70.032c-1.458 1.364-3.077 1.927-4.86 2.507-1.783.581-4.052.461-6.811.461h-6.253l-1.733 10h-7.301l6.515-34H41.7c4.224 0 7.305 1.215 9.242 3.432 1.937 2.217 2.519 5.364 1.747 9.337-.319 1.637-.856 3.159-1.614 4.515a15.118 15.118 0 01-2.972 3.748zM69.414 73l2.881-14.42c.328-1.688.208-2.942-.361-3.555-.57-.614-1.782-1.025-3.635-1.025h-5.79l-3.731 19h-7.244l6.515-33h7.244l-1.732 9h6.453c4.061 0 6.861.815 8.402 2.231s2.003 3.356 1.387 6.528L76.772 73h-7.358zm40.259-11.178c-.318 1.637-.856 3.133-1.613 4.488-.758 1.357-1.748 2.598-2.971 3.722-1.458 1.364-3.078 1.927-4.86 2.507-1.782.581-4.053.461-6.812.461h-6.253l-1.732 10h-7.301l6.514-34h14.041c4.224 0 7.305 1.215 9.241 3.432 1.935 2.217 2.518 5.418 1.746 9.39zM95.919 54h-5.001l-2.727 14h4.442c2.942 0 5.136-.29 6.576-1.4 1.442-1.108 2.413-2.828 2.918-5.421.484-2.491.264-4.434-.66-5.458-.925-1.024-2.774-1.721-5.548-1.721zm-56.985 0h-5.002l-2.727 14h4.441c2.943 0 5.136-.29 6.577-1.4 1.441-1.108 2.413-2.828 2.917-5.421.484-2.491.264-4.434-.66-5.458S41.708 54 38.934 54z">
+                        </path>
+                      </svg>
+
+                    </div>
+                    PHP
+                  </li>
+
+
+
+                  <li class="techstack_item make-neg">
+                    <div class="techstack_icon">
+                      <svg viewBox="0 0 128 128">
+                        <path fill="#00618A"
+                          d="M116.948 97.807c-6.863-.187-12.104.452-16.585 2.341-1.273.537-3.305.552-3.513 2.147.7.733.809 1.829 1.365 2.731 1.07 1.73 2.876 4.052 4.488 5.268 1.762 1.33 3.577 2.751 5.465 3.902 3.358 2.047 7.107 3.217 10.34 5.268 1.906 1.21 3.799 2.733 5.658 4.097.92.675 1.537 1.724 2.732 2.147v-.194c-.628-.8-.79-1.898-1.366-2.733l-2.537-2.537c-2.48-3.292-5.629-6.184-8.976-8.585-2.669-1.916-8.642-4.504-9.755-7.609l-.195-.195c1.892-.214 4.107-.898 5.854-1.367 2.934-.786 5.556-.583 8.585-1.365l4.097-1.171v-.78c-1.531-1.571-2.623-3.651-4.292-5.073-4.37-3.72-9.138-7.437-14.048-10.537-2.724-1.718-6.089-2.835-8.976-4.292-.971-.491-2.677-.746-3.318-1.562-1.517-1.932-2.342-4.382-3.511-6.633-2.449-4.717-4.854-9.868-7.024-14.831-1.48-3.384-2.447-6.72-4.293-9.756-8.86-14.567-18.396-23.358-33.169-32-3.144-1.838-6.929-2.563-10.929-3.513-2.145-.129-4.292-.26-6.438-.391-1.311-.546-2.673-2.149-3.902-2.927C17.811 4.565 5.257-2.16 1.633 6.682c-2.289 5.581 3.421 11.025 5.462 13.854 1.434 1.982 3.269 4.207 4.293 6.438.674 1.467.79 2.938 1.367 4.489 1.417 3.822 2.652 7.98 4.487 11.511.927 1.788 1.949 3.67 3.122 5.268.718.981 1.951 1.413 2.145 2.927-1.204 1.686-1.273 4.304-1.95 6.44-3.05 9.615-1.899 21.567 2.537 28.683 1.36 2.186 4.567 6.871 8.975 5.073 3.856-1.57 2.995-6.438 4.098-10.732.249-.973.096-1.689.585-2.341v.195l3.513 7.024c2.6 4.187 7.212 8.562 11.122 11.514 2.027 1.531 3.623 4.177 6.244 5.073v-.196h-.195c-.508-.791-1.303-1.119-1.951-1.755-1.527-1.497-3.225-3.358-4.487-5.073-3.556-4.827-6.698-10.11-9.561-15.609-1.368-2.627-2.557-5.523-3.709-8.196-.444-1.03-.438-2.589-1.364-3.122-1.263 1.958-3.122 3.542-4.098 5.854-1.561 3.696-1.762 8.204-2.341 12.878-.342.122-.19.038-.391.194-2.718-.655-3.672-3.452-4.683-5.853-2.554-6.07-3.029-15.842-.781-22.829.582-1.809 3.21-7.501 2.146-9.172-.508-1.666-2.184-2.63-3.121-3.903-1.161-1.574-2.319-3.646-3.124-5.464-2.09-4.731-3.066-10.044-5.267-14.828-1.053-2.287-2.832-4.602-4.293-6.634-1.617-2.253-3.429-3.912-4.683-6.635-.446-.968-1.051-2.518-.391-3.513.21-.671.508-.951 1.171-1.17 1.132-.873 4.284.29 5.462.779 3.129 1.3 5.741 2.538 8.392 4.294 1.271.844 2.559 2.475 4.097 2.927h1.756c2.747.631 5.824.195 8.391.975 4.536 1.378 8.601 3.523 12.292 5.854 11.246 7.102 20.442 17.21 26.732 29.269 1.012 1.942 1.45 3.794 2.341 5.854 1.798 4.153 4.063 8.426 5.852 12.488 1.786 4.052 3.526 8.141 6.05 11.513 1.327 1.772 6.451 2.723 8.781 3.708 1.632.689 4.307 1.409 5.854 2.34 2.953 1.782 5.815 3.903 8.586 5.855 1.383.975 5.64 3.116 5.852 4.879zM29.729 23.466c-1.431-.027-2.443.156-3.513.389v.195h.195c.683 1.402 1.888 2.306 2.731 3.513.65 1.367 1.301 2.732 1.952 4.097l.194-.193c1.209-.853 1.762-2.214 1.755-4.294-.484-.509-.555-1.147-.975-1.755-.556-.811-1.635-1.272-2.339-1.952z">
+                        </path>
+                      </svg>
+
+                    </div>
+                    MySQL
+                  </li>
+                  <!--
+                                    <li>
+                                      <div class="techstack_item">
+                                       <i class="devicon-apache-plain"></i>
+                                        
+                                      </div>
+                                      Apache
+                                    </li>
+                                    <li>
+                                      <div class="techstack_item">
+                                        <i class="devicon-nginx-original"></i>
+                                        
+                                      </div>
+                                      Nginx
+                                    </li>
+                            
+                                    <li>
+                                      <div class="techstack_item">
+                                        <i class="devicon-bootstrap-plain"></i>
+                                        
+                                      </div>
+                                      Bootstrap
+                                    </li>
+                            -->
+                  <li class="techstack_item make-neg">
+                    <div class="techstack_icon">
+                      <svg viewBox="0 0 128 128">
+                        <path fill-rule="evenodd" clip-rule="evenodd" fill="#2A4D80"
+                          d="M122.301 58.635c-.6-1.299-.89-2.836-.952-4.283-.154-3.561-.023-7.135-.184-10.696-.144-3.189-1.282-6.063-4.344-7.707-2.696-1.447-5.821-1.591-8.821-1.625v5.691c1 .034.754.065.998.078 4.029.198 5.379 1.476 5.43 5.473.038 2.972.012 5.946.06 8.917.059 3.605.597 7.046 3.894 9.322.056.039.051.182.083.348-1.678 1.192-3.006 2.727-3.392 4.822a34.53 34.53 0 00-.54 5.153c-.096 3.118.003 6.243-.086 9.361-.07 2.442-1.227 3.588-3.604 4.132-.895.206-1.843.279-2.843.406v5.677c2-.12 3.017-.199 4.387-.347 5.156-.558 8.059-3.241 8.654-8.243.186-1.568.165-3.166.2-4.75.066-2.969.032-5.952.298-8.903.271-3.011 2.461-4.675 5.461-4.509v-5.951c-2 .358-3.843-.507-4.699-2.366zM28.314 70.768C28.313 59.219 28 47.67 28 36.122v-1.817c-3 0-6.226-.029-9.391.014-1.285.017-2.418.127-3.692.301-4.877.664-7.228 2.953-8.092 7.812-.25 1.402-.2 2.859-.221 4.293-.039 2.726.039 5.453-.005 8.178-.055 3.432-1.672 6.092-5.172 6.294-.124.007.573.15-.427.236v5.305c4 .628 5.273 2.243 5.539 5.959.042.592.053 1.189.059 1.784.034 3.32-.004 6.645.146 9.959.141 3.093.828 5.857 3.751 7.48C13.225 93.436 17 93.559 19 93.638v-5.664c0-.048-.21-.092-.405-.104-4.339-.265-5.317-1.443-5.343-5.785-.017-2.875.106-5.75.06-8.625-.058-3.612-.586-7.038-3.856-9.324-.05-.035-.001-.183-.017-.383 2.199-1.39 3.368-3.516 3.686-6.094.176-1.422.235-2.864.26-4.299.05-2.973-.003-5.949.078-8.92.057-2.088 1.39-3.61 3.091-3.952 1.612-.325 2.446-.315 5.446-.466v2.056c0 10.31-.367 20.619-.313 30.929.019 3.531.41 7.012 4.195 8.537 2.058.829 4.263 1.084 6.627 1.642.395-2.312.524-4.23.847-6.128-4.357-1.25-5.042-1.898-5.042-6.29zm26.674-19.893c-7.34-3.51-16.248-.441-19.666 6.921-2.574 5.544-2.482 11.25-.216 16.872 1.229 3.048 3.45 5.33 6.473 6.672 5.904 2.621 11.879 1.984 17.832.144.321-.1.731-.718.692-1.046-.203-1.661-.54-3.306-.841-5.021-1.417.357-2.601.722-3.811.949-3.197.601-6.401.6-9.512-.637-3.072-1.22-5.135-4.73-4.622-7.73h20.872c.255-3 .154-7.125-1.123-10.536-1.14-3.049-3.108-5.167-6.078-6.588zM54.944 63H41.228c.007-4 3.264-7.59 7.537-7.508 3.753.072 6.349 3.508 6.179 7.508zm56.108 12.279c.492-5.054-1.034-7.898-5.534-10.094-1.596-.779-3.29-1.356-4.916-2.078-1.217-.54-2.442-1.087-3.58-1.771-1.108-.665-1.572-1.769-1.408-3.062.161-1.277.982-2.119 2.168-2.359 1.437-.292 2.943-.542 4.388-.424 2.042.167 4.056.69 6.163 1.075l1.332-5.818c-2.851-.434-5.509-.995-8.195-1.207-2.987-.235-5.896.261-8.63 1.67-5.777 2.977-5.883 12.116-.574 15.116 1.586.896 3.283 1.596 4.933 2.38 1.737.827 3.537 1.546 5.199 2.504 1.262.727 1.713 1.996 1.375 3.475-.313 1.375-1.354 1.988-2.577 2.105-1.86.177-3.768.347-5.609.128-2.217-.264-4.387-.937-6.658-1.451l-1.158 5.79c5.333 2.002 10.61 2.33 15.938 1.149 4.459-.988 6.999-3.596 7.343-7.128zm-28.415-9.452c-1.959-1.039-4.066-1.797-6.088-2.723-1.255-.575-2.584-1.074-3.69-1.871-2.127-1.533-1.731-4.472.746-5.258 1.421-.452 3.028-.592 4.521-.48 2.034.153 4.041.679 6.162 1.063l1.258-5.546c-1.077-.293-2.052-.612-3.051-.822-3.971-.836-7.963-1.16-11.874.215-3.36 1.182-5.691 3.392-6.152 7.11-.516 4.152.861 7.43 4.696 9.402 1.535.79 3.18 1.363 4.747 2.095 1.564.73 3.161 1.427 4.614 2.343 1.111.7 1.549 1.885 1.236 3.255-.311 1.358-1.301 2.042-2.533 2.169-1.86.191-3.769.368-5.611.153-2.226-.26-4.403-.935-6.714-1.455-.341 1.613-.741 3.238-.99 4.885-.054.358.345 1.046.681 1.163 5.384 1.866 10.864 2.134 16.34.521 3.27-.962 5.557-3.051 6.018-6.623.523-4.055-.444-7.544-4.316-9.596z">
+                        </path>
+                      </svg>
+
+                    </div>
+                    Less
+                  </li>
+                  <!--
+                                    <li>
+                                      <div class="techstack_item">
+                                         <i class="devicon-sass-original"></i>
+                                        
+                                      </div>
+                                      Sass
+                                    </li>
+                            -->
+                  <li class="techstack_item">
+                    <div class="techstack_icon">
+
+                      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id=""
+                        enable-background="new 336.7 357.7 258.7 113.5" width="50" viewBox="0 0 250 255" height="38">
+                        <defs id="defs30590">
+                          <style id="style30588">
+                            .cls-1 {
+                              fill: #fff
+                            }
+
+                            .cls-2 {
+                              fill: #e0684b
+                            }
+
+                            .cls-3 {
+                              fill: #bb464b
+                            }
+                          </style>
+                        </defs>
+                        <path id="path30594" d="M110.92.01L0 64.01v128.11l110.92 64.07 110.92-64V64.04z" class="cls-1">
+                        </path>
+                        <path transform="translate(-110.78 -64.81)" id="polygon30596" class="cls-2"
+                          d="M264.5 128.09l34.72 20.05 33.4-19.29-34.72-20.04z"></path>
+                        <path transform="translate(-110.78 -64.81)" id="polygon30598" class="cls-2"
+                          d="M221.7 64.81l-110.92 64.04 33.4 19.29L255.09 84.1z"></path>
+                        <path transform="translate(-110.78 -64.81)" id="polygon30600" class="cls-2"
+                          d="M256.41 212.94l-34.71-20.05-34.72 20.05 34.72 20.04z"></path>
+                        <path transform="translate(-110.78 -64.81)" id="polygon30602" class="cls-3"
+                          d="M221.7 282.41l-77.52-44.76v-89.51l-33.4-19.29v128.08l110.92 64.04 110.92-64.04V128.85l-33.4 19.29v89.51z">
+                        </path>
+                        <path transform="translate(-110.78 -64.81)" id="polygon30604" class="cls-3"
+                          d="M186.98 212.94l34.72-20.05 34.71 20.05v-40.09l-34.71-20.04-34.72 20.04z"></path>
+                        <path transform="translate(-110.78 -64.81)" id="polygon30606" fill="#e0ded8"
+                          d="M256.41 212.94l-34.71 20.04v49.43l77.52-44.76v-89.51l-42.81 24.71z"></path>
+                        <path transform="translate(-110.78 -64.81)" id="polygon30608" fill="#d5d2ca"
+                          d="M186.98 212.94l34.72 20.04v49.43l-77.52-44.76v-89.51l42.8 24.71z"></path>
+                        <path transform="translate(-110.78 -64.81)" id="polygon30610" class="cls-1"
+                          d="M264.5 128.09l34.72 20.05-42.81 24.71-34.71-20.04-34.72 20.04-42.8-24.71L255.09 84.1l42.81 24.71z">
+                        </path>
+                      </svg>
+
+                    </div>
+                    BabylonJS
+                  </li>
+
+
+                </ul>
+              </div>
+
+
+
+            </div>
+
+
+            
+            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-0 mt-md-0 desc-features">
+              <h2>Truly <i class="gradtext-rainbow" style="font-variant:initial;">you</i>,
+                <br>forever <i class="gradtext-rainbow" style="font-variant:initial;">yours</i>.
+              </h2>
+              <p>
+                We build tailor-made websites and applications on top of open source technologies.
+              </p>
+            </div>
+
+
+
+          </div>
+        </div>
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+      <div class="section section-base-bg-2" data-scroll-section-id="section4">
+        <div class="container">
+          <div style="background-image: url('src/logotransparent.png');
+                    background-position: 0% 20%;
+                    width: 200px;
+                    height: 200px;
+                    position: absolute;
+                    margin-top: -61px;
+                    background-repeat: no-repeat;
+                    overflow: visible;
+                    margin-left: -58px;
+                    background-size: 121px;
+                    rotate: -20deg;display:none;"></div>
+          <div class="row">
+            <div class="col-12">
+              <div class="subscribe">
+                <div class="row align-items-center">
+                  <div class="col-12 col-md-6 mb-2 mb-md-0">
+                    <h2 id="contact-us" class="subscribe-title">Let's keep in touch</h2>
+                  </div>
+
+                  <div class="co-12 col-md-6" style="text-align: center;">
+                    <div id="mc_embed_signup" style="text-align: center;">
+                      <button type="button" class="btn btn-primary btn-lg"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16" width="24" height="24" style="margin-top: -5px;margin-right: 2px;margin-left: 2px;">
+              <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"></path>
+            </svg>
+                      Contact Us</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+
+ 
+
+
+
+
+  <div class="footer">
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-12 col-md">
+          <div class="footer-info">
+
+
+            <div class="logos">
+              
+      
+              <div class="logo logo-desktop-invert mb-4">
+      
+                <a href="#wrapper">
+                  <div class="logo-image">
+      
+                    <img height="44px" width="44px" alt="Creative Coder Logo" src="src/logo.png">
+      
+      
+                  </div>
+                  <span class="logospan"><i><small>my</small><b style=" font-variant: small-caps;"><span class="gradtext-rainbow">Creative</span><span>Coder</span></b><small></small></i><i style="font-size: 2em;margin-left: .05em;line-height: 0em;">.</i><small style="opacity: 0.8; line-height: 2em;">com</small></span>
+                </a>
+      
+      
+      
+              </div>
+
+            </div>
+            <p style="display: none;">creative web development studio with 15 years of experience in making awesome projects go from <i>impossible</i> to <strong><i>inevitable.</i></strong></p>
+
+          
+        </div>
+      </div>
+
+
+
+        <div class="col-12 col-md-2" style="display: none;"></div>
+
+        
+        
+
+        <div class="col-12 col-md-2 mt-2 mt-md-0" style="display: none;">
+          <div class="footer-menu">
+
+            <h3>Projects</h3>
+
+            <div class="menu-footer-primary">
+              <ul class="footer-menu">
+
+
+                <li class="menu-item-project-1">
+                  <a href="https://mycreativecoder.com/projects/project-1/">Project 1</a>
+                </li>
+
+                <li class="menu-item-project-2">
+                  <a href="https://mycreativecoder.com/projects/project-2/">Project 2</a>
+                </li>
+
+                <li class="menu-item-project-3">
+                  <a href="https://mycreativecoder.com/projects/project-3/">Project 3</a>
+                </li>
+
+                <li class="menu-item-project-4">
+                  <a href="https://mycreativecoder.com/projects/project-4/">Project 4</a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-12 col-md-2 mt-2 mt-md-0" style="display: none;">
+          <div class="footer-menu">
+
+            <h3>Company</h3>
+
+            <div class="menu-footer-secondary">
+              <ul class="footer-menu">
+
+
+                <li class="menu-item-blog">
+                  <a href="https://mycreativecoder.com/blog/">Blog</a>
+                </li>
+
+                <li class="menu-item-about">
+                  <a href="https://mycreativecoder.com/about/">About</a>
+                </li>
+
+                <li class="menu-item-contact">
+                  <a onclick="javascript:void(Tawk_API.toggle());">Contact</a>
+                </li>
+
+                <li class="menu-item-privacy-policy">
+                  <a href="https://mycreativecoder.com/privacy-policy/">Privacy Policy</a>
+                </li>
+
+                <li class="menu-item-terms-and-conditions">
+                  <a href="https://mycreativecoder.com/terms-and-conditions/">Terms and Conditions</a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div class="row mt-4" style="display: none;">
+        <div class="col-12 col-md">
+
+          <div id="social" class="social">
+
+            <a href="https://www.zerostatic.io/" target="blank" title="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+
+            <a href="https://www.zerostatic.io/" target="blank" title="Github">
+              <i class="fab fa-github"></i>
+            </a>
+
+            <a href="https://www.zerostatic.io/" target="blank" title="Discord">
+              <i class="fab fa-discord"></i>
+            </a>
+
+            <a href="https://www.zerostatic.io/" target="blank" title="Tiktok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+
+            <a href="https://www.zerostatic.io/" target="blank" title="Facebook">
+              <i class="fab fa-facebook-square"></i>
+            </a>
+
+            <a href="https://www.zerostatic.io/" target="blank" title="Instagram">
+              <i class="fab fa-instagram-square"></i>
+            </a>
+
+            <a href="https://www.zerostatic.io/" target="blank" title="Linkedin">
+              <i class="fab fa-linkedin"></i>
+            </a>
+
+            <a href="https://www.zerostatic.io/" target="blank" title="Mailchimp">
+              <i class="fab fa-mailchimp"></i>
+            </a>
+
+          </div>
+
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+<!--
+  <script type="text/javascript"
+    src="src/darkModeBundle.min.2313db1c1cabf805494bc0e56d0a45b0fa46d279a3.js"></script>
+-->
+  <script type="text/javascript"
+    src="src/bundle.min.424653c76a19b835c9a468baebb22183124cc256e0da9870bb.js"></script>
+
+  <script type="text/javascript" src="src/rellax.min.js"></script>
+
+  <link rel="stylesheet" href="src/cookieconsent.css">
+
+  <script type="text/javascript"
+    src="src/cookieConsentModeBundle.85e254496474a23adf0e3000a780a2231b010.js"></script>
+
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+
+  <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/66f6c86ae5982d6c7bb5abe3/1i8pvtogp';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+
+  <!--<link rel="stylesheet" href="src/locomotive-scroll.css">
+
+  <script>
+    window.addEventListener('load', function () {
+
+
+      var cc = initCookieConsent();
+
+
+      cc.run({
+        current_lang: 'en',
+        autoclear_cookies: true,
+        page_scripts: true,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        onFirstAction: function (user_preferences, cookie) {
+
+        },
+
+        onAccept: function (cookie) {
+
+        },
+
+        onChange: function (cookie, changed_preferences) {
+
+          if (!cc.allowedCategory('analytics')) {
+            typeof gtag === 'function' && gtag('consent', 'update', {
+              'analytics_storage': 'denied'
+            });
+          }
+        },
+
+        languages: {
+          'en': {
+            consent_modal: {
+              title: 'We use cookies!',
+              description: 'Hi, this website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent. <button type="button" data-cc="c-settings" class="cc-link">Let me choose</button>',
+              primary_btn: {
+                text: 'Accept all',
+                role: 'accept_all'
+              },
+              secondary_btn: {
+                text: 'Reject all',
+                role: 'accept_necessary'
+              }
+            },
+            settings_modal: {
+              title: 'Cookie preferences',
+              save_settings_btn: 'Save settings',
+              accept_all_btn: 'Accept all',
+              reject_all_btn: 'Reject all',
+              close_btn_label: 'Close',
+
+              cookie_table_headers: [
+                { col1: 'Name' },
+                { col2: 'Domain' },
+                { col3: 'Expiration' },
+                { col4: 'Description' }
+              ],
+              blocks: [
+                {
+                  title: 'Cookie usage 📢',
+                  description: 'I use cookies to ensure the basic functionalities of the website and to enhance your online experience. You can choose for each category to opt-in/out whenever you want. For more details relative to cookies and other sensitive data, please read the full <a href="#" class="cc-link">privacy policy</a>.'
+                }, {
+                  title: 'Strictly necessary cookies',
+                  description: 'These cookies are essential for the proper functioning of my website. Without these cookies, the website would not work properly',
+                  toggle: {
+                    value: 'necessary',
+                    enabled: true,
+                    readonly: true
+                  }
+                }, {
+                  title: 'Performance and Analytics cookies',
+                  description: 'These cookies allow the website to remember the choices you have made in the past',
+                  toggle: {
+                    value: 'analytics',
+                    enabled: false,
+                    readonly: false
+                  },
+                  cookie_table: [
+                    {
+                      col1: '^_ga',
+                      col2: 'google.com',
+                      col3: '2 years',
+                      col4: 'description ...',
+                      is_regex: true
+                    },
+                    {
+                      col1: '_gid',
+                      col2: 'google.com',
+                      col3: '1 day',
+                      col4: 'description ...',
+                    }
+                  ]
+                },
+                {
+                  title: 'More information',
+                  description: 'For any queries in relation to our policy on cookies and your choices, please <a class="cc-link" href="#yourcontactpage">contact us</a>.',
+                }
+              ]
+            }
+          }
+        }
+      });
+    });
+  </script>
+
+<div id="cc--main" style="position: fixed;" class="c--anim">
+  <div id="cc_div" class="cc_div"><div id="cm" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="c-ttl" aria-describedby="c-txt" style="visibility: hidden;" aria-hidden="true"><div id="c-inr"><div id="c-inr-i"><h2 id="c-ttl">We use cookies!</h2><div id="c-txt">Hi,
+ this website uses essential cookies to ensure its proper operation and 
+tracking cookies to understand how you interact with it. The latter will
+ be set only after consent. <button type="button" data-cc="c-settings" class="cc-link" aria-haspopup="dialog">Let me choose</button></div></div><div id="c-bns"><button type="button" id="c-p-bn" class="c-bn"><span tabindex="-1">Accept all</span></button><button type="button" id="c-s-bn" class="c-bn c_link"><span tabindex="-1">Reject all</span></button></div></div></div><div id="cm-ov" style="visibility: hidden; opacity: 0;"></div><div tabindex="-1" id="s-cnt" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="s-ttl" style="visibility: hidden;"><div id="c-vln"><div id="cs"><div id="c-s-in"><div id="s-inr" class="bns-t"><div id="s-hdr"><h2 id="s-ttl">Cookie preferences</h2><div id="s-c-bnc"><button type="button" id="s-c-bn" class="c-bn" aria-label="Close"><span tabindex="-1"></span></button></div></div><div id="s-bl"><div class="c-bl"><div class="title"><div class="b-tl" role="heading" aria-level="3">Cookie usage 📢</div></div><div class="desc"><div class="p">I
+ use cookies to ensure the basic functionalities of the website and to 
+enhance your online experience. You can choose for each category to 
+opt-in/out whenever you want. For more details relative to cookies and 
+other sensitive data, please read the full <a href="#" class="cc-link">privacy policy</a>.</div></div></div><div class="c-bl b-ex"><div class="title b-bn"><button type="button" class="b-tl exp" aria-expanded="false" aria-controls="c-ac-1">Strictly necessary cookies</button><label class="b-tg"><input class="c-tgl" type="checkbox" value="necessary" disabled="disabled" checked="checked"><span class="c-tg c-ro" aria-hidden="true"><span class="on-i"></span><span class="off-i"></span></span><span class="t-lb">Strictly necessary cookies</span></label></div><div class="desc b-acc" id="c-ac-1" aria-hidden="true"><div class="p">These cookies are essential for the proper functioning of my website. Without these cookies, the website would not work properly</div></div></div><div class="c-bl b-ex"><div class="title b-bn"><button type="button" class="b-tl exp" aria-expanded="false" aria-controls="c-ac-2">Performance and Analytics cookies</button><label class="b-tg"><input class="c-tgl" type="checkbox" value="analytics"><span class="c-tg" aria-hidden="true"><span class="on-i"></span><span class="off-i"></span></span><span class="t-lb">Performance and Analytics cookies</span></label></div><div class="desc b-acc" id="c-ac-2" aria-hidden="true"><div class="p">These cookies allow the website to remember the choices you have made in the past</div><table><thead><tr><th scope="col">Name</th><th scope="col">Domain</th><th scope="col">Expiration</th><th scope="col">Description</th></tr></thead><tbody><tr><td data-column="Name">^_ga</td><td data-column="Domain">google.com</td><td data-column="Expiration">2 years</td><td data-column="Description">description ...</td></tr><tr><td data-column="Name">_gid</td><td data-column="Domain">google.com</td><td data-column="Expiration">1 day</td><td data-column="Description">description ...</td></tr></tbody></table></div></div><div class="c-bl"><div class="title"><div class="b-tl" role="heading" aria-level="3">More information</div></div><div class="desc"><div class="p">For any queries in relation to our policy on cookies and your choices, please <a class="cc-link" href="#yourcontactpage">contact us</a>.</div></div></div></div><div id="s-bns"><button type="button" id="s-all-bn" class="c-bn">Accept all</button><button type="button" id="s-rall-bn" class="c-bn">Reject all</button><button type="button" id="s-sv-bn" class="c-bn">Save settings</button></div></div></div></div></div></div><div id="cs-ov" style="visibility: hidden; opacity: 0;"></div>
+</div>
+</div>
+-->
+<a id="chat-widget-custom" class="hidden" onclick="javascript:void(Tawk_API.toggle());">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+    <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+  </svg>
+</a>
+
+</body>
+
+</html>
