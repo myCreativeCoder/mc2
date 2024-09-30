@@ -326,8 +326,10 @@
       }
 
 
-
+      
       const navSections = document.querySelectorAll('.nav-section');
+      const navSectionsStart = document.querySelectorAll('.nav-section-start');
+      let currentSection = navSectionsStart[0];  // Start with the first section
       const menuItems = document.querySelectorAll('[data-nav-section-id-target]');
 
       const observerOptions = {
@@ -343,7 +345,7 @@
           entries.forEach(entry => {
               if (entry.isIntersecting) {
                   const sectionId = entry.target.getAttribute('data-nav-section-id');
-                  console.log(sectionId)
+                  //console.log(sectionId)
                   setActiveMenuItem(sectionId);
               }
           });
@@ -380,11 +382,66 @@
 
               // Update the active section id
               activeSectionId = sectionId;
+
+              currentSection = document.querySelector(`.nav-section-start[data-nav-section-id="${sectionId}"]`);
+              //alert(currentSection.id)
           }
+
+          
       }
 
 
+      // Function to scroll to a specific section using Lenis
+      const scrollToSection = (section) => {
+          const sectionId = section.id;  // Get the section ID
+          lenis.scrollTo(`#${sectionId}`, { lerp: 0.025, lock: true });  // Smooth scroll using Lenis
+          currentSection = section;  // Update the current section
+          //setActiveMenuItem(sectionId);  // Update the active menu item
+      };
 
+      // Listen for keydown events to navigate sections
+      // Listen for keydown events to navigate sections
+      document.addEventListener('keydown', (e) => {
+        // Check if the document has focus, if not, return early
+        if (!document.hasFocus() || e.repeat || lenis.isScrolling) {
+          e.stopPropagation();
+          e.preventDefault();
+          return;
+        }
+
+        switch (e.key) {
+            case 'ArrowDown':
+            case 'Enter':{
+                e.stopPropagation();
+                e.preventDefault();
+                // Get all sections again to ensure we have the latest references
+                const sectionsArrayDown = Array.from(navSectionsStart);
+                const currentIndexDown = sectionsArrayDown.indexOf(currentSection);
+                
+                // Calculate the next section
+                const nextSection = sectionsArrayDown[currentIndexDown + 1];
+                if (nextSection) {
+                    scrollToSection(nextSection); // Scroll to the next section if it exists
+                }
+                break;
+            }
+            case 'ArrowUp': {
+                e.stopPropagation();
+                e.preventDefault(); 
+                // Get all sections again to ensure we have the latest references
+                const sectionsArrayUp = Array.from(navSectionsStart);
+                const currentIndexUp = sectionsArrayUp.indexOf(currentSection);
+                
+                // Calculate the previous section
+                const prevSection = sectionsArrayUp[currentIndexUp - 1];
+                if (prevSection) {
+                    scrollToSection(prevSection); // Scroll to the previous section if it exists
+                }
+                break;
+            }
+        }
+      });
+    
 
         // lazy load images with lazyload class once core stuff has been loaded
         // REM : let the splash screen transition finish before lazyloading to avoid cluttering the main thread
@@ -957,7 +1014,7 @@
         });
 
 
-        const wrapper = document.getElementById('wrapper');
+        const wrapper = document.getElementById('home');
 
         // Modal elements
         const modal = document.getElementById('modal');
