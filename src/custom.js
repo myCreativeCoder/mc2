@@ -4,9 +4,27 @@
                          window.location.hostname === "127.0.0.1" || 
                          window.location.protocol === "file:");
 
-    
+      let testMode = isOnline;
 
-    
+      if (isOnline){
+        function injectTawkScript() {
+          var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+          
+          // Create the script element
+          var s1 = document.createElement("script");
+          s1.async = true;
+          s1.src = 'https://embed.tawk.to/66f6c86ae5982d6c7bb5abe3/1i8pvtogp';
+          s1.charset = 'UTF-8';
+          s1.setAttribute('crossorigin', '*');
+        
+          // Find the first script tag on the page and insert the new script before it
+          var s0 = document.getElementsByTagName("script")[0];
+          s0.parentNode.insertBefore(s1, s0);
+        }
+        
+        // Call the function to inject the script
+        injectTawkScript();
+      }
 
       const threshold = .01
       const options = {
@@ -37,8 +55,10 @@
 
 
       document.addEventListener("DOMContentLoaded", (event) => {
+
         
-      if (isOnline) {
+        
+      if (testMode) {
           // Prompt for test mode password
           let input = prompt("Enter the password to enable test mode:");
   
@@ -70,6 +90,8 @@
         const linkAbout = document.getElementById('linkAbout');
         const linkContact = document.getElementById('linkContact');
 
+        const linkLegal = document.getElementById('link-legal');
+
         const chatWidgetCustom = document.getElementById('chat-widget-custom');
 
         const hoverableDelay = 3000;
@@ -80,6 +102,8 @@
           console.log('last acceptable delay ' + performance.now())
           body.classList.remove('js-hidden');
         }, acceptabeDelay); 
+
+        
 
       // sticky header
       const headerElem = document.querySelector('.sticky');
@@ -112,6 +136,29 @@
       });
 
 
+      // Get the sticky and target elements
+      const stickyDiv = document.getElementById("sunglasses");
+      const targetDiv = document.getElementsByClassName("astrodude")[0];  // Access the first element with class 'astrodude'
+
+     
+
+
+      // Function to extract the translateY value from the transform property
+      function getTranslateY(element) {
+        const transform = window.getComputedStyle(element).transform;
+
+        if (transform !== 'none') {
+            const matrix = transform.match(/^matrix3d\((.+)\)$/);
+            if (matrix) {
+                return parseFloat(matrix[1].split(', ')[13]); // Extract Y translation in 3D matrix
+            } else {
+                const matrix2d = transform.match(/^matrix\((.+)\)$/);
+                return matrix2d ? parseFloat(matrix2d[1].split(', ')[5]) : 0; // Extract Y translation in 2D matrix
+            }
+        }
+        return 0;
+      }
+
         function lazyload(){
           images.forEach(img => {
               const dataSrc = img.getAttribute('data-src');
@@ -133,8 +180,8 @@
       const animonItems = document.querySelectorAll('.animonItem');
 
       // Convert NodeList to an array and get the first 3 items
-      const firstThreeItems = Array.from(animonItems).slice(0, 3);
-      const fourthItem = animonItems[3];
+      const firstFourItems = Array.from(animonItems).slice(0, 4);
+      const fifthItem = animonItems[4];
 
       const handleIntersect = function (entries, observer) {
         //entries.forEach(function (entry) {
@@ -156,16 +203,24 @@
                   // Ensure entry.target is a valid DOM element
                   const targetDiv = entry.target;
 
+                  
+                     
+
                   // Check if the entry does not have any class from reveal-1 to reveal-10
                   const hasRevealClass = Array.from({ length: 10 }, (_, i) => `reveal-${i + 1}`).some(cls => targetDiv.classList.contains(cls));
 
-                  if (!hasRevealClass || scrollDirection === 'up' && (firstThreeItems.includes(targetDiv) || targetDiv.id == fourthItem.id)) {
+                  if (!hasRevealClass || scrollDirection === 'up' && (firstFourItems.includes(targetDiv) || targetDiv.id == fifthItem.id)) {
 
                       let delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`; // Use reveal-1 to reveal-10
                       
+                      
                       if (scrollDirection === 'down') {
                           // If scrolling down, apply regular transition-delay order
-                          targetDiv.classList.add(delayClass);
+                          
+                          if (!hasRevealClass){
+                            targetDiv.classList.add(delayClass);
+                          }
+                          
                       } else if (scrollDirection === 'up') {
                           if (targetDiv.querySelector('#hand')){
                               //alert("hand")
@@ -176,21 +231,21 @@
                               
 
                               // Loop through the first three items and add the 'reveal-prehide' class
-                              firstThreeItems.forEach(item => {
+                              firstFourItems.forEach(item => {
                                   item.classList.add('reveal-prehide');
 
                                   
                               });
 
                               requestAnimationFrame(() => {
-                                firstThreeItems.forEach(item => {
+                                firstFourItems.forEach(item => {
                                     // Remove 'reveal-prehide' class in the next animation frame
                                     item.classList.remove('reveal-prehide');
                                 });
                               });
 
                               
-                          } else if (firstThreeItems.includes(targetDiv)) {
+                          } else if (firstFourItems.includes(targetDiv)) {
                               if (targetDiv.id == 'we-make'){
                                   //console.log(document.getElementById('we-make'));
                                   setTimeout(function() { // TODO : check if splash is in viewport
@@ -234,6 +289,14 @@
                       lenis.scrollTo('#wrapper', { lerp: 0.05, lock: true});
                   }
 
+                  if (targetDiv.id == 'inevitable'){ 
+                        
+                    let lightbulb = document.getElementById('lightbulb-shape');
+                    console.log('uh')
+                    lightbulb.classList.remove('reveal-prehide');
+                  }
+
+
                   /*if (targetDiv.id == 'about-us'){
                       
                       let fullBleed = targetDiv.querySelector('.full-bleed');
@@ -243,8 +306,9 @@
 
                       }
                   }*/
-
-                  targetDiv.classList.remove('reveal-prehide');
+                  if (!targetDiv.classList.contains('reveal-delegated')) {
+                    targetDiv.classList.remove('reveal-prehide');
+                  }
 
                   // Stop observing once the element is animated
                   observer.unobserve(entry.target)
@@ -286,7 +350,7 @@
                           //}, lazyloadDelay);
                           setTimeout(function() { 
                               splashDiv.classList.add('finished'); // TODO ? : check if splash is in viewport
-
+                              sunglasses.classList.remove('hidden');
                               
                               // Find all elements with the class .logo in #header
                               headerElem.querySelectorAll('.logo').forEach(logo => {
@@ -616,7 +680,116 @@
           //console.log(e)
         //})
 
+        let ty = getTranslateY(targetDiv);
+        let maxOffsetTop = targetDiv.offsetTop + ty;
+
+        maxOffsetTop = 600;
+
+        console.log(maxOffsetTop)
+
+        let maxScale = 8;
+
+        // 1 to 16
+        let scalingFactor = 2;
+        // clamp sunglasses div size in px
+        let maxW = 600;
+
+
         function raf(time) {
+
+          //console.log(time)
+          // Get the sticky element's and target element's positions
+          const stickyRect = stickyDiv.getBoundingClientRect();
+          const targetRect = targetDiv.getBoundingClientRect();
+          //if (stickyRect.top <= 0) {
+            const computedStyle = window.getComputedStyle(targetDiv);
+          //}
+          /*
+          if (targetRect.top <= 0) {
+            // Set stickyDiv's position to match targetDiv's position
+            stickyDiv.style.position = "absolute";
+            stickyDiv.style.top = targetDiv.offsetTop + "px";
+            stickyDiv.style.left = targetDiv.offsetLeft + "px";
+          } else {*/
+          // Get the translateY value of targetDiv
+              let translateY = getTranslateY(targetDiv);
+              stickyDiv.style.position = "absolute";
+              
+              
+              //stickyDiv.style.top = (targetDiv.offsetTop + translateY) < 100 ? (targetDiv.offsetTop + translateY) + "px" : - (targetDiv.offsetTop + translateY) + "px";
+              //stickyDiv.style.top = (targetDiv.offsetTop + translateY) < 100 ? (targetDiv.offsetTop + translateY) + "px" : ;
+              //if (translateY > 0 ){
+                let tmpY = -(parseFloat(translateY) - parseFloat(computedStyle.marginTop))
+                let stop = window.innerWidth > 480 ? 30 : 64;
+                let adjust = window.innerWidth > 480 ? 8 : 0;
+                
+                if (tmpY > stop){
+
+                  tmpY = stop - ((stop + adjust) - Math.abs(translateY));
+
+                  //if (tmpY < -8){
+                    if (translateY < 0){
+                      tmpY = translateY - adjust;
+                    } 
+                  
+                } else {
+                  tmpY = -(parseFloat(translateY) - parseFloat(computedStyle.marginTop))
+                }
+                stickyDiv.style.transform = `translate3d(0px, ${tmpY}px, 0px)`;
+              //}
+              
+              stickyDiv.style.marginLeft = computedStyle.marginLeft;
+              stickyDiv.style.width = computedStyle.width;
+              /*
+
+              let estimatedPos = parseFloat(targetDiv.offsetTop) + translateY;
+
+              
+
+              let frontier = 100;
+
+              if (estimatedPos < frontier){ // stick sunglasses to astrodude when astrodude reaches 100px from top
+                stickyDiv.style.top = estimatedPos + "px";
+                stickyDiv.style.marginLeft = computedStyle.marginLeft;
+                stickyDiv.style.width = computedStyle.width;
+                
+              } else {
+                
+                if (-((estimatedPos - 200) * 5) < 0){
+                  stickyDiv.style.top = - ((estimatedPos - (200)) * 5) + "px";
+                  const scale = Math.min(1 + (Math.abs((estimatedPos - (200)) * scalingFactor) / maxOffsetTop), maxScale);  // Ensure the scale doesn't exceed 1
+                  //console.log(scale)
+
+                  //console.log(mg)
+                  // Apply the calculated scale to stickyDiv
+                  //stickyDiv.style.transform = `scale(${scale})`;
+                  //stickyDiv.style.width = 270 * scale + "px";
+                  //stickyDiv.style.marginLeft = parseFloat(computedStyle.marginLeft) - (100 * (scale - 1)) + "px";
+                  let w = Math.min(parseFloat(computedStyle.width) + (parseFloat(computedStyle.width) * (scale - 1)), maxW);
+                  
+                  stickyDiv.style.width = w + "px";
+                  //stickyDiv.style.marginLeft = parseFloat(computedStyle.marginLeft) - (((parseFloat(computedStyle.marginLeft) / 2) - (w / 2)) * (scale - 1)) + "px";
+                  
+                  //stickyDiv.style.marginLeft = parseFloat(computedStyle.marginLeft) - (((parseFloat(computedStyle.marginLeft) / 6)) * (scale - 1)) + "px";
+                  //stickyDiv.style.marginLeft = parseFloat(computedStyle.marginLeft) - (((parseFloat(computedStyle.marginLeft) / 8)) * (scale - 1)) + "px";
+
+                  stickyDiv.style.marginLeft = parseFloat(computedStyle.marginLeft) - ((w - parseFloat(computedStyle.width)) ) + "px";
+                
+                } else {
+                  
+                  stickyDiv.style.top = - ((estimatedPos - (200))) + "px";
+                  stickyDiv.style.width = computedStyle.width;
+                  stickyDiv.style.marginLeft = computedStyle.marginLeft;
+                }
+
+                
+              
+                
+              }
+              //stickyDiv.style.left = (targetDiv.offsetLeft + (stickyDiv.offsetWidth / 4)) + "px";
+              //stickyDiv.style.top = (targetDiv.offsetTop + translateY) + "px";
+              */
+          //}
 
           lenis.raf(time)
           requestAnimationFrame(raf)
@@ -701,7 +874,7 @@
           revealIndex = 0;
           //let target = document.getElementById('projects-reel');
           //scroll.scrollTo(target);
-          lenis.scrollTo('#projects-reel', { lerp: 0.05, lock: true});
+          lenis.scrollTo('#projects-reel', { lerp: 0.025, lock: true});
           setTimeout(() => {astrodudeInstance.show();}, 3000);
           setTimeout(() => {astrodudeInstance.hide();}, 13000);
           /*
@@ -736,6 +909,14 @@
         const modalDescription = document.getElementById('modal-description');
 
         const slides = document.getElementsByClassName("crossfaded");
+
+        
+
+        linkLegal.addEventListener('click', (event) => {
+          event.preventDefault();
+          showSlideInModal(event.target, '', '')
+        });
+
 
         btnModalPrev.addEventListener('click', (event) => {
           // Get the ID stored in the 'data-slide-collection' attribute of the modal
@@ -1140,6 +1321,46 @@
       }
         function showSlideInModal(childSlide, parentSlidesCollection, modalSlideDirection) {
 
+
+          if (!parentSlidesCollection){
+            
+              // Handle text case
+              if (modalImg) {
+                  modalImg.style.display = 'none';
+              }
+              if (modalVideo) {
+                  modalVideo.style.display = 'none';
+              }
+      
+              // Show only text content
+              let title = childSlide.querySelector('.summary-title').innerHTML;
+              
+              let client = childSlide.querySelector('.summary-subtitle').innerHTML;
+              let desc = childSlide.querySelector('.summary-description').innerHTML;
+      
+              modalDescription.innerHTML = `
+                  <div class='modal-title'>${title}</div>
+                  ${client}<br/>
+                  <div class='desc'>${desc}</div>
+              `;
+      
+              modal.style.visibility = "visible";
+              modal.classList.add('active');
+              wrapper.classList.add('blurred');
+              document.body.classList.add('scroll-lock');
+
+              setTimeout(function() { 
+                modal.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: "smooth",
+                });
+              }, 100); 
+          
+              return
+          }
+
+          
           console.log('show slide in modal ' + childSlide.getAttribute('src'));
           
           
@@ -1305,7 +1526,7 @@
                       videoClone.play().catch(error => {
                           console.error('Error playing video:', error);
                       });
-                  }
+                  } 
               
 
               }

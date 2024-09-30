@@ -272,7 +272,7 @@ h2 {
   border: 1px solid #002a3a;
   //opacity: 0;
   //transition: transform 1s ease 2s, padding-top 1s ease 2s, padding-bottom 1s ease 2s, opacity .3s ease 2s, color 3s ease 3s, text-shadow 3s ease 6s;
-  clip-path: polygon(0% 100%, 86% 100%, 93% 10%, 11% 8%);
+  //clip-path: polygon(0% 100%, 86% 100%, 93% 10%, 11% 8%);
   opacity: 1;
   //transform: scale(1);
 
@@ -613,7 +613,7 @@ a.arrow:hover .hand {
 .summary .summary-thumbnail img {}
 
 .summary .summary-thumbnail {
-  border-radius: 8px;
+  //border-radius: 8px;
 }
 
 .summary.summary-project .summary-thumbnail img, .summary.summary-project .summary-thumbnail video {
@@ -987,6 +987,8 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
 
 }
 
+.modal p {padding-bottom: 1em;}
+
 .desc ul {
   padding: 1em 0 0 2em;
 }
@@ -1100,6 +1102,31 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
   color: #bbb;
   text-decoration: none;
   cursor: pointer;
+}
+
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+#sunglasses {
+  //animation: float 6s ease-in-out infinite;
+  //animation-delay: .7s;
+  transition: opacity 1s linear, scale 1s ease; 
+  //transform: scale(0);
+  opacity: 1;
+  scale: 1;
+  margin-top: 4em;
+}
+#sunglasses img {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: .7s;
+}
+#sunglasses.hidden {
+  opacity: 0;
+  scale: 0;
+  
+
 }
 
 #parallax_wrapper {
@@ -1307,7 +1334,7 @@ ul.techstack {
   animation: rotation 30s linear infinite;
 
   max-width: 400px;
-  margin: -3em 8em 5em auto;
+  margin: -3em auto 5em auto;
   width: 80%;
 
 
@@ -1565,7 +1592,7 @@ ul.techstack li:nth-child(8) .techstack_icon {
 .techstack-halo {
   padding: 5em 0em 1.5em 32px;
   background: radial-gradient(20em 20em at 43% 43%, rgba(80, 0, 255, 0.1) 0%, transparent 60%);
-  width: 120%;
+  width: 100%;
 
   overflow: hidden;
 
@@ -1688,9 +1715,13 @@ ul.techstack li:nth-child(8) .techstack_icon {
     font-size: 15em;
   }
 
+  
+  #sunglasses {
+    margin-top: 3.4em;
+  }
   .astrodude {
     margin-left: 70%;
-    margin-top: 7em;
+    margin-top: 3.4em;
   }
 
   #contact-us {
@@ -1740,7 +1771,9 @@ ul.techstack li:nth-child(8) .techstack_icon {
   .shout>span:nth-of-type(6) {
     font-size: 10em;
   }
-
+  #sunglasses {
+    margin-top: 7em;
+  }
   .astrodude {
     margin-left: 63%;
     margin-top: 7em;
@@ -1784,6 +1817,7 @@ ul.techstack li:nth-child(8) .techstack_icon {
     margin-left: -135%;
   }
   
+ 
   
 }
 
@@ -1791,7 +1825,7 @@ ul.techstack li:nth-child(8) .techstack_icon {
 
 @media (min-width: 768px) {
   .desc-features {
-    padding: 8em 4em 0 2em;
+    padding: 8em 2em 0 3em;
     width: 50%;
   }
 
@@ -1861,6 +1895,7 @@ ul.techstack li:nth-child(8) .techstack_icon {
   }
 
   .techstack-halo {
+    
     padding: 5em 0em 1.5em 0;
     background: radial-gradient(20em 20em at 43% 43%, rgba(80, 0, 255, 0.1) 0%, transparent 60%);
   }
@@ -1892,7 +1927,11 @@ ul.techstack li:nth-child(8) .techstack_icon {
 }
 
 @media (max-width: 1200px) {
-  
+  .techstack-halo {
+    background: radial-gradient(20em 20em at 40% 40%, rgba(80, 0, 255, 0.1) 0%, transparent 60%);
+    overflow: visible;
+    padding: 5em 0em 1.5em 0;
+  }
 }
 
 @media (min-width: 1800px) {
