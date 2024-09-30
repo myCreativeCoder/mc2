@@ -218,6 +218,10 @@ h2 {
   }
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 .header .logos a:hover, .logos a:hover {
   opacity: 1;
   text-decoration: none;
@@ -227,6 +231,13 @@ h2 {
 .pop, .footer-info .logos .gradtext-rainbow, .about-info .logos .gradtext-rainbow {
   text-shadow: -1px -1px 0px var(--color-primary-shadow);
   padding-left: 0.1em;
+}
+
+#truly i {
+  font-variant: initial;
+  text-decoration-color: #5000f1;
+  text-decoration-line: underline;
+  text-decoration-thickness: 3px;
 }
 
 .footer {
@@ -624,6 +635,7 @@ a.arrow:hover .hand {
 
 .summary.summary-project {
   overflow: visible;
+  background-color: transparent;
 }
 
 .summary.summary-project .summary-thumbnail img:hover {
@@ -836,6 +848,11 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
 
 }
 
+.nav-section {
+  display: block;
+    visibility: visible;
+}
+
 .sticky {
     position: fixed;
     top: 0;
@@ -844,7 +861,7 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
     will-change: transform;
 }
 
-#wrapper {
+#home {
   transition: all .5s ease;
   will-change: transform, opacity;
   padding-top: 4em;
@@ -1591,7 +1608,7 @@ ul.techstack li:nth-child(8) .techstack_icon {
 
 .techstack-halo {
   padding: 5em 0em 1.5em 32px;
-  background: radial-gradient(20em 20em at 43% 43%, rgba(80, 0, 255, 0.1) 0%, transparent 60%);
+  background: radial-gradient(20em 20em at 48% 43%, rgba(80, 0, 255, 0.1) 0%, transparent 60%);
   width: 100%;
 
   overflow: hidden;
@@ -1841,7 +1858,13 @@ ul.techstack li:nth-child(8) .techstack_icon {
 
 
 
-
+@media (max-width: 1200px) {
+  .techstack-halo {
+    background: radial-gradient(20em 20em at 48% 43%, rgba(80, 0, 255, 0.1) 0%, transparent 60%);
+    overflow: visible;
+    padding: 5em 0em 1.5em 0;
+  }
+}
 
 
 @media (min-width: 1300px) {
@@ -1897,14 +1920,14 @@ ul.techstack li:nth-child(8) .techstack_icon {
   .techstack-halo {
     
     padding: 5em 0em 1.5em 0;
-    background: radial-gradient(20em 20em at 43% 43%, rgba(80, 0, 255, 0.1) 0%, transparent 60%);
+    background: radial-gradient(20em 20em at 46% 43%, rgba(80, 0, 255, 0.1) 0%, transparent 60%);
   }
 }
 
 @media (min-width: 1400px) {
   .techstack-halo {
     padding: 5em 0em 1.5em 0;
-    background: radial-gradient(20em 20em at 40% 43%, rgba(80, 0, 255, 0.1) 0%, transparent 60%);
+    background: radial-gradient(20em 20em at 43% 43%, rgba(80, 0, 255, 0.1) 0%, transparent 60%);
   }
   .full-bleed {
     font-size: 1.4em;
@@ -1926,13 +1949,7 @@ ul.techstack li:nth-child(8) .techstack_icon {
   }
 }
 
-@media (max-width: 1200px) {
-  .techstack-halo {
-    background: radial-gradient(20em 20em at 40% 40%, rgba(80, 0, 255, 0.1) 0%, transparent 60%);
-    overflow: visible;
-    padding: 5em 0em 1.5em 0;
-  }
-}
+
 
 @media (min-width: 1800px) {
   #parallax_wrapper {

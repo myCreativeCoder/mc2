@@ -292,7 +292,7 @@
                   if (targetDiv.id == 'inevitable'){ 
                         
                     let lightbulb = document.getElementById('lightbulb-shape');
-                    console.log('uh')
+                    
                     lightbulb.classList.remove('reveal-prehide');
                   }
 
@@ -324,6 +324,67 @@
           //}
         //})
       }
+
+
+
+      const navSections = document.querySelectorAll('.nav-section');
+      const menuItems = document.querySelectorAll('[data-nav-section-id-target]');
+
+      const observerOptions = {
+        root: null, // Viewport as root
+        rootMargin: '0px', // Adjust if necessary (e.g., '-50px 0px' to trigger earlier)
+        threshold: 0.5 // Ensure that 50% of the element is in view before triggering
+      };
+
+      let activeSectionId = null;
+      
+      // Callback for the intersection observer
+      const observerCallback = (entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  const sectionId = entry.target.getAttribute('data-nav-section-id');
+                  console.log(sectionId)
+                  setActiveMenuItem(sectionId);
+              }
+          });
+      };
+
+      const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+      // Observe each section
+      navSections.forEach(section => {
+          observer.observe(section);
+      });
+
+      function setActiveMenuItem(sectionId) {
+          if (sectionId !== activeSectionId) {
+              
+              // Remove active class from all menu items
+              menuItems.forEach(item => {
+                const parentLi = item.closest('li'); // Find the closest parent <li>
+                if (parentLi) {
+                    parentLi.classList.remove('active'); // Remove the 'active' class from the <li>
+                }
+              });
+
+              // Find the menu item that matches the section and set it as active
+              const targetMenuItems = document.querySelectorAll(`[data-nav-section-id-target="${sectionId}"]`);
+              if (targetMenuItems.length) {
+                targetMenuItems.forEach(item => {
+                    const parentLi = item.closest('li'); // Find the closest parent <li> of the <a> element
+                    if (parentLi) {
+                        parentLi.classList.add('active'); // Add the 'active' class to the <li> element
+                    }
+                });
+              }
+
+              // Update the active section id
+              activeSectionId = sectionId;
+          }
+      }
+
+
+
 
         // lazy load images with lazyload class once core stuff has been loaded
         // REM : let the splash screen transition finish before lazyloading to avoid cluttering the main thread
@@ -999,7 +1060,7 @@
           modal.style.visibility = 'hidden';
           modal.classList.remove('active');
           wrapper.classList.remove('blurred');
-          document.body.classList.remove('scroll-lock');
+          body.classList.remove('scroll-lock');
           //setTimeout(function() { 
               modal.scrollTo({
                 top: 0,
@@ -1016,7 +1077,7 @@
             modal.style.visibility = 'hidden';
             modal.classList.remove('active');
             wrapper.classList.remove('blurred');
-            document.body.classList.remove('scroll-lock');
+            body.classList.remove('scroll-lock');
             //lenis.start();
           }
         });
