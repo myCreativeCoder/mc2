@@ -170,7 +170,7 @@
 
 </head>
 
-<body class="page page-home grid js-hidden ">
+<body class="page page-home grid js-hidden scroll-lock">
 
 <div class="loading"></div>
 
@@ -209,19 +209,15 @@
 
 
         <li class="menu-item-home active">
-          <a href="#wrapper">Home</a>
+          <a href="#home" data-nav-section-id-target="1">Home</a>
         </li>
 
         <li class="menu-item-projects">
-          <a href="https://mycreativecoder.com/projects/">Projects</a>
-        </li>
-
-        <li class="menu-item-blog">
-          <a href="https://mycreativecoder.com/blog/">Blog</a>
+          <a href="https://mycreativecoder.com/projects/" data-nav-section-id-target="2">Projects</a>
         </li>
 
         <li class="menu-item-about">
-          <a href="https://mycreativecoder.com/about/">About</a>
+          <a href="https://mycreativecoder.com/about/" data-nav-section-id-target="3">About</a>
         </li>
 
         <li class="menu-item-contact">
@@ -316,7 +312,7 @@
     <div class="container">
       <div class="logos">
         <div class="logo logo-desktop">
-          <a href="#wrapper">
+          <a href="#home" data-nav-section-id-target="1">
             <div class="logo-image">
 
               <img height="44px" width="44px" alt="Creative Coder Logo" src="src/logo.png">
@@ -331,7 +327,7 @@
 
         <div class="logo logo-desktop-invert">
 
-          <a href="#wrapper">
+          <a href="#home" data-nav-section-id-target="1">
             <div class="logo-image">
 
               <img height="44px" width="44px" alt="Creative Coder Logo" src="src/logo.png">
@@ -348,7 +344,7 @@
         <div class="logo logo-mobile">
 
 
-          <a href="#wrapper">
+          <a href="#home" data-nav-section-id-target="1">
             <div class="logo-image">
 
               <img height="44px" width="44px" alt="Creative Coder Logo" src="src/logo.png">
@@ -368,7 +364,7 @@
         <div class="logo logo-mobile-invert">
 
 
-          <a href="#wrapper">
+          <a href="#home" data-nav-section-id-target="1">
             <div class="logo-image">
 
               <img height="44px" width="44px" alt="Creative Coder Logo" src="src/logo.png">
@@ -393,7 +389,7 @@
         
         
           <li class="active ">
-            <a href="#wrapper">Home</a>
+            <a href="#home" data-nav-section-id-target="1">Home</a>
           </li>
         
         
@@ -470,14 +466,14 @@
         
         
           <li class="">
-            <a href="#projects-reel" id="linkProjects">Projects</a>
+            <a href="#projects-reel" id="linkProjects" data-nav-section-id-target="2">Projects</a>
           </li>
         
         
         
         
           <li class="">
-            <a href="#about-us" id="linkAbout">About</a>
+            <a href="#about-us" id="linkAbout" data-nav-section-id-target="3">About</a>
           </li>
         
         
@@ -536,9 +532,9 @@
 
   
 
-    <div id="wrapper" class="wrapper">
+    <div id="home" class="wrapper">
 
-      <div class="section" id="splash">
+      <div id="splash" class="section nav-section" data-nav-section-id="1" >
         <div class="container">
           
           <div class="row" style="display: flex;justify-content: center;align-items: center;">
@@ -562,7 +558,7 @@
               <span>&lt;</span>
 
             </h2>
-            <div class="animonItem reveal-prehide reveal-4 reverse" style="display: block;">
+            <div class="animonItem reveal-prehide reveal-4 reverse nav-section" data-nav-section-id="1" style="display: block;">
               <a class="arrow scrolly" id="hand" style="display: block;">
                 <svg class="hand" xmlns="http://www.w3.org/2000/svg" version="1.1" width="512px" height="512px"
                   viewBox="0 0 512 512"
@@ -594,73 +590,71 @@
 
       
       
+      <div >
+        <div class="section pt-0 nav-section" data-nav-section-id="2" >
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
 
-      <div class="section pt-0" data-scroll-section-id="section1">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
 
-
-              <div id="projects-reel" class="col-12">
-                <div id="parallax_wrapper" class="col-12" style="overflow-x: visible;">
-                  <div id="sunglasses" class="hidden" style="background: rgba(255, 0, 0, 0.541); 
-      z-index: 9; height: 0px; ">
-      <img src="src/sunglasses.png"
-      style="width:100%;">
-    </div>
-                  <div class="rellax astrodude" data-rellax-speed="3" style="z-index: 2;">
-                    <a onclick="javascript:void(Tawk_API.toggle());">
-                    <img id="astrodude" src="src/astrodude.png"
-                      style="width:100%;">
-                    </a>
+                <div id="projects-reel" class="col-12">
+                  <div id="parallax_wrapper" class="col-12" style="overflow-x: visible;">
+                    <div id="sunglasses" class="hidden" style="background: rgba(255, 0, 0, 0.541); z-index: 9; height: 0px; ">
+                      <img src="src/sunglasses.png"
+                    style="width:100%;">
                   </div>
-                  <div class="rellax donut" data-rellax-speed="10">
-                    <img id="donut" src="src/donut.png"
-                      style="width:100%;">
-                  </div>
-                  <div class="rellax device" data-rellax-speed="3">
-                    <img src="src/mbp2.png">
+                    <div class="rellax astrodude" data-rellax-speed="3" style="z-index: 2;">
+                      <a onclick="javascript:void(Tawk_API.toggle());">
+                      <img id="astrodude" src="src/astrodude.png"
+                        style="width:100%;">
+                      </a>
+                    </div>
+                    <div class="rellax donut" data-rellax-speed="10">
+                      <img id="donut" src="src/donut.png"
+                        style="width:100%;">
+                    </div>
+                    <div class="rellax device" data-rellax-speed="3">
+                      <img src="src/mbp2.png">
+                    </div>
+
                   </div>
 
                 </div>
-
-              </div>
-
-              
-
-              <div class="heading animonItem reveal-prehide reveal-1" style=" padding-top: 5em; z-index: 1; position: relative;">
 
                 
 
-                <h1 style="font-size: 2em;text-align: center;width: 100%; " >&nbsp;&nbsp;Making it <i
-                    class="gradtext-rainbow animate pop" style="padding: 0 .2em 0 0.1em; 
-                    font-size: 1.35em;">POP</i><br><small style="font-family: serif;"> – &nbsp;<i>since
-                      2009</i>&nbsp;&nbsp;–</small></h1>
+                <div class="heading animonItem reveal-prehide reveal-1" style=" padding-top: 5em; z-index: 1; position: relative;">
+
+                  
+
+                  <h1 style="font-size: 2em;text-align: center;width: 100%; " >&nbsp;&nbsp;Making it <i
+                      class="gradtext-rainbow animate pop" style="padding: 0 .2em 0 0.1em; 
+                      font-size: 1.35em;">POP</i><br><small style="font-family: serif;"> – &nbsp;<i>since
+                        2009</i>&nbsp;&nbsp;–</small></h1>
 
 
 
-                <p style="display: none;">Some projects we have been working on</p>
+                  <p style="display: none;">Some projects we have been working on</p>
 
 
+
+                </div>
 
               </div>
-
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="section pt-0 projects-sliders" data-scroll-section-id="section2" style="z-index: 3; position: relative;">
-        <div class="container">
-          <div class="row">
-
+        <div class="section pt-0 projects-sliders"  style="z-index: 3; position: relative;">
+          <div class="container">
+            <div class="row">
 
 
 
 
 
-            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-0 mt-md-0">
 
+              <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-0 mt-md-0">
 
 
 
@@ -668,117 +662,118 @@
 
 
 
-              <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide reveal-2">
 
-                <div class="summary-thumbnail">
+                <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide reveal-2">
 
-                  <img alt="Editions Exprimerie" class="placeholder"
-                    src="src/media/placeholder-thumbnail.png">
+                  <div class="summary-thumbnail">
 
-                </div>
+                    <img alt="Editions Exprimerie" class="placeholder"
+                      src="src/media/placeholder-thumbnail.png">
 
-                <div class="summary-thumbnail crossfaded" id="crossfaded-1">
-                  <a href="https://mycreativecoder.com/projects/project-2/">
-                    <img class="slide lazyload" alt="Editions Exprimerie" loading="lazy"
-                      data-src="src/media/project-1-1-thumbnail.png">
-                    <img class="slide lazyload" alt="Editions Exprimerie" loading="lazy"
-                      data-src="src/media/project-1-2-thumbnail.png">
-                    <img class="slide" alt="Editions Exprimerie" 
-                      src="src/media/project-1-3-thumbnail.png">
-                    <img class="slide shown" alt="Editions Exprimerie"
-                      src="src/media/project-1-4-thumbnail.png">
-                  </a>
-                </div>
-
-
-                <div class="summary-content">
-                  <div class="summary-title">
-                    <h2>
-                      <a href="https://mycreativecoder.com/projects/project-2/">l'Exprimerie</a>
-                    </h2>
                   </div>
 
-                  <span class="summary-client">
-                    Maison d'edition | site eCommerce
-                  </span>
-
-                  <div class="summary-description">
-                    E-commerce Site (multilingual) for online sales of physical books, DVDs, with a catalog of over 100
-                    products :
-                    <ul>
-                      <li>Graphic Identity</li>
-                      <li>web design</li>
-                      <li>web development</li>
-                      <li>technical and editorial maintenance</li>
-                      <li>newsletter (1000+ adresses listing, 100k+ mails sent) and transactional mailing</li>
-                    </ul>
+                  <div class="summary-thumbnail crossfaded" id="crossfaded-1">
+                    <a href="https://mycreativecoder.com/projects/project-2/">
+                      <img class="slide lazyload" alt="Editions Exprimerie" loading="lazy"
+                        data-src="src/media/project-1-1-thumbnail.png">
+                      <img class="slide lazyload" alt="Editions Exprimerie" loading="lazy"
+                        data-src="src/media/project-1-2-thumbnail.png">
+                      <img class="slide" alt="Editions Exprimerie" 
+                        src="src/media/project-1-3-thumbnail.png">
+                      <img class="slide shown" alt="Editions Exprimerie"
+                        src="src/media/project-1-4-thumbnail.png">
+                    </a>
                   </div>
 
+
+                  <div class="summary-content">
+                    <div class="summary-title">
+                      <h2>
+                        <a href="https://mycreativecoder.com/projects/project-2/">l'Exprimerie</a>
+                      </h2>
+                    </div>
+
+                    <span class="summary-client">
+                      Maison d'edition | site eCommerce
+                    </span>
+
+                    <div class="summary-description">
+                      E-commerce Site (multilingual) for online sales of physical books, DVDs, with a catalog of over 100
+                      products :
+                      <ul>
+                        <li>Graphic Identity</li>
+                        <li>web design</li>
+                        <li>web development</li>
+                        <li>technical and editorial maintenance</li>
+                        <li>newsletter (1000+ adresses listing, 100k+ mails sent) and transactional mailing</li>
+                      </ul>
+                    </div>
+
+                  </div>
                 </div>
               </div>
-            </div>
 
 
-            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-md-0">
-
-
+              <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-md-0">
 
 
 
 
 
 
-              <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide reveal-3">
 
 
-                <div class="summary-thumbnail ">
+                <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide reveal-3">
 
-                  <img class="placeholder" alt="AirAir - Online multiplayer game"
-                    src="src/media/placeholder-thumbnail.png">
 
-                </div>
+                  <div class="summary-thumbnail ">
 
-                <div class="summary-thumbnail crossfaded" id="crossfaded-4">
-                  <a href="https://mycreativecoder.com/projects/project-1/">
-                    <img class="slide lazyload" alt="AirAir - Online multiplayer game" loading="lazy" style="opacity:0;"
-                      data-src="src/media/project-4-6-thumbnail.png">
-                    <video class="slide" alt="AirAir - Online multiplayer game" style="opacity:0;"
-                      title="AirAir - Online multiplayer game" preload="auto">
-                      <source alt="AirAir - Online multiplayer game" title="AirAir - Online multiplayer game"
-                        src="src/airair.mp4" type="video/mp4" />
-                    </video>
-                    <img class="slide shown" alt="AirAir - Online multiplayer game"
-                      src="src/media/project-4-1-thumbnail.png">
-                  </a>
-                </div>
+                    <img class="placeholder" alt="AirAir - Online multiplayer game"
+                      src="src/media/placeholder-thumbnail.png">
 
-                <div class="summary-content">
-                  <div class="summary-title">
-                    <h2>
-                      <a href="https://mycreativecoder.com/projects/project-4/">AirAir</a>
-                    </h2>
                   </div>
 
-                  <span class="summary-client">
-                    Online multiplayer game
-                  </span>
-
-                  <div class="summary-description">
-                    TypeScript, NodeJS, BabylonJS, WebGL, WebGPU, GLSL, CSS3, HTML5, Web APIs, WebSockets, Gamepad API,
-                    Vibration API, Push notifications <br />
-                    User Interface, game engine, renderer, game assets, shaders, animation, inputs, camera behavior,
-                    day-night cycle, cloud system, post-process, avatars
+                  <div class="summary-thumbnail crossfaded" id="crossfaded-4">
+                    <a href="https://mycreativecoder.com/projects/project-1/">
+                      <img class="slide lazyload" alt="AirAir - Online multiplayer game" loading="lazy" style="opacity:0;"
+                        data-src="src/media/project-4-6-thumbnail.png">
+                      <video class="slide" alt="AirAir - Online multiplayer game" style="opacity:0;"
+                        title="AirAir - Online multiplayer game" preload="auto">
+                        <source alt="AirAir - Online multiplayer game" title="AirAir - Online multiplayer game"
+                          src="src/airair.mp4" type="video/mp4" />
+                      </video>
+                      <img class="slide shown" alt="AirAir - Online multiplayer game"
+                        src="src/media/project-4-1-thumbnail.png">
+                    </a>
                   </div>
 
+                  <div class="summary-content">
+                    <div class="summary-title">
+                      <h2>
+                        <a href="https://mycreativecoder.com/projects/project-4/">AirAir</a>
+                      </h2>
+                    </div>
+
+                    <span class="summary-client">
+                      Online multiplayer game
+                    </span>
+
+                    <div class="summary-description">
+                      TypeScript, NodeJS, BabylonJS, WebGL, WebGPU, GLSL, CSS3, HTML5, Web APIs, WebSockets, Gamepad API,
+                      Vibration API, Push notifications <br />
+                      User Interface, game engine, renderer, game assets, shaders, animation, inputs, camera behavior,
+                      day-night cycle, cloud system, post-process, avatars
+                    </div>
+
+                  </div>
                 </div>
               </div>
-            </div>
 
 
 
 
 
-            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mt-md-0">
+              <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mt-md-0">
 
 
 
@@ -787,59 +782,58 @@
 
 
 
-              <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide">
+                <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide">
 
 
-                <div class="summary-thumbnail">
+                  <div class="summary-thumbnail">
 
-                  <img alt="Crises et Société" class="placeholder"
-                    src="src/media/placeholder-thumbnail.png">
+                    <img alt="Crises et Société" class="placeholder"
+                      src="src/media/placeholder-thumbnail.png">
 
-                </div>
-
-                <div class="summary-thumbnail crossfaded" id="crossfaded-2">
-                  <a href="https://mycreativecoder.com/projects/project-1/">
-                    <img class="slide lazyload" alt="Crises et Société" loading="lazy"
-                    data-src="src/media/project-2-1-thumbnail.png">
-                    <img class="slide lazyload" alt="Crises et Société" loading="lazy"
-                    data-src="src/media/project-2-2-thumbnail.png">
-                    <img class="slide lazyload" alt="Crises et Société" loading="lazy"
-                    data-src="src/media/project-2-3-thumbnail.png">
-                    <img class="slide lazyload" alt="Crises et Société" loading="lazy"
-                    data-src="src/media/project-2-4-thumbnail.png">
-                    <img class="slide" alt="Crises et Société" 
-                      src="src/media/project-2-5-thumbnail.png">
-                    <img class="slide shown" alt="Crises et Société"
-                      src="src/media/project-2-6-thumbnail.png">
-                  </a>
-                </div>
-
-                <div class="summary-content">
-                  <div class="summary-title">
-                    <h2>
-                      <a href="https://mycreativecoder.com/projects/project-1/">Crises et Société</a>
-                    </h2>
                   </div>
 
-                  <span class="summary-client">
-                    Multidisciplinary magazine centered on the study of crises
-                  </span>
-
-                  <div class="summary-description">
-                    <ul>
-                      <li>Graphic Identity</li>
-                      <li>web design</li>
-                      <li>web development</li>
-                      <li>technical and editorial maintenance</li>
-                    </ul>
+                  <div class="summary-thumbnail crossfaded" id="crossfaded-2">
+                    <a href="https://mycreativecoder.com/projects/project-1/">
+                      <img class="slide lazyload" alt="Crises et Société" loading="lazy"
+                      data-src="src/media/project-2-1-thumbnail.png">
+                      <img class="slide lazyload" alt="Crises et Société" loading="lazy"
+                      data-src="src/media/project-2-2-thumbnail.png">
+                      <img class="slide lazyload" alt="Crises et Société" loading="lazy"
+                      data-src="src/media/project-2-3-thumbnail.png">
+                      <img class="slide lazyload" alt="Crises et Société" loading="lazy"
+                      data-src="src/media/project-2-4-thumbnail.png">
+                      <img class="slide" alt="Crises et Société" 
+                        src="src/media/project-2-5-thumbnail.png">
+                      <img class="slide shown" alt="Crises et Société"
+                        src="src/media/project-2-6-thumbnail.png">
+                    </a>
                   </div>
 
+                  <div class="summary-content">
+                    <div class="summary-title">
+                      <h2>
+                        <a href="https://mycreativecoder.com/projects/project-1/">Crises et Société</a>
+                      </h2>
+                    </div>
+
+                    <span class="summary-client">
+                      Multidisciplinary magazine centered on the study of crises
+                    </span>
+
+                    <div class="summary-description">
+                      <ul>
+                        <li>Graphic Identity</li>
+                        <li>web design</li>
+                        <li>web development</li>
+                        <li>technical and editorial maintenance</li>
+                      </ul>
+                    </div>
+
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mt-md-0">
-
+              <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mt-md-0">
 
 
 
@@ -847,145 +841,146 @@
 
 
 
-              <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide">
 
-                <div class="summary-thumbnail">
+                <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide">
 
-                  <img class="placeholder" alt="Institut Français de Gestalt-thérapie" class="placeholder"
-                    src="src/media/placeholder-thumbnail.png">
+                  <div class="summary-thumbnail">
 
-                </div>
+                    <img class="placeholder" alt="Institut Français de Gestalt-thérapie" class="placeholder"
+                      src="src/media/placeholder-thumbnail.png">
 
-                <div class="summary-thumbnail crossfaded" id="crossfaded-3">
-                  <a href="https://mycreativecoder.com/projects/project-3/">
-                    <img class="slide lazyload" alt="Institut Français de Gestalt-thérapie" loading="lazy"
-                      data-src="src/media/project-3-1-thumbnail.png">
-                    <img class="slide" alt="Institut Français de Gestalt-thérapie" 
-                      src="src/media/project-3-2-thumbnail.png">
-                    <img class="slide shown" alt="Institut Français de Gestalt-thérapie"
-                      src="src/media/project-3-3-thumbnail.png"
-                  </a>
-                </div>
-
-
-                <div class="summary-content">
-                  <div class="summary-title">
-                    <h2>
-                      <a href="https://mycreativecoder.com/projects/project-3/">Institut Français de
-                        Gestalt-thérapie</a>
-                    </h2>
                   </div>
 
-                  <span class="summary-client">
-                    Formations de Psychothérapeute
-                  </span>
-
-                  <div class="summary-description">
-                    Website for the IfGt training institute (Qualiopi certified) :
-                    <ul>
-                      <li>Graphic Identity</li>
-                      <li>web design</li>
-                      <li>web development</li>
-                      <li>technical and editorial maintenance</li>
-                      <li>newsletter (4k+ adresses listing, 300k+ mails sent) and transactional mailing</li>
-                      <li>Development of an online professionnal directory (100+ pros) (cartography GIS, Leaflet,
-                        OpenStreetMap)
-                        (JS/PHP/SPIP)</li>
-                      <li>Cloud Platform (Nextcloud) and collaborative work tools for students and trainers : Logo
-                        design,
-                        branding,
-                        integration, access management, file system tree, transactional mailing, technical maintenance,
-                        print communication.
-                        (100+ users)</li>
-                    </ul>
+                  <div class="summary-thumbnail crossfaded" id="crossfaded-3">
+                    <a href="https://mycreativecoder.com/projects/project-3/">
+                      <img class="slide lazyload" alt="Institut Français de Gestalt-thérapie" loading="lazy"
+                        data-src="src/media/project-3-1-thumbnail.png">
+                      <img class="slide" alt="Institut Français de Gestalt-thérapie" 
+                        src="src/media/project-3-2-thumbnail.png">
+                      <img class="slide shown" alt="Institut Français de Gestalt-thérapie"
+                        src="src/media/project-3-3-thumbnail.png"
+                    </a>
                   </div>
 
+
+                  <div class="summary-content">
+                    <div class="summary-title">
+                      <h2>
+                        <a href="https://mycreativecoder.com/projects/project-3/">Institut Français de
+                          Gestalt-thérapie</a>
+                      </h2>
+                    </div>
+
+                    <span class="summary-client">
+                      Formations de Psychothérapeute
+                    </span>
+
+                    <div class="summary-description">
+                      Website for the IfGt training institute (Qualiopi certified) :
+                      <ul>
+                        <li>Graphic Identity</li>
+                        <li>web design</li>
+                        <li>web development</li>
+                        <li>technical and editorial maintenance</li>
+                        <li>newsletter (4k+ adresses listing, 300k+ mails sent) and transactional mailing</li>
+                        <li>Development of an online professionnal directory (100+ pros) (cartography GIS, Leaflet,
+                          OpenStreetMap)
+                          (JS/PHP/SPIP)</li>
+                        <li>Cloud Platform (Nextcloud) and collaborative work tools for students and trainers : Logo
+                          design,
+                          branding,
+                          integration, access management, file system tree, transactional mailing, technical maintenance,
+                          print communication.
+                          (100+ users)</li>
+                      </ul>
+                    </div>
+
+                  </div>
                 </div>
               </div>
-            </div>
 
-            
-
-
-
-
-            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mt-md-0">
-
-
-              <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide">
-
-
-                <div class="summary-thumbnail ">
-
-                  <img class="placeholder" alt="Illustration (Vector / Bitmap)"
-                    src="src/media/placeholder-thumbnail.png">
-
-                </div>
-
-                <div class="summary-thumbnail crossfaded" id="crossaded-5">
-                  <a href="https://mycreativecoder.com/projects/project-3/">
-                    <img class="slide shown" alt="Illustration (Vector / Bitmap)"
-                      src="src/media/project-5-1-thumbnail.png">
-                  </a>
-                </div>
-
-
-
-                <div class="summary-content">
-                  <div class="summary-title">
-                    <h2>
-                      <a href="https://mycreativecoder.com/projects/project-3/">Illustration – Vector / Bitmap</a>
-                    </h2>
-                  </div>
-
-                  <span class="summary-client">
-                    Illustration – Vector / Bitmap
-                  </span>
-
-                </div>
-              </div>
-            </div>
-
-
-           
-            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mt-md-0 ">
-
-
-              <div class="summary summary-project summary- summary-has-thumbnail">
-
-                <div style="filter: drop-shadow(22px 34px 0px #1d1c456b);text-align: center;">
-                  <div style="" class="lightbulb  pt-10">
-                    <svg id="lightbulb-shape" class="animonItem reveal-2 reveal-prehide reveal-delegated" style="filter: drop-shadow(0px 0px 54px #00f3ff);width: 4rem;height: 4rem;" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="64" height="64">
-                      <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5"></path>
-                    </svg>
-                  </div>
               
 
 
-                </div>
 
-                <div id="inevitable" style="font-weight: bold;
-                  border-radius: 12px;
-                  background: #5000f1;
-                  padding: 5rem 1rem;
-                  margin-top: 2em; aspect-ratio: 16/8;" class="full-bleed animonItem reveal-prehide">
-                  
-                  Making awesome ideas <br>go from <i><quote>« impossible »</quote></i> <br>to <strong><strong>INEVITABLE.</strong></strong>
+
+              <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mt-md-0">
+
+
+                <div class="summary summary-project summary- summary-has-thumbnail animonItem reveal-prehide">
+
+
+                  <div class="summary-thumbnail ">
+
+                    <img class="placeholder" alt="Illustration (Vector / Bitmap)"
+                      src="src/media/placeholder-thumbnail.png">
+
+                  </div>
+
+                  <div class="summary-thumbnail crossfaded" id="crossaded-5">
+                    <a href="https://mycreativecoder.com/projects/project-3/">
+                      <img class="slide shown" alt="Illustration (Vector / Bitmap)"
+                        src="src/media/project-5-1-thumbnail.png">
+                    </a>
+                  </div>
+
+
+
+                  <div class="summary-content">
+                    <div class="summary-title">
+                      <h2>
+                        <a href="https://mycreativecoder.com/projects/project-3/">Illustration – Vector / Bitmap</a>
+                      </h2>
+                    </div>
+
+                    <span class="summary-client">
+                      Illustration – Vector / Bitmap
+                    </span>
+
+                  </div>
                 </div>
               </div>
 
+
+            
+              <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mt-md-0 ">
+
+
+                <div class="summary summary-project summary- summary-has-thumbnail">
+
+                  <div style="filter: drop-shadow(22px 34px 0px #1d1c456b);text-align: center;">
+                    <div style="" class="lightbulb  pt-10">
+                      <svg id="lightbulb-shape" class="animonItem reveal-2 reveal-prehide reveal-delegated" style="filter: drop-shadow(0px 0px 54px #00f3ff);width: 4rem;height: 4rem;" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="64" height="64">
+                        <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5"></path>
+                      </svg>
+                    </div>
+                
+
+
+                  </div>
+
+                  <div id="inevitable" style="font-weight: bold;
+                    border-radius: 12px;
+                    background: #5000f1;
+                    padding: 5rem 1rem;
+                    margin-top: 2em; aspect-ratio: 16/8;" class="full-bleed animonItem reveal-prehide nav-section" data-nav-section-id="2" >
+                    
+                    Making awesome ideas <br>go from <i><quote>« impossible »</quote></i> <br>to <strong><strong>INEVITABLE.</strong></strong>
+                  </div>
+                </div>
+
+              </div>
+
+
+
+
+
             </div>
-
-
-
-
-
           </div>
         </div>
       </div>
 
-
-      <div id="about-us" class="section  pt-16" style="padding-top: 0;">
+      <div id="about-us" class="section pt-16 nav-section" data-nav-section-id="3" style="padding-top: 0;">
         <div class="container">
           <!--
           <div class="row">
@@ -1269,9 +1264,9 @@
 
 
             
-            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-0 mt-md-0 desc-features">
-              <h2>Truly <i class="gradtext-rainbow" style="font-variant:initial;">you</i>,
-                <br>forever <i class="gradtext-rainbow" style="font-variant:initial;">yours</i>.
+            <div id="truly" class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-0 mt-md-0 desc-features">
+              <h2>Truly <i>you</i>,
+                <br>forever <i>yours</i>.
               </h2>
               <p>
                 We build tailor-made websites and applications on top of open source technologies.
@@ -1361,7 +1356,7 @@
       
               <div class="logo logo-desktop-invert mb-4">
       
-                <a href="#wrapper">
+                <a href="#home">
                   <div class="logo-image">
       
                     <img height="44px" width="44px" alt="Creative Coder Logo" src="src/logo.png">
