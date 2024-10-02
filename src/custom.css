@@ -595,10 +595,11 @@ a.arrow:hover .hand {
 
 
 .animonItem:not(.reveal-prehide) #flip div:first-child {
-  animation: show 6s linear infinite;
+  animation-name: show;
   animation-delay: 4s;
-  
-
+  animation-timing-function: cubic-bezier(0,2,1.5,1);
+  animation-iteration-count: infinite;
+  animation-duration: 6s;
 }
 
 @keyframes show {
@@ -627,10 +628,46 @@ a.arrow:hover .hand {
   //border-radius: 8px;
 }
 
-.summary.summary-project .summary-thumbnail img, .summary.summary-project .summary-thumbnail video {
+.summary.summary-project .summary-thumbnail img, .summary.summary-project .summary-thumbnail .video-slide video {
   border-radius: var(--card-border-radius);
   object-fit: cover;
   object-position: top left;
+  width: 100%;
+  height: 100%;
+}
+.playbtn::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' class='svg-triangle' width='30' viewBox='0 0 100 100' height='50'%3E%3Cpath d='M 90,50 10,90 10,10 z' stroke='%230096b8' stroke-width='20' stroke-linejoin='round' stroke-linecap='round' fill='%230096b8' /%3E%3C/svg%3E");
+      font-size: 40px;
+  color: #00f3ffcf;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-13%, -25%);
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+  width: 100px;
+  height: 100px;
+
+}
+.playbtn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background-color: #4815ff;
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+  border: 3px solid rgba(1,1,1,.4);
+  box-shadow: 0px 0px 13px #0000008a;
+  transition: opacity 1s ease;
+}
+.playbtn:hover::before, .playbtn:hover::after {
+  display: none;
 }
 
 .summary.summary-project {
@@ -644,19 +681,55 @@ a.arrow:hover .hand {
 
 .summary.summary-project .summary-thumbnail a {
   border: 1px solid var(--color-border-thumbnail);
-  box-shadow: 0px 2px 24px #CCCCCC85;
-  border-radius: var(--card-border-radius);
+    
+    box-shadow: 0px 0 24px #3b1aa9a0;
+    
+    border-radius: var(--card-border-radius);
+    transition: all .3s ease;
+    z-index: 1;
 }
 
 .summary-description {
   display: none;
 }
 
+#projects-sliders-container .row .col-12:nth-of-type(2) .summary-project .summary-thumbnail a {
+  box-shadow: 0px 0 24px #3b1aa957;
+  scale: 1;
+  transition: all .3s ease;
+  z-index: 1;
+}
 
+#projects-sliders-container .row .col-12:nth-of-type(2) .summary-project .summary-thumbnail a:hover {
+
+}
+
+#projects-sliders-container:not(.locked) .summary.summary-project .summary-thumbnail a:hover {
+
+  //scale: 1.025;
+  z-index: 4;
+  border: 4px solid #40f;
+  border-radius: 20px;
+  margin-top: -8px;
+  
+}
 
 .placeholder {
   opacity: 0;
   left: 0px;
+  z-index: 1;
+}
+
+.crossfaded:not(.hovered) .shown.playbtn::before {
+  z-index: 3;
+}
+.crossfaded:not(.hovered) .shown.playbtn::after {
+  z-index: 2;
+}
+
+.crossfaded.hovered .shown.playbtn::before, .crossfaded.hovered .shown.playbtn:after  {
+  opacity: 0;
+  
 }
 
 .crossfaded .slide:not(.placeholder) {
@@ -699,11 +772,19 @@ video.slide {
   
   will-change: transform, opacity;
 }
-
-.animonItem.reverse {
-  transform: translateY(-100px);
+body:not(.js-hidden) .fade-in:not(.reveal-prehide) {
+  transition-property: opacity;  /* The properties you're animating */
+  transition-duration: 2s !important;              /* Duration for both transitions */
+                 /* Delay for transform and opacity */
   
+
+
 }
+
+body:not(.js-hidden) .animonItem.reverse.reveal-prehide {
+  transform: translateY(-100px) !important;
+}
+
 body:not(.js-hidden) .reveal-5-ease-out:not(.reveal-prehide) {
   transition-duration: .5s;
   transition-timing-function: ease-out;
@@ -715,7 +796,7 @@ body:not(.js-hidden) .reveal-5-ease-out:not(.reveal-prehide) {
 }
 body:not(.js-hidden) .reveal-1:not(.reveal-prehide) {
   transition-duration: .5s;
-  transition-timing-function: cubic-bezier(0,1.01,.35,1.28);
+  transition-timing-function: cubic-bezier(0,2,1.5,1);
   transition-delay: 0.5s;  /* Base delay */
   opacity: 1;
   transform: translateY(0);
@@ -725,7 +806,7 @@ body:not(.js-hidden) .reveal-1:not(.reveal-prehide) {
 
 body:not(.js-hidden) .reveal-2:not(.reveal-prehide) {
   transition-duration: .5s;
-  transition-timing-function: cubic-bezier(0,1.01,.35,1.28);
+  transition-timing-function: cubic-bezier(0,2,1.5,1);
   transition-delay: 1s;  /* Base + 0.5s */
   opacity: 1;
   transform: translateY(0);
@@ -735,7 +816,7 @@ body:not(.js-hidden) .reveal-2:not(.reveal-prehide) {
 
 body:not(.js-hidden) .reveal-3:not(.reveal-prehide) {
   transition-duration: .5s;
-  transition-timing-function: cubic-bezier(0,1.01,.35,1.28);
+  transition-timing-function: cubic-bezier(0,2,1.5,1);
   transition-delay: 1.5s;  /* Base + 1s */
   opacity: 1;
   transform: translateY(0);
@@ -745,7 +826,7 @@ body:not(.js-hidden) .reveal-3:not(.reveal-prehide) {
 
 body:not(.js-hidden) .reveal-4:not(.reveal-prehide) {
   transition-duration: .5s;
-  transition-timing-function: cubic-bezier(0,1.01,.35,1.28);
+  transition-timing-function: cubic-bezier(0,2,1.5,1);
   transition-delay: 2s;  /* Base + 1.5s */
   opacity: 1;
   transform: translateY(0);
@@ -755,7 +836,7 @@ body:not(.js-hidden) .reveal-4:not(.reveal-prehide) {
 
 body:not(.js-hidden) .reveal-5:not(.reveal-prehide) {
   transition-duration: .5s;
-  transition-timing-function: cubic-bezier(0,1.01,.35,1.28);
+  transition-timing-function: cubic-bezier(0,2,1.5,1);
   transition-delay: 2.5s;  /* Base + 2s */
   opacity: 1;
   transform: translateY(0);
@@ -765,7 +846,7 @@ body:not(.js-hidden) .reveal-5:not(.reveal-prehide) {
 
 body:not(.js-hidden) .reveal-6:not(.reveal-prehide) {
   transition-duration: .5s;
-  transition-timing-function: cubic-bezier(0,1.01,.35,1.28);
+  transition-timing-function: cubic-bezier(0,2,1.5,1);
   transition-delay: 3s;  /* Base + 2.5s */
   opacity: 1;
   transform: translateY(0);
@@ -775,7 +856,7 @@ body:not(.js-hidden) .reveal-6:not(.reveal-prehide) {
 
 body:not(.js-hidden) .reveal-7:not(.reveal-prehide) {
   transition-duration: .5s;
-  transition-timing-function: cubic-bezier(0,1.01,.35,1.28);
+  transition-timing-function: cubic-bezier(0,2,1.5,1);
   transition-delay: 3.5s;  /* Base + 3s */
   opacity: 1;
   transform: translateY(0);
@@ -785,7 +866,7 @@ body:not(.js-hidden) .reveal-7:not(.reveal-prehide) {
 
 body:not(.js-hidden) .reveal-8:not(.reveal-prehide) {
   transition-duration: .5s;
-  transition-timing-function: cubic-bezier(0,1.01,.35,1.28);
+  transition-timing-function: cubic-bezier(0,2,1.5,1);
   transition-delay: 4s;  /* Base + 3.5s */
   opacity: 1;
   transform: translateY(0);
@@ -795,7 +876,7 @@ body:not(.js-hidden) .reveal-8:not(.reveal-prehide) {
 
 body:not(.js-hidden) .reveal-9:not(.reveal-prehide) {
   transition-duration: .5s;
-  transition-timing-function: cubic-bezier(0,1.01,.35,1.28);
+  transition-timing-function: cubic-bezier(0,2,1.5,1);
   transition-delay: 4.5s;  /* Base + 4s */
   opacity: 1;
   transform: translateY(0);
@@ -805,7 +886,7 @@ body:not(.js-hidden) .reveal-9:not(.reveal-prehide) {
 
 body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
   transition-duration: .5s;
-  transition-timing-function: cubic-bezier(0,1.01,.35,1.28);
+  transition-timing-function: cubic-bezier(0,2,1.5,1);
   transition-delay: 5s;  /* Base + 4.5s */
   opacity: 1;
   transform: translateY(0);
@@ -820,6 +901,8 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
   will-change: transform, opacity;
   transition: transform, opacity;
 }
+
+
 
 .reveal {
   opacity: 1;
@@ -856,8 +939,8 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
 .sticky {
     position: fixed;
     top: 0;
-    /* and a smooth transition, so it won't just pop in and out the screen */
-    transition: top 1500ms linear;
+    /* smooth transition, so it won't just pop in and out the screen */
+    transition: top 1500ms ease;
     will-change: transform;
 }
 
@@ -1081,6 +1164,7 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
   display: block;
 }
 
+
 .modal-slide {
   width: 100%;
 
@@ -1101,6 +1185,17 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
   text-align: left;
   padding: 16px 20px 20px 20px;
   border-top: 1px solid var(--color-base-text);
+}
+
+
+.modal.text-page .modal-content .modal-media-content-container {
+  display: none;
+}
+.modal.text-page .modal-content {
+  border-radius: 12px 12px;
+}
+.modal.text-page .modal-description {
+  border-top: 0px;
 }
 
 /* Close Button */
