@@ -273,7 +273,7 @@
 
 
 
-      <div class="dark-mode-switcher" id="dark-mode-container">
+      <div class="dark-mode-switcher" id="dark-mode-container" style="display: none;">
         <div class="dark-mode-switch animated dark">
           <svg class="dark-mode-icon-dark" data-name="Layer 1" fill="#000000" height="20px" viewBox="0 0 64 64"
             width="20px" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px">
@@ -480,7 +480,9 @@
         
         
           <li class="">
-            <a id="linkContact" class="btn-sm btn-primary"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16" width="24" height="24" style="margin-top: -5px;margin-right: 2px;margin-left: 2px;">
+            <a id="linkContact" class="btn-sm btn-primary"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16" width="20" height="20" style="margin-top: -5px;
+              margin-right: 4px;
+              margin-left: 0px;">
               <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"></path>
             </svg> Contact</a>
           </li>
@@ -499,7 +501,7 @@
 
 
 
-      <div class="dark-mode-switcher" id="dark-mode-container">
+      <div class="dark-mode-switcher" id="dark-mode-container" style="display: none;">
         <div class="dark-mode-switch animated dark">
           <svg class="dark-mode-icon-dark" data-name="Layer 1" fill="#000000" height="20px" viewBox="0 0 64 64"
             width="20px" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px">
@@ -543,10 +545,10 @@
               <span class="">
                 <div class="animonItem reveal-prehide reveal-2" id="we-make" style="display: inline-block;">We</div>
                 <div class="animonItem reveal-prehide reveal-3" style="display: inline-block;">Make</div></span>
-              <div class="animonItem reveal-prehide reveal-4 gradtext-rainbow great animate">
+              <div class="animonItem reveal-prehide reveal-4 gradtext-rainbow great animate" style="white-space: nowrap;">
                 <div>G</div><div>R</div><div>E</div><div>A</div><div>T</div>&nbsp;
               </div>
-              <span class="animonItem reveal-prehide reveal-5 reverse">Web
+              <span class="animonItem reveal-prehide reveal-5 reverse" style="white-space: nowrap;">Web
                 <div id=flip>
                   <div><div>sites</div></div>
                   <div><div>apps</div></div>
@@ -577,13 +579,14 @@
       
           </div>
 
-          <img src="src/coffee.png" class="floating"
-      style="position: absolute;
-      width: 17vw;
-      top: 33vh;
-      z-index: 9;
-      max-width: 300px;
-      left: 7vw;">
+          <div class="animonItem reveal-prehide reveal-1" style="position: absolute;
+          width: 17vw;
+          top: 33vh;
+          z-index: 9;
+          max-width: 300px;
+          left: 7vw;">
+          <img src="src/coffee.png" class="floating" style="width:100%;">
+      </div>
 
         </div>
       </div>
@@ -645,7 +648,7 @@
           </div>
         </div>
 
-        <div class="section pt-0 projects-sliders"  style="z-index: 3; position: relative;">
+        <div id="projects-sliders-container" class="section pt-0 projects-sliders"  style="z-index: 3; position: relative;">
           <div class="container">
             <div class="row">
 
@@ -689,7 +692,7 @@
                   <div class="summary-content">
                     <div class="summary-title">
                       <h2>
-                        <a href="https://mycreativecoder.com/projects/project-2/">l'Exprimerie</a>
+                        <a class="slide-link" href="https://mycreativecoder.com/projects/project-2/">l'Exprimerie</a>
                       </h2>
                     </div>
 
@@ -737,11 +740,13 @@
                     <a href="https://mycreativecoder.com/projects/project-1/">
                       <img class="slide lazyload" alt="AirAir - Online multiplayer game" loading="lazy" style="opacity:0;"
                         data-src="src/media/project-4-6-thumbnail.png">
-                      <video class="slide" alt="AirAir - Online multiplayer game" style="opacity:0;"
-                        title="AirAir - Online multiplayer game" preload="auto">
-                        <source alt="AirAir - Online multiplayer game" title="AirAir - Online multiplayer game"
-                          src="src/airair.mp4" type="video/mp4" />
-                      </video>
+                        <div class="playbtn slide video-slide">
+                          <video class="" preload="auto">
+                          
+                            <source alt="AirAir - Online multiplayer game" title="AirAir - Online multiplayer game"
+                              src="src/airair.mp4" type="video/mp4" />
+                          </video>
+                        </div>
                       <img class="slide shown" alt="AirAir - Online multiplayer game"
                         src="src/media/project-4-1-thumbnail.png">
                     </a>
@@ -750,7 +755,7 @@
                   <div class="summary-content">
                     <div class="summary-title">
                       <h2>
-                        <a href="https://mycreativecoder.com/projects/project-4/">AirAir</a>
+                        <a class="slide-link" href="https://mycreativecoder.com/projects/project-4/">AirAir</a>
                       </h2>
                     </div>
 
@@ -812,7 +817,7 @@
                   <div class="summary-content">
                     <div class="summary-title">
                       <h2>
-                        <a href="https://mycreativecoder.com/projects/project-1/">Crises et Société</a>
+                        <a class="slide-link" href="https://mycreativecoder.com/projects/project-1/">Crises et Société</a>
                       </h2>
                     </div>
 
@@ -866,7 +871,7 @@
                   <div class="summary-content">
                     <div class="summary-title">
                       <h2>
-                        <a href="https://mycreativecoder.com/projects/project-3/">Institut Français de
+                        <a class="slide-link" href="https://mycreativecoder.com/projects/project-3/">Institut Français de
                           Gestalt-thérapie</a>
                       </h2>
                     </div>
@@ -929,7 +934,7 @@
                   <div class="summary-content">
                     <div class="summary-title">
                       <h2>
-                        <a href="https://mycreativecoder.com/projects/project-3/">Illustration – Vector / Bitmap</a>
+                        <a class="slide-link" href="https://mycreativecoder.com/projects/project-3/">Illustration – Vector / Bitmap</a>
                       </h2>
                     </div>
 
@@ -950,7 +955,7 @@
 
                   <div style="filter: drop-shadow(22px 34px 0px #1d1c456b);text-align: center;">
                     <div style="" class="lightbulb  pt-10">
-                      <svg id="lightbulb-shape" class="animonItem reveal-2 reveal-prehide reveal-delegated" style="filter: drop-shadow(0px 0px 54px #00f3ff);width: 4rem;height: 4rem;" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="64" height="64">
+                      <svg id="lightbulb-shape" class="animonItem reveal-prehide reveal-delegated" style="filter: drop-shadow(0px 0px 54px #00f3ff);width: 4rem;height: 4rem;" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="64" height="64">
                         <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5"></path>
                       </svg>
                     </div>
@@ -1001,7 +1006,7 @@
               <div class="about-info">
 
 
-                <div class="logos animonItem reveal-prehide">
+                <div class="logos animonItem reveal-prehide reveal-1">
                   
           
                   <div class="logo logo-desktop-invert">
@@ -1021,7 +1026,7 @@
                   </div>
     
                 </div>
-                <p class="animonItem reveal-prehide">creative web development studio with 15 years of experience in making awesome projects </p>
+                <p class="fade-in animonItem reveal-prehide reveal-2">creative web development studio with 15 years of experience in making awesome projects </p>
 
                 
     
@@ -1034,9 +1039,9 @@
           
 
 
-          <div class="row animonItem reveal-prehide">
-            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-0 mt-md-0 mb-0" style="padding: 0;">
-              <div class="techstack-halo">
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-0 mt-md-0 mb-0 " style="padding: 0;">
+              <div class="techstack-halo animonItem reveal-prehide fade-in">
                 <!--col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mb-0 mt-md-0 
                             <ul class="actions special">
                               <li><a href="#URL_RUBRIQUE" class="button"><:info_articles_tous:></a></li>
@@ -1265,10 +1270,10 @@
 
             
             <div id="truly" class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-0 mt-md-0 desc-features">
-              <h2>Truly <i>you</i>,
-                <br>forever <i>yours</i>.
+              <h2><div class="animonItem reveal-prehide reveal-2">Truly <i>you</i>,</div>
+               <div class="animonItem reveal-prehide reveal-3">forever <i>yours</i>.</div>
               </h2>
-              <p>
+              <p class="fade-in animonItem reveal-prehide reveal-4 " >
                 We build tailor-made websites and applications on top of open source technologies.
               </p>
             </div>
@@ -1295,7 +1300,7 @@
 
 
 
-      <div class="section section-base-bg-2 nav-section nav-section-start" data-nav-section-id="4" id="contact">
+      <div class="section section-base-bg-2 nav-section-start" data-nav-section-id="4" id="contact">
         <div class="container">
           <div style="background-image: url('src/logotransparent.png');
                     background-position: 0% 20%;
@@ -1318,7 +1323,9 @@
 
                   <div class="co-12 col-md-6" style="text-align: center;">
                     <div id="mc_embed_signup" style="text-align: center;">
-                      <button type="button" class="btn btn-primary btn-lg"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16" width="24" height="24" style="margin-top: -5px;margin-right: 2px;margin-left: 2px;">
+                      <button type="button" class="btn btn-primary btn-lg"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16" width="24" height="24" style="margin-top: -5px;
+                        margin-right: 7px;
+                        margin-left: -5px;">
               <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"></path>
             </svg>
                       Contact Us</button>
@@ -1382,71 +1389,84 @@
 
 
         <div class="col-md-6 col-sm-12 mt-md-0" style="padding-top: .6em;">
-          <small style="float:right; color: #45336d; padding-top: .125em;">&nbsp;&nbsp;© 2024-2025 mycreativecoder.com</small>
+          
           <a id="link-legal" style="float:right; color:#45336d;">Legal Notice
             <div class="summary-title" style="display:none;">Mentions légales</div>
             <div class="summary-subtitle" style="display:none;">En vigueur au 01/10/2024</div>
             <div class="summary-description" style="display:none;">
-        <br/>      
-<p>
-Conformément aux dispositions de la loi n°2004-575 du 21 juin 2004 pour la Confiance en l’économie
-numérique, il est porté à la connaissance des utilisateurs et visiteurs, ci-après l' "Utilisateur", du site
-<span style="display: inline-block;">https://mycreativecoder.com</span>, ci-après le "Site", les présentes mentions légales.
-La connexion et la navigation sur le Site par l’Utilisateur implique acceptation intégrale et sans
-réserve des présentes mentions légales.
-Ces dernières sont accessibles sur le Site à la rubrique "Mentions légales".
-</p>
-<h3>EDITION DU SITE</h3>
-<p>
-L'édition du Site est assurée par la société Amutio Sacha, Entrepreneur Individuel immatriculé au Registre du Commerce et des Sociétés de
-Bordeaux sous le numéro 512156373 dont le siège social est situé au 5, rue Emile Zola,
-33400 TALENCE,
+              <br/>      
+              <p>
+              Conformément aux dispositions de la loi n°2004-575 du 21 juin 2004 pour la Confiance en l’économie
+              numérique, il est porté à la connaissance des utilisateurs et visiteurs, ci-après l' "Utilisateur", du site
+              <span style="display: inline-block;">https://mycreativecoder.com</span>, ci-après le "Site", les présentes mentions légales.
+              La connexion et la navigation sur le Site par l’Utilisateur implique acceptation intégrale et sans
+              réserve des présentes mentions légales.
+              Ces dernières sont accessibles sur le Site à la rubrique "Mentions légales".
+              </p>
+              <h3>EDITION DU SITE</h3>
+              <p>
+              L'édition du Site est assurée par la société Amutio Sacha, Entrepreneur Individuel immatriculé au Registre du Commerce et des Sociétés de
+              Bordeaux sous le numéro 512156373 dont le siège social est situé au 5, rue Emile Zola,
+              33400 TALENCE,
 
-<ul>
-  <li>Adresse e-mail : <span style="display: inline-block;">hello@mycreativecoder.com</span>.</li>
-  <li>N° de TVA intracommunautaire : _______________</li>
-  <li>Directeur de la publication : Amutio Sacha</li>
-</ul>
+              <ul>
+                <li>Adresse e-mail : <span style="display: inline-block;">hello@mycreativecoder.com</span>.</li>
+                <li>N° de TVA intracommunautaire : _______________</li>
+                <li>Directeur de la publication : Amutio Sacha</li>
+              </ul>
 
-ci-après l'"Editeur".
-</p>
+              ci-après l'"Editeur".
+              </p>
 
-<h3>HEBERGEUR</h3>
-<p>
-L'hébergeur du Site est la société GitHub Pages, dont le siège social est situé au 88 Colin P. Kelly Jr.
-Street San Francisco .
-</p>
+              <h3>HEBERGEUR</h3>
+              <p>
+              L'hébergeur du Site est la société GitHub Pages, dont le siège social est situé au 88 Colin P. Kelly Jr.
+              Street San Francisco .
+              </p>
 
-<h3>ACCES AU SITE</h3>
-<p>
-Le Site est normalement accessible, à tout moment, à l'Utilisateur. Toutefois, l'Editeur pourra, à tout
-moment, suspendre, limiter ou interrompre le Site afin de procéder, notamment, à des mises à jour ou
-des modifications de son contenu. L'Editeur ne pourra en aucun cas être tenu responsable des
-conséquences éventuelles de cette indisponibilité sur les activités de l'Utilisateur.
-</p>
+              <h3>ACCES AU SITE</h3>
+              <p>
+              Le Site est normalement accessible, à tout moment, à l'Utilisateur. Toutefois, l'Editeur pourra, à tout
+              moment, suspendre, limiter ou interrompre le Site afin de procéder, notamment, à des mises à jour ou
+              des modifications de son contenu. L'Editeur ne pourra en aucun cas être tenu responsable des
+              conséquences éventuelles de cette indisponibilité sur les activités de l'Utilisateur.
+              </p>
 
-<h3>COLLECTE DES DONNEES</h3>
-<p>
-Le Site assure à l'Utilisateur une collecte et un traitement des données personnelles dans le respect
-de la vie privée conformément à la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers
-aux libertés et dans le respect de la règlementation applicable en matière de traitement des données
-à caractère personnel conformément au règlement (UE) 2016/679 du Parlement européen et du
-Conseil du 27 avril 2016 (ci-après, ensemble, la "Règlementation applicable en matière de
-protection des Données à caractère personnel").
-</p>
-<p>
-En vertu de la Règlementation applicable en matière de protection des Données à caractère
-personnel, l'Utilisateur dispose d'un droit d'accès, de rectification, de suppression et d'opposition de
-ses données personnelles. L'Utilisateur peut exercer ce droit :
-• par mail à l'adresse email <span style="display: inline-block;">hello@mycreativecoder.com</span>
-Toute utilisation, reproduction, diffusion, commercialisation, modification de toute ou partie du Site,
-sans autorisation expresse de l’Editeur est prohibée et pourra entraîner des actions et poursuites
-judiciaires telles que prévues par la règlementation en vigueur.
-Pour plus d'informations en matière de protection des données à caractère personnel, se reporter à la
-Charte en matière de protection des données à caractère personnel du site
-<span style="display: inline-block;">https://mycreativecoder.com</span> accessible depuis la rubrique "Données personnelles".
-</p>
+              <h3>COLLECTE DES DONNEES</h3>
+              <p>
+              Le Site assure à l'Utilisateur une collecte et un traitement des données personnelles dans le respect
+              de la vie privée conformément à la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers
+              aux libertés et dans le respect de la règlementation applicable en matière de traitement des données
+              à caractère personnel conformément au règlement (UE) 2016/679 du Parlement européen et du
+              Conseil du 27 avril 2016 (ci-après, ensemble, la "Règlementation applicable en matière de
+              protection des Données à caractère personnel").
+              </p>
+              <p>
+              En vertu de la Règlementation applicable en matière de protection des Données à caractère
+              personnel, l'Utilisateur dispose d'un droit d'accès, de rectification, de suppression et d'opposition de
+              ses données personnelles. L'Utilisateur peut exercer ce droit :
+              • par mail à l'adresse email <span style="display: inline-block;">hello@mycreativecoder.com</span>
+              Toute utilisation, reproduction, diffusion, commercialisation, modification de toute ou partie du Site,
+              sans autorisation expresse de l’Editeur est prohibée et pourra entraîner des actions et poursuites
+              judiciaires telles que prévues par la règlementation en vigueur.
+              Pour plus d'informations en matière de protection des données à caractère personnel, se reporter à la
+              Charte en matière de protection des données à caractère personnel du site
+              <span style="display: inline-block;">https://mycreativecoder.com</span> accessible depuis la rubrique "Données personnelles".
+              </p>
             </div>
+          </a>
+          
+          <a id="link-trademark" style="float:right; color: #45336d; ">
+            Trademark Disclaimer
+            <div class="summary-title" style="display:none;">Trademark Disclaimer</div>
+            <div class="summary-subtitle" style="display:none;"></div>
+            <div class="summary-description" style="display:none;">
+              <p>All product names, logos, brands, trademarks and registered trademarks are property of their respective owners. </p>
+              <p>All company, product and service names used in this website are for identification purposes only. Use of these names, trademarks and brands does not imply endorsement.</p>
+              <p>All other trademarks cited herein are the property of their respective owners.</p>
+            </div>
+            
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </a>
           
         </div>
@@ -1576,11 +1596,6 @@ Charte en matière de protection des données à caractère personnel du site
 
     </div>
   </div>
-
-
-
-
-
 
 
 <!--
