@@ -705,11 +705,11 @@ function checkIfAllImagesLoaded() {
   if (loadedCount === totalFirstThumbnailImages) {
     console.log('All first thumbnails images have loaded ' + performance.now());
     if (document.fonts.check('1em Poppins')) {
-      console.log("Font has been loaded.");
+      console.log("Font has been loaded " + performance.now());
       spaStart();
     } else { // font not ready yet
       document.fonts.ready.then(function () {
-        console.log("All fonts have finished loading.");
+        console.log("All fonts have finished loading " + performance.now());
         spaStart();
       });
     }
@@ -721,6 +721,7 @@ function checkIfAllImagesLoaded() {
 }
 
 function spaStart(){
+  
   // show document 
   body.classList.remove('js-hidden');
   body.classList.remove('scroll-lock');
@@ -892,6 +893,7 @@ linkProjects.addEventListener('click', (event) => {
   setTimeout(() => { astrodudeInstance.show(); }, 3000);
   setTimeout(() => { astrodudeInstance.hide(); }, 13000);
 
+  // TODO : check if mouse is already hovering a slide at this point
   setTimeout(() => { slidesContainer.classList.remove('locked') }, 3000);
   
 });
@@ -917,7 +919,8 @@ splashDiv.addEventListener('click', (event) => {
   lenis.scrollTo('#projects-reel', { lerp: 0.05, lock: true });
   setTimeout(() => { astrodudeInstance.show(); }, 3000);
   setTimeout(() => { astrodudeInstance.hide(); }, 13000);
-
+  
+  // TODO : check if mouse is already hovering a slide at this point
   setTimeout(() => { slidesContainer.classList.remove('locked') }, 3000);
 
 });
@@ -1135,8 +1138,8 @@ for (let i = 0; i < slides.length; i++) {
 
 
 
-          // Check if the current child is an image or if the elapsed time exceeds current slide duration
-          if (elapsed > timeBetweenFades) {
+          // Check if the elapsed time exceeds current slide duration
+          if (elapsed > timeBetweenFades && childSlides.length > 1) {
             crossFade(thisSlide.id)
           }
 
@@ -1165,7 +1168,7 @@ for (let i = 0; i < slides.length; i++) {
           let currentChildSlideType;
           let currentChildSlideDuration;
 
-
+          
 
           // Loop through the child slides to find the one that is currently shown
           for (let j = 0; j < childSlides.length; j++) {
@@ -1200,8 +1203,13 @@ for (let i = 0; i < slides.length; i++) {
 
 
               // Check if the current child is an image or if the elapsed time exceeds current slide duration
-              if (elapsed > currentChildSlideDuration) {
-                //console.log('call CF');
+              if (elapsed > currentChildSlideDuration && childSlides.length > 1) {
+                
+                slidesContainer.classList.add('blink');
+                setTimeout(function () {
+                  slidesContainer.classList.remove('blink');
+                }, 500);
+
                 crossFade(thisSlide.id);  // Trigger crossfade for the hovered slide
               } else {
                 //console.log('elapsed ' + elapsed);
