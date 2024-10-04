@@ -202,7 +202,18 @@ const handleIntersect = function (entries, observer) {
         //console.log(document.getElementById('we-make'));
         setTimeout(function () { // TODO : check if splash is in viewport
           splashDiv.classList.add('finished');
-          
+          // Créer un nouvel élément <style>
+          var style = document.createElement('style');
+
+          // Ajouter la règle CSS à l'élément <style>
+          style.innerHTML = `
+            .paused, .paused > *, .paused > * > * {
+              animation-play-state: paused !important;
+            }
+          `;
+
+          // Ajouter l'élément <style> au <head> du document
+          document.head.appendChild(style);
           //alert("finished")
         }, hoverableDelay);
       }
