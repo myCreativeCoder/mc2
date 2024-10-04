@@ -38,6 +38,7 @@ lastScrollY = currentScrollY;
 
 document.addEventListener("DOMContentLoaded", (event) => {
 
+  console.log('dom content loaded ' + performance.now())
 // preload custom eye cursor both states to prevent cursor jump on first blink (loading blink cursor image)
 
 //setTimeout(function () {
@@ -67,6 +68,7 @@ if (testMode) {
 });
 
 function spa() {
+  console.log("spa " + performance.now())
 const body = document.querySelector('.page-home');
 
 const images = document.querySelectorAll("img.lazyload");
@@ -756,6 +758,8 @@ function checkIfAllImagesLoaded() {
 }
 
 function spaStart(){
+
+  console.log('spaStart ' + performance.now())
   
   // show document 
   body.classList.remove('js-hidden');
@@ -785,21 +789,7 @@ function spaStart(){
   }
 }
 
-// Add 'load' event listeners to each image
-firstThumbnailImages.forEach((img) => {
-  if (img.complete) {
-    // If the image is already loaded from cache, directly call the function
-    checkIfAllImagesLoaded();
-  } else {
-    // Otherwise, attach the 'load' event listener
-    img.addEventListener('load', checkIfAllImagesLoaded);
 
-    // Optional error handling
-    img.addEventListener('error', function () {
-      console.error(`Image failed to load: ${img.src}`);
-    });
-  }
-});
 
 window.addEventListener('load', function () {
 
@@ -807,6 +797,22 @@ window.addEventListener('load', function () {
   //body.classList.remove('js-hidden');
   //}, 2000); 
   console.log('window on load ' + performance.now())
+
+  // Add 'load' event listeners to each image
+  firstThumbnailImages.forEach((img) => {
+    if (img.complete) {
+      // If the image is already loaded from cache, directly call the function
+      checkIfAllImagesLoaded();
+    } else {
+      // Otherwise, attach the 'load' event listener
+      img.addEventListener('load', checkIfAllImagesLoaded);
+
+      // Optional error handling
+      img.addEventListener('error', function () {
+        console.error(`Image failed to load: ${img.src}`);
+      });
+    }
+  });
   //body.classList.remove('js-hidden');
   //body.classList.remove('scroll-lock');
   //sunglasses.classList.remove('hidden');
