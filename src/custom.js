@@ -95,7 +95,6 @@ function spa() {
 
   let acceptabeDelay = 10000;
 
-  /*
   const firstThumbnailImages = document.querySelectorAll('img.shown');
 
   let loadedCount = 0;
@@ -137,7 +136,7 @@ function spa() {
       });
     }
   });
-  */
+
 
 
   setTimeout(function () { // give us a bit more time to load images
@@ -219,191 +218,7 @@ function spa() {
   }
 
 
-  let hasLazyLoaded = false;
-
-  // Get all elements with class 'animonItem'
-  const animonItems = document.querySelectorAll('.animonItem');
-
-  // Convert NodeList to an array and get the first 3 items
-  const firstFourItems = Array.from(animonItems).slice(0, 4);
-  const fifthItem = animonItems[4];
-
-  const handleIntersect = function (entries, observer) {
-    //entries.forEach(function (entry) {
-    //if (entry.intersectionRatio > threshold) {
-
-
-    //let visibleBatch = [];
-
-
-    // Iterate over each entry (each observed element)
-    entries.forEach(function (entry) {
-      const targetDiv = entry.target;
-      if (entry.intersectionRatio > threshold) {
-
-        //console.log('interesect ' + entry.target.id)
-        //console.log('Scroll direction: ' + scrollDirection);
-
-        // Add the box to the array of visible elements for this batch
-        //visibleBatch.push(entry.target);
-        // Ensure entry.target is a valid DOM element
-        
-
-        if (targetDiv.id == 'we-make') {
-          //console.log(document.getElementById('we-make'));
-          setTimeout(function () { // TODO : check if splash is in viewport
-            splashDiv.classList.add('finished');
-            /*
-            // Créer un nouvel élément <style>
-            var style = document.createElement('style');
-
-            // Ajouter la règle CSS à l'élément <style>
-            style.innerHTML = `
-              .paused, .paused > *, .paused > * > * {
-                animation-play-state: paused !important;
-              }
-            `;
-
-            // Ajouter l'élément <style> au <head> du document
-            document.head.appendChild(style);
-            */
-            //alert("finished")
-          }, hoverableDelay);
-        }
-
-
-        // Check if the entry does not have any class from reveal-1 to reveal-10
-        const hasRevealClass = Array.from({ length: 10 }, (_, i) => `reveal-${i + 1}`).some(cls => targetDiv.classList.contains(cls));
-
-        if (!hasRevealClass || scrollDirection === 'up' && (firstFourItems.includes(targetDiv) || targetDiv.id == fifthItem.id)) {
-
-          let delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`; // Use reveal-1 to reveal-10
-
-
-          if (scrollDirection === 'down') {
-            // If scrolling down, apply regular transition-delay order
-
-            if (!hasRevealClass) {
-              targetDiv.classList.add(delayClass);
-            }
-            
-
-          } else if (scrollDirection === 'up') {
-            if (targetDiv.querySelector('#hand')) {
-              //alert("hand")
-              splashDiv.classList.remove('finished');
-              // If scrolling up, invert the delay order
-              const invertedIndex = 10 - revealIndex; // Calculate the reverse index
-              delayClass = `reveal-${Math.min(invertedIndex, 10)}`; // Use inverted index for delay class
-
-
-              // Loop through the first three items and add the 'reveal-prehide' class
-              firstFourItems.forEach(item => {
-                item.classList.add('reveal-prehide');
-
-
-              });
-
-              requestAnimationFrame(() => {
-                firstFourItems.forEach(item => {
-                  // Remove 'reveal-prehide' class in the next animation frame
-                  item.classList.remove('reveal-prehide');
-                });
-              });
-
-
-            } else if (firstFourItems.includes(targetDiv)) {
-              if (targetDiv.id == 'we-make') {
-                //console.log(document.getElementById('we-make'));
-                setTimeout(function () { // TODO : check if splash is in viewport
-                  splashDiv.classList.add('finished');
-                  
-                  //alert("finished")
-                }, hoverableDelay);
-              } else {
-
-              }
-            } else {
-              if (!hasRevealClass) {
-                delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`;
-                targetDiv.classList.add(delayClass);
-              }
-
-            }
-
-          }
-
-
-          //targetDiv.classList.remove('reveal-prehide');
-
-        }
-
-        if (hasLazyLoaded == false) {
-
-          // Check if the target contains a div with the ID 'crossfaded-1'
-          const hasCrossfadedDiv = targetDiv.querySelector('#crossfaded-1') !== null;
-
-          if (hasCrossfadedDiv) {
-            //console.log('go lazy')
-            setTimeout(function () {
-              lazyload();
-            }, 3000);
-            hasLazyLoaded = true;
-          }
-        }
-
-
-        if (targetDiv.querySelector('#hand')) {
-          lenis.scrollTo('#wrapper', { lerp: 0.05, lock: true });
-        }
-
-        if (targetDiv.id == 'inevitable') {
-
-          let lightbulb = document.getElementById('lightbulb-shape');
-
-          // set class to targetDiv reveal-n + 1
-          revealIndex++
-          delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`;
-          lightbulb.classList.add(delayClass);
-          lightbulb.classList.remove('reveal-prehide');
-          lightbulb.classList.remove('paused');
-          //const revealNClass = Array.from(element.classList).find(cls => cls.startsWith('reveal-'));
-
-
-        }
-
-
-        /*if (targetDiv.id == 'about-us'){
-            
-            let fullBleed = targetDiv.querySelector('.full-bleed');
-            if (fullBleed){
-
-                fullBleed.classList.add('show')
-
-            }
-        }*/
-        if (!targetDiv.classList.contains('reveal-delegated')) {
-          targetDiv.classList.remove('reveal-prehide');
-          targetDiv.classList.remove('paused');
-        }
-
-        // Stop observing once the element is animated
-        //observer.unobserve(entry.target)
-
-        revealIndex++
-      } else {
-        //alert('paused ' + targetDiv.id)
-        targetDiv.classList.add('paused');
-      }
-    });
-
-
-
-
-
-    //}
-    //})
-  }
+  
 
 
 
@@ -669,14 +484,14 @@ function spa() {
     // DON'T use an animation here!
   } else {
     // DO use an animation here!
-
+    /*
     // Reveal on scroll stuff
     const observer = new IntersectionObserver(handleIntersect, options)
     const targets = document.querySelectorAll('.animonItem')
     targets.forEach(function (target) {
       observer.observe(target)
     })
-
+    */
     // Accepts any class name
     var rellax = new Rellax('.rellax', {
       center: true,
@@ -792,6 +607,198 @@ function spa() {
     lenis.start();
     
 
+    let hasLazyLoaded = false;
+
+  // Get all elements with class 'animonItem'
+  const animonItems = document.querySelectorAll('.animonItem');
+
+  // Convert NodeList to an array and get the first 3 items
+  const firstFourItems = Array.from(animonItems).slice(0, 4);
+  const fifthItem = animonItems[4];
+
+  const handleIntersect = function (entries, observer) {
+    //entries.forEach(function (entry) {
+    //if (entry.intersectionRatio > threshold) {
+
+
+    //let visibleBatch = [];
+
+
+    // Iterate over each entry (each observed element)
+    entries.forEach(function (entry) {
+      const targetDiv = entry.target;
+      if (entry.intersectionRatio > threshold) {
+
+        //console.log('interesect ' + entry.target.id)
+        //console.log('Scroll direction: ' + scrollDirection);
+
+        // Add the box to the array of visible elements for this batch
+        //visibleBatch.push(entry.target);
+        // Ensure entry.target is a valid DOM element
+        
+
+        if (targetDiv.id == 'we-make') {
+          //console.log(document.getElementById('we-make'));
+          setTimeout(function () { // TODO : check if splash is in viewport
+            splashDiv.classList.add('finished');
+            /*
+            // Créer un nouvel élément <style>
+            var style = document.createElement('style');
+
+            // Ajouter la règle CSS à l'élément <style>
+            style.innerHTML = `
+              .paused, .paused > *, .paused > * > * {
+                animation-play-state: paused !important;
+              }
+            `;
+
+            // Ajouter l'élément <style> au <head> du document
+            document.head.appendChild(style);
+            */
+            //alert("finished")
+          }, hoverableDelay);
+        }
+
+
+        // Check if the entry does not have any class from reveal-1 to reveal-10
+        const hasRevealClass = Array.from({ length: 10 }, (_, i) => `reveal-${i + 1}`).some(cls => targetDiv.classList.contains(cls));
+
+        if (!hasRevealClass || scrollDirection === 'up' && (firstFourItems.includes(targetDiv) || targetDiv.id == fifthItem.id)) {
+
+          let delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`; // Use reveal-1 to reveal-10
+
+
+          if (scrollDirection === 'down') {
+            // If scrolling down, apply regular transition-delay order
+
+            if (!hasRevealClass) {
+              targetDiv.classList.add(delayClass);
+            }
+            
+
+          } else if (scrollDirection === 'up') {
+            if (targetDiv.querySelector('#hand')) {
+              //alert("hand")
+              splashDiv.classList.remove('finished');
+              // If scrolling up, invert the delay order
+              const invertedIndex = 10 - revealIndex; // Calculate the reverse index
+              delayClass = `reveal-${Math.min(invertedIndex, 10)}`; // Use inverted index for delay class
+
+
+              // Loop through the first three items and add the 'reveal-prehide' class
+              firstFourItems.forEach(item => {
+                item.classList.add('reveal-prehide');
+
+
+              });
+
+              requestAnimationFrame(() => {
+                firstFourItems.forEach(item => {
+                  // Remove 'reveal-prehide' class in the next animation frame
+                  item.classList.remove('reveal-prehide');
+                });
+              });
+
+
+            } else if (firstFourItems.includes(targetDiv)) {
+              if (targetDiv.id == 'we-make') {
+                //console.log(document.getElementById('we-make'));
+                setTimeout(function () { // TODO : check if splash is in viewport
+                  splashDiv.classList.add('finished');
+                  
+                  //alert("finished")
+                }, hoverableDelay);
+              } else {
+
+              }
+            } else {
+              if (!hasRevealClass) {
+                delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`;
+                targetDiv.classList.add(delayClass);
+              }
+
+            }
+
+          }
+
+
+          //targetDiv.classList.remove('reveal-prehide');
+
+        }
+
+        if (hasLazyLoaded == false) {
+
+          // Check if the target contains a div with the ID 'crossfaded-1'
+          const hasCrossfadedDiv = targetDiv.querySelector('#crossfaded-1') !== null;
+
+          if (hasCrossfadedDiv) {
+            //console.log('go lazy')
+            setTimeout(function () {
+              lazyload();
+            }, 3000);
+            hasLazyLoaded = true;
+          }
+        }
+
+
+        if (targetDiv.querySelector('#hand')) {
+          lenis.scrollTo('#wrapper', { lerp: 0.05, lock: true });
+        }
+
+        if (targetDiv.id == 'inevitable') {
+
+          let lightbulb = document.getElementById('lightbulb-shape');
+
+          // set class to targetDiv reveal-n + 1
+          revealIndex++
+          delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`;
+          lightbulb.classList.add(delayClass);
+          lightbulb.classList.remove('reveal-prehide');
+          lightbulb.classList.remove('paused');
+          //const revealNClass = Array.from(element.classList).find(cls => cls.startsWith('reveal-'));
+
+
+        }
+
+
+        /*if (targetDiv.id == 'about-us'){
+            
+            let fullBleed = targetDiv.querySelector('.full-bleed');
+            if (fullBleed){
+
+                fullBleed.classList.add('show')
+
+            }
+        }*/
+        if (!targetDiv.classList.contains('reveal-delegated')) {
+          targetDiv.classList.remove('reveal-prehide');
+          targetDiv.classList.remove('paused');
+        }
+
+        // Stop observing once the element is animated
+        //observer.unobserve(entry.target)
+
+        revealIndex++
+      } else {
+        //alert('paused ' + targetDiv.id)
+        targetDiv.classList.add('paused');
+      }
+    });
+
+
+
+
+
+    //}
+    //})
+  }
+    // Reveal on scroll stuff
+    const observer = new IntersectionObserver(handleIntersect, options)
+    const targets = document.querySelectorAll('.animonItem')
+    targets.forEach(function (target) {
+      observer.observe(target)
+    })
+
     if (isOnline) {
       function injectTawkScript() {
         var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
@@ -828,7 +835,7 @@ function spa() {
     //sunglasses.classList.remove('hidden');
     //lenis.start();
 
-    spaStart();
+    spaStart()
   });
   //lenis.on('scroll', (e) => {
   //console.log(e)
