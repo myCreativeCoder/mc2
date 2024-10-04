@@ -7,6 +7,8 @@ window.location.protocol === "file:");
 //let testMode = isOnline;
 let testMode = false;
 
+const lenis = new Lenis();
+lenis.stop();
 
 const threshold = .01
 const options = {
@@ -90,6 +92,32 @@ const chatWidgetCustom = document.getElementById('chat-widget-custom');
 const hoverableDelay = 3000;
 
 let acceptabeDelay = 10000;
+
+const firstThumbnailImages = document.querySelectorAll('img.shown');
+
+let loadedCount = 0;
+const totalFirstThumbnailImages = firstThumbnailImages.length;
+
+// Function to check if all images are loaded
+function checkIfAllImagesLoaded() {
+  loadedCount++;
+  if (loadedCount === totalFirstThumbnailImages) {
+    console.log('All first thumbnails images have loaded ' + performance.now());
+    if (document.fonts.check('1em Poppins')) {
+      console.log("Font has been loaded " + performance.now());
+      spaStart();
+    } else { // font not ready yet
+      document.fonts.ready.then(function () {
+        console.log("Fonts have finished loading " + performance.now());
+        spaStart();
+      });
+    }
+    
+    //lenis.scrollTo('#wrapper', { lerp: 0.05, lock: true});
+
+    
+  }
+}
 
 // Add 'load' event listeners to each image
 firstThumbnailImages.forEach((img) => {
@@ -746,34 +774,9 @@ tippy('#donut', {
 
 
 
-const lenis = new Lenis();
-lenis.stop();
 
-const firstThumbnailImages = document.querySelectorAll('img.shown');
 
-let loadedCount = 0;
-const totalFirstThumbnailImages = firstThumbnailImages.length;
 
-// Function to check if all images are loaded
-function checkIfAllImagesLoaded() {
-  loadedCount++;
-  if (loadedCount === totalFirstThumbnailImages) {
-    console.log('All first thumbnails images have loaded ' + performance.now());
-    if (document.fonts.check('1em Poppins')) {
-      console.log("Font has been loaded " + performance.now());
-      spaStart();
-    } else { // font not ready yet
-      document.fonts.ready.then(function () {
-        console.log("Fonts have finished loading " + performance.now());
-        spaStart();
-      });
-    }
-    
-    //lenis.scrollTo('#wrapper', { lerp: 0.05, lock: true});
-
-    
-  }
-}
 
 function spaStart(){
 
