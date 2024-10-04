@@ -1807,9 +1807,13 @@ ul.techstack li:nth-child(8) .techstack_icon {
   min-width: 100px;;
 }
 
-.paused, .paused > * {
+.paused, .paused > *, .paused > * > * {
   animation-play-state: paused !important;
+}
 
+#reel-wrap {
+  background:url("./starrybg.png");
+  background-color: #0b03269e;
 }
 
 @media (max-width: 1200px) {
@@ -1841,6 +1845,7 @@ ul.techstack li:nth-child(8) .techstack_icon {
     font-size: 20em;
   }
 }
+
 
 /* For screens smaller than 768px (tablets) */
 @media (max-width: 768px) {
