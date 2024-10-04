@@ -725,13 +725,13 @@ const totalFirstThumbnailImages = firstThumbnailImages.length;
 function checkIfAllImagesLoaded() {
   loadedCount++;
   if (loadedCount === totalFirstThumbnailImages) {
-    //console.log('All first thumbnails images have loaded ' + performance.now());
+    console.log('All first thumbnails images have loaded ' + performance.now());
     if (document.fonts.check('1em Poppins')) {
-      //console.log("Font has been loaded " + performance.now());
+      console.log("Font has been loaded " + performance.now());
       spaStart();
     } else { // font not ready yet
       document.fonts.ready.then(function () {
-        //console.log("All fonts have finished loading " + performance.now());
+        console.log("Fonts have finished loading " + performance.now());
         spaStart();
       });
     }
@@ -747,6 +747,7 @@ function spaStart(){
   // show document 
   body.classList.remove('js-hidden');
   body.classList.remove('scroll-lock');
+  sunglasses.classList.remove('hidden');
   lenis.start();
   
 
@@ -792,10 +793,10 @@ window.addEventListener('load', function () {
   //setTimeout(function() { 
   //body.classList.remove('js-hidden');
   //}, 2000); 
-  //console.log('window on load ' + performance.now())
-  body.classList.remove('js-hidden');
-  body.classList.remove('scroll-lock');
-  sunglasses.classList.remove('hidden');
+  console.log('window on load ' + performance.now())
+  //body.classList.remove('js-hidden');
+  //body.classList.remove('scroll-lock');
+  //sunglasses.classList.remove('hidden');
   lenis.start();
 });
 //lenis.on('scroll', (e) => {
