@@ -90,8 +90,8 @@ const hoverableDelay = 3000;
 let acceptabeDelay = 10000;
 
 setTimeout(function () { // give us a bit more time to load images
-  //console.log('last acceptable delay ' + performance.now())
-  body.classList.remove('js-hidden');
+  console.log('last acceptable delay ' + performance.now())
+  //body.classList.remove('js-hidden');
 }, acceptabeDelay);
 
 
