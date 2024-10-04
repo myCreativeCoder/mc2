@@ -4,8 +4,8 @@ const isOnline = !(window.location.hostname === "localhost" ||
 window.location.hostname === "127.0.0.1" ||
 window.location.protocol === "file:");
 
-let testMode = isOnline;
-
+//let testMode = isOnline;
+let testMode = false;
 
 
 const threshold = .01
@@ -38,7 +38,11 @@ lastScrollY = currentScrollY;
 
 document.addEventListener("DOMContentLoaded", (event) => {
 
+// preload custom eye cursor both states to prevent cursor jump on first blink (loading blink cursor image)
 
+//setTimeout(function () {
+  //document.body.classList.remove('blink');
+//}, 5);
 
 if (testMode) {
   // Prompt for test mode password
@@ -67,7 +71,11 @@ const body = document.querySelector('.page-home');
 
 const images = document.querySelectorAll("img.lazyload");
 
+const wrapper = document.getElementById('home');
+
 const splashDiv = document.getElementById('splash');
+const linksHome = document.getElementsByClassName('linkHome');
+
 const linkProjects = document.getElementById('linkProjects');
 const linkAbout = document.getElementById('linkAbout');
 const linkContact = document.getElementById('linkContact');
@@ -82,7 +90,7 @@ const hoverableDelay = 3000;
 let acceptabeDelay = 10000;
 
 setTimeout(function () { // give us a bit more time to load images
-  console.log('last acceptable delay ' + performance.now())
+  //console.log('last acceptable delay ' + performance.now())
   body.classList.remove('js-hidden');
 }, acceptabeDelay);
 
@@ -179,17 +187,25 @@ const handleIntersect = function (entries, observer) {
 
   // Iterate over each entry (each observed element)
   entries.forEach(function (entry) {
+    const targetDiv = entry.target;
     if (entry.intersectionRatio > threshold) {
 
-      console.log('interesect ' + entry.target.id)
+      //console.log('interesect ' + entry.target.id)
       //console.log('Scroll direction: ' + scrollDirection);
 
       // Add the box to the array of visible elements for this batch
       //visibleBatch.push(entry.target);
       // Ensure entry.target is a valid DOM element
-      const targetDiv = entry.target;
+      
 
-
+      if (targetDiv.id == 'we-make') {
+        //console.log(document.getElementById('we-make'));
+        setTimeout(function () { // TODO : check if splash is in viewport
+          splashDiv.classList.add('finished');
+          
+          //alert("finished")
+        }, hoverableDelay);
+      }
 
 
       // Check if the entry does not have any class from reveal-1 to reveal-10
@@ -206,6 +222,7 @@ const handleIntersect = function (entries, observer) {
           if (!hasRevealClass) {
             targetDiv.classList.add(delayClass);
           }
+          
 
         } else if (scrollDirection === 'up') {
           if (targetDiv.querySelector('#hand')) {
@@ -236,6 +253,7 @@ const handleIntersect = function (entries, observer) {
               //console.log(document.getElementById('we-make'));
               setTimeout(function () { // TODO : check if splash is in viewport
                 splashDiv.classList.add('finished');
+                
                 //alert("finished")
               }, hoverableDelay);
             } else {
@@ -262,7 +280,7 @@ const handleIntersect = function (entries, observer) {
         const hasCrossfadedDiv = targetDiv.querySelector('#crossfaded-1') !== null;
 
         if (hasCrossfadedDiv) {
-          console.log('go lazy')
+          //console.log('go lazy')
           setTimeout(function () {
             lazyload();
           }, 3000);
@@ -284,7 +302,7 @@ const handleIntersect = function (entries, observer) {
         delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`;
         lightbulb.classList.add(delayClass);
         lightbulb.classList.remove('reveal-prehide');
-
+        lightbulb.classList.remove('paused');
         //const revealNClass = Array.from(element.classList).find(cls => cls.startsWith('reveal-'));
 
 
@@ -302,12 +320,16 @@ const handleIntersect = function (entries, observer) {
       }*/
       if (!targetDiv.classList.contains('reveal-delegated')) {
         targetDiv.classList.remove('reveal-prehide');
+        targetDiv.classList.remove('paused');
       }
 
       // Stop observing once the element is animated
-      observer.unobserve(entry.target)
+      //observer.unobserve(entry.target)
 
       revealIndex++
+    } else {
+      //alert('paused ' + targetDiv.id)
+      targetDiv.classList.add('paused');
     }
   });
 
@@ -339,7 +361,7 @@ const observerCallback = (entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       const sectionId = entry.target.getAttribute('data-nav-section-id');
-      console.log("nav intersect " + sectionId)
+      //console.log("nav intersect " + sectionId)
       setActiveMenuItem(sectionId);
     }
   });
@@ -455,7 +477,7 @@ if ('loading' in HTMLImageElement.prototype) {
           //console.log('js-hidden class removed from body!');
 
 
-
+          
           //setTimeout(function() {
           //    lazyload();
           //}, lazyloadDelay);
@@ -703,13 +725,13 @@ const totalFirstThumbnailImages = firstThumbnailImages.length;
 function checkIfAllImagesLoaded() {
   loadedCount++;
   if (loadedCount === totalFirstThumbnailImages) {
-    console.log('All first thumbnails images have loaded ' + performance.now());
+    //console.log('All first thumbnails images have loaded ' + performance.now());
     if (document.fonts.check('1em Poppins')) {
-      console.log("Font has been loaded " + performance.now());
+      //console.log("Font has been loaded " + performance.now());
       spaStart();
     } else { // font not ready yet
       document.fonts.ready.then(function () {
-        console.log("All fonts have finished loading " + performance.now());
+        //console.log("All fonts have finished loading " + performance.now());
         spaStart();
       });
     }
@@ -726,6 +748,7 @@ function spaStart(){
   body.classList.remove('js-hidden');
   body.classList.remove('scroll-lock');
   lenis.start();
+  
 
   if (isOnline) {
     function injectTawkScript() {
@@ -769,9 +792,10 @@ window.addEventListener('load', function () {
   //setTimeout(function() { 
   //body.classList.remove('js-hidden');
   //}, 2000); 
-  console.log('window on load ' + performance.now())
+  //console.log('window on load ' + performance.now())
   body.classList.remove('js-hidden');
   body.classList.remove('scroll-lock');
+  sunglasses.classList.remove('hidden');
   lenis.start();
 });
 //lenis.on('scroll', (e) => {
@@ -867,7 +891,7 @@ function raf(time) {
 
 requestAnimationFrame(raf);
 
-const wrapper = document.getElementById('home');
+
 const slides = document.getElementsByClassName("crossfaded");
 const slidesContainer = document.getElementById("projects-sliders-container");
 
@@ -889,12 +913,27 @@ linkProjects.addEventListener('click', (event) => {
 
   slidesContainer.classList.add('locked');
 
+  // preload custom eye cursor blink state to prevent cursor jump on first blink (loading blink cursor image)
+  /*document.body.classList.add('blink');
+  setTimeout(function () {
+    document.body.classList.remove('blink');
+  }, 500);*/
+
   lenis.scrollTo('#projects-reel', { lerp: 0.05, lock: true });
   setTimeout(() => { astrodudeInstance.show(); }, 3000);
   setTimeout(() => { astrodudeInstance.hide(); }, 13000);
 
-  // TODO : check if mouse is already hovering a slide at this point
-  setTimeout(() => { slidesContainer.classList.remove('locked') }, 3000);
+  // if mouse is already/still hovering a slide at this point, start crossfading
+  setTimeout(() => { 
+    slidesContainer.classList.remove('locked');
+    for (let i = 0; i < slides.length; i++) {
+      let thisSlide = slides.item(i);
+      if (thisSlide.classList.contains('hovered')){
+        sliderActive(thisSlide);
+        break
+      }
+    }
+  }, 3000);
   
 });
 linkAbout.addEventListener('click', (event) => {
@@ -907,7 +946,7 @@ linkContact.addEventListener('click', (event) => {
   Tawk_API.toggle();
   /*
   lenis.scrollTo('#contact-us', { lerp: 0.05, easing: 'ease-in', lock: true});
-  console.log('contact clicked')*/
+  //console.log('contact clicked')*/
 });
 splashDiv.addEventListener('click', (event) => {
   event.preventDefault(); // Prevent default link behavior
@@ -915,16 +954,39 @@ splashDiv.addEventListener('click', (event) => {
   //let target = document.getElementById('projects-reel');
   //scroll.scrollTo(target);
   slidesContainer.classList.add('locked');
+  /*
+  document.body.classList.add('blink');
+  setTimeout(function () {
+    document.body.classList.remove('blink');
+  }, 500);
+  */
 
   lenis.scrollTo('#projects-reel', { lerp: 0.05, lock: true });
   setTimeout(() => { astrodudeInstance.show(); }, 3000);
   setTimeout(() => { astrodudeInstance.hide(); }, 13000);
   
-  // TODO : check if mouse is already hovering a slide at this point
-  setTimeout(() => { slidesContainer.classList.remove('locked') }, 3000);
+  // if mouse is already/still hovering a slide at this point, start crossfading 
+  setTimeout(() => { 
+    slidesContainer.classList.remove('locked');
+    for (let i = 0; i < slides.length; i++) {
+      let thisSlide = slides.item(i);
+      if (thisSlide.classList.contains('hovered')){
+        sliderActive(thisSlide);
+        break
+      }
+    }
+  }, 3000);
 
 });
 
+for (let i=0; i < linksHome.length; i++){
+  
+  linksHome[i].addEventListener('click', (event) => {
+    event.preventDefault();
+    lenis.scrollTo('#home', { lerp: 0.025, easing: 'ease-in', lock: true });
+  });
+  
+}
 
 
 
@@ -978,7 +1040,7 @@ btnModalPrev.addEventListener('click', (event) => {
 });
 
 btnModalNext.addEventListener('click', (event) => {
-  console.log("next clicked")
+  //console.log("next clicked")
   // Get the ID stored in the 'data-slide-collection' attribute of the modal
   const slideCollectionId = modal.getAttribute('data-slide-collection');
 
@@ -1101,9 +1163,34 @@ for (let i = 0; i < slides.length; i++) {
     modal.style.visibility = 'visible';
   });
   // Add mouseenter and mouseleave event listeners
-  thisSlide.addEventListener('mouseenter', function () {
+  thisSlide.addEventListener('mouseenter', function (e) {
 
-    thisSlide.classList.add('hovered');
+    sliderActive(e.target);
+  });
+
+  thisSlide.addEventListener('mouseleave', function () {
+
+    this.classList.remove('hovered');
+    if (!!isReduced) {
+      // DON'T use an amination here!
+      return
+    }
+
+    // Get all video elements on the page
+    const allVideos = thisSlide.querySelectorAll("video");
+
+    // Pause all videos
+    allVideos.forEach((video) => {
+      if (!video.paused) {
+        video.pause();
+      }
+    });
+    clearTimeout(fadeLoopTimeout);  // Stop the loop when mouse leaves
+  });
+}
+
+function sliderActive(thisSlide){
+  thisSlide.classList.add('hovered');
     if (!!isReduced || slidesContainer.classList.contains('locked')) {
       // DON'T use an amination here!
       return
@@ -1228,27 +1315,6 @@ for (let i = 0; i < slides.length; i++) {
     }
 
     startFadeLoop();  // Start loop when mouse enters
-  });
-
-  thisSlide.addEventListener('mouseleave', function () {
-
-    this.classList.remove('hovered');
-    if (!!isReduced) {
-      // DON'T use an amination here!
-      return
-    }
-
-    // Get all video elements on the page
-    const allVideos = thisSlide.querySelectorAll("video");
-
-    // Pause all videos
-    allVideos.forEach((video) => {
-      if (!video.paused) {
-        video.pause();
-      }
-    });
-    clearTimeout(fadeLoopTimeout);  // Stop the loop when mouse leaves
-  });
 }
 
 
@@ -1326,10 +1392,13 @@ function preloadAndAppendSlide(slide, containerClass) {
   const container = modal.querySelector(`.${containerClass}`);
 
   // Clone the slide and append it to the container
-  let clonedSlide = slide.cloneNode(true);
+  let clonedSlide;
 
 
-  if (clonedSlide.tagName === 'IMG') {
+  if (slide.tagName === 'IMG') {
+
+    clonedSlide = slide.cloneNode(true);
+
     clonedSlide.classList.remove('slide');
     clonedSlide.classList.remove('shown');
     clonedSlide.classList.add('modal-slide');
@@ -1337,15 +1406,26 @@ function preloadAndAppendSlide(slide, containerClass) {
 
 
 
-  } else if (clonedSlide.classList.contains('video-slide')) {
-    clonedSlide.classList.remove('slide');
-    clonedSlide.classList.remove('shown');
+  } else if (slide.classList.contains('video-slide')) {
 
+    // Create a new video element
+    clonedSlide = document.createElement('video');
     clonedSlide.classList.add('modal-slide');
     clonedSlide.classList.add('modal-video');
+    clonedSlide.controls = true; // Add controls to the video
+    clonedSlide.autoplay = true; // Optional: Start playing video automatically
 
-    clonedSlide.removeAttribute("style");
-
+    // Create source elements
+    const source = slide.querySelector('source');
+    if (source) {
+      const sourceClone = document.createElement('source');
+      sourceClone.src = source.src;
+      sourceClone.type = source.type;
+      clonedSlide.appendChild(sourceClone);
+    } else {
+      console.error('No source element found in the video slide.');
+    }
+    
     clonedSlide.controls = true; // Add controls to the video
     clonedSlide.autoplay = true; // Optional: Start playing video automatically
 
@@ -1353,7 +1433,7 @@ function preloadAndAppendSlide(slide, containerClass) {
     newDiv.classList.add('modal-video');
     newDiv.classList.add('modal-slide');
 
-    newDiv.append(clonedSlide)
+    newDiv.append(clonedSlide);
 
     clonedSlide = newDiv;
   }
@@ -1382,7 +1462,7 @@ function showSlideInModal(childSlide, parentSlidesCollection, modalSlideDirectio
     let desc = childSlide.querySelector('.summary-description').innerHTML;
 
     modalDescription.innerHTML = `
-                <div class='modal-title'>${title}</div>
+                <h2 class='modal-title'>${title}</h2>
                 ${client}<br/>
                 <div class='desc'>${desc}</div>
             `;
@@ -1406,7 +1486,7 @@ function showSlideInModal(childSlide, parentSlidesCollection, modalSlideDirectio
   }
 
 
-  console.log('show slide in modal ' + childSlide.getAttribute('src'));
+  //console.log('show slide in modal ' + childSlide.getAttribute('src'));
 
   modal.classList.remove('text-page');
 
@@ -1416,8 +1496,8 @@ function showSlideInModal(childSlide, parentSlidesCollection, modalSlideDirectio
 
   let totalSlides = childSlides.length;
 
-  console.log('parent ' + parentSlidesCollection.id)
-  console.log('childs ' + childSlides.length)
+  //console.log('parent ' + parentSlidesCollection.id)
+  //console.log('childs ' + childSlides.length)
 
   if (childSlides.length > 1) {
 
@@ -1427,7 +1507,7 @@ function showSlideInModal(childSlide, parentSlidesCollection, modalSlideDirectio
   }
   // Preload previous and next slides
   let currentIndex = Array.from(childSlides).indexOf(childSlide);
-  console.log("index " + currentIndex)
+  //console.log("index " + currentIndex)
   // Find previous and next slide indices
   let nextIndex = currentIndex > 0 ? currentIndex - 1 : totalSlides - 1; // Loop to last slide if on first
   let prevIndex = currentIndex < totalSlides - 1 ? currentIndex + 1 : 0; // Loop to first slide if on last
@@ -1494,8 +1574,8 @@ function showSlideInModal(childSlide, parentSlidesCollection, modalSlideDirectio
     prevElement.innerHTML = '';
     nextElement.innerHTML = '';
 
-    console.log("prev : " + prevSlide.src)
-    console.log("next : " + nextSlide.src)
+    //console.log("prev : " + prevSlide.src)
+    //console.log("next : " + nextSlide.src)
     // Preload and append previous and next slides
     preloadAndAppendSlide(prevSlide, 'modal-prev-content');
     preloadAndAppendSlide(nextSlide, 'modal-next-content');
