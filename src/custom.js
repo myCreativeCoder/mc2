@@ -91,6 +91,10 @@ const hoverableDelay = 3000;
 
 let acceptabeDelay = 10000;
 
+body.classList.remove('js-hidden');
+body.classList.remove('scroll-lock');
+sunglasses.classList.remove('hidden')
+
 setTimeout(function () { // give us a bit more time to load images
   console.log('last acceptable delay ' + performance.now())
   //body.classList.remove('js-hidden');
@@ -762,9 +766,9 @@ function spaStart(){
   console.log('spaStart ' + performance.now())
   
   // show document 
-  body.classList.remove('js-hidden');
-  body.classList.remove('scroll-lock');
-  sunglasses.classList.remove('hidden');
+  //body.classList.remove('js-hidden');
+  //body.classList.remove('scroll-lock');
+  //sunglasses.classList.remove('hidden');
   lenis.start();
   
 
