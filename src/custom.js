@@ -91,9 +91,23 @@ const hoverableDelay = 3000;
 
 let acceptabeDelay = 10000;
 
-body.classList.remove('js-hidden');
-body.classList.remove('scroll-lock');
-sunglasses.classList.remove('hidden')
+// Add 'load' event listeners to each image
+firstThumbnailImages.forEach((img) => {
+  if (img.complete) {
+    // If the image is already loaded from cache, directly call the function
+    checkIfAllImagesLoaded();
+  } else {
+    // Otherwise, attach the 'load' event listener
+    img.addEventListener('load', checkIfAllImagesLoaded);
+
+    // Optional error handling
+    img.addEventListener('error', function () {
+      console.error(`Image failed to load: ${img.src}`);
+    });
+  }
+});
+
+
 
 setTimeout(function () { // give us a bit more time to load images
   console.log('last acceptable delay ' + performance.now())
@@ -766,9 +780,9 @@ function spaStart(){
   console.log('spaStart ' + performance.now())
   
   // show document 
-  //body.classList.remove('js-hidden');
-  //body.classList.remove('scroll-lock');
-  //sunglasses.classList.remove('hidden');
+  body.classList.remove('js-hidden');
+  body.classList.remove('scroll-lock');
+  sunglasses.classList.remove('hidden');
   lenis.start();
   
 
@@ -802,21 +816,7 @@ window.addEventListener('load', function () {
   //}, 2000); 
   console.log('window on load ' + performance.now())
 
-  // Add 'load' event listeners to each image
-  firstThumbnailImages.forEach((img) => {
-    if (img.complete) {
-      // If the image is already loaded from cache, directly call the function
-      checkIfAllImagesLoaded();
-    } else {
-      // Otherwise, attach the 'load' event listener
-      img.addEventListener('load', checkIfAllImagesLoaded);
-
-      // Optional error handling
-      img.addEventListener('error', function () {
-        console.error(`Image failed to load: ${img.src}`);
-      });
-    }
-  });
+  
   //body.classList.remove('js-hidden');
   //body.classList.remove('scroll-lock');
   //sunglasses.classList.remove('hidden');
