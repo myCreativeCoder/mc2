@@ -73,6 +73,7 @@ function spa() {
   
   console.log("spa " + performance.now())
   
+  
   const body = document.querySelector('.page-home');
 
   const images = document.querySelectorAll("img.lazyload");
@@ -749,14 +750,39 @@ function spa() {
 
           let lightbulb = document.getElementById('lightbulb-shape');
 
+          const revealClassRegex = /^reveal-(\d+)$/;
+
+          // Find the 'reveal-N' class using the regex
+          const targetClass = [...targetDiv.classList].find(cls => revealClassRegex.test(cls));
+          
+          if (targetClass) {
+            // Extract the number (N) from the matched class 'reveal-N'
+            const num = parseInt(targetClass.match(revealClassRegex)[1], 10);
+            
+            // Create the new class 'reveal-(N+1)'
+            delayClass = `reveal-${Math.min(num + 1, 10)}`;
+            
+          } else {
+            delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`;
+          }
+
+          //const revealNClass = Array.from(element.classList).find(cls => cls.startsWith('reveal-'));
+          const classListArray = Array.from(lightbulb.classList);
+          const revealRegex = /^reveal-\d+$/;
+
+          // Loop through and remove each class that matches the regex
+          classListArray.forEach(cls => {
+            if (revealRegex.test(cls)) {
+              lightbulb.classList.remove(cls);
+            }
+          });
+          
           // set class to targetDiv reveal-n + 1
           revealIndex++
-          delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`;
+          
           lightbulb.classList.add(delayClass);
           lightbulb.classList.remove('reveal-prehide');
           lightbulb.classList.remove('paused');
-          //const revealNClass = Array.from(element.classList).find(cls => cls.startsWith('reveal-'));
-
 
         }
 
