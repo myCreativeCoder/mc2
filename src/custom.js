@@ -798,7 +798,7 @@ function spa() {
           });
           
           // set class to targetDiv reveal-n + 1
-          revealIndex++
+          //revealIndex++
           
           lightbulb.classList.add(delayClass);
           lightbulb.classList.remove('reveal-prehide');
@@ -819,12 +819,13 @@ function spa() {
         if (!targetDiv.classList.contains('reveal-delegated')) {
           targetDiv.classList.remove('reveal-prehide');
           targetDiv.classList.remove('paused');
+          revealIndex++
         }
 
         // Stop observing once the element is animated
         //observer.unobserve(entry.target)
 
-        revealIndex++
+        
       } else {
         //alert('paused ' + targetDiv.id)
         targetDiv.classList.add('paused');
