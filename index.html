@@ -16,9 +16,9 @@
     connect-src https://*.tawk.to wss://*.tawk.to https://mycreativecoder.com;
     media-src https://embed.tawk.to https://mycreativecoder.com;  /* Autoriser le chargement des médias depuis Tawk.to */
     form-action https://*.tawk.to;">
+  
 
 
-    
   <!--
   <script>
     localStorage.getItem('darkMode') === 'true' && document.documentElement.setAttribute('data-bs-theme', 'dark');
@@ -615,18 +615,15 @@
                 <div id="projects-reel" class="col-12">
                   <div id="parallax_wrapper" class="col-12" style="overflow-x: visible;">
                     <div id="sunglasses" class="hidden" style="background: rgba(255, 0, 0, 0.541); z-index: 9; height: 0px; ">
-                      <img src="src/sunglasses.png"
-                    style="width:100%;">
+                      <img src="src/sunglasses.png" style="width:100%;">
                   </div>
                     <div class="rellax astrodude" data-rellax-speed="3" style="z-index: 2;">
                       <a onclick="javascript:void(Tawk_API.toggle());">
-                      <img id="astrodude" src="src/astrodude.png"
-                        style="width:100%;">
+                      <img id="astrodude" src="src/astrodude.png" style="width:100%;">
                       </a>
                     </div>
                     <div class="rellax donut" data-rellax-speed="10">
-                      <img id="donut" src="src/donut.png"
-                        style="width:100%;">
+                      <img id="donut" src="src/donut.png" style="width:100%;">
                     </div>
                     <div class="rellax device" data-rellax-speed="3">
                       <img src="src/mbp2.png">
@@ -642,10 +639,15 @@
 
                   
 
-                  <h1 style="font-size: 2em;text-align: center;width: 100%; " >&nbsp;&nbsp;Making it <i
+                  <h1 id="make-pop">&nbsp;&nbsp;Making it <i
                       class="gradtext-rainbow animate pop" style="padding: 0 .2em 0 0.1em; 
-                      font-size: 1.35em;">POP</i><br><small style="font-family: serif;"> – &nbsp;<i>since
-                        2009</i>&nbsp;&nbsp;–</small></h1>
+                      font-size: 1.35em;">POP</i><br>
+                      <small class="animonItem reveal-prehide fade-in reveal-2" style="font-family: serif; color: #2e0e9f;"> 
+                        — &nbsp;
+                        <span class="fraktur ">since 2009</span>
+                        &nbsp;&nbsp;—
+                      </small>
+                    </h1>
 
 
 
@@ -1328,7 +1330,11 @@
               <div class="subscribe">
                 <div class="row align-items-center">
                   <div class="col-12 col-md-6 mb-2 mb-md-0">
-                    <h2 id="contact-us" class="subscribe-title">Let's keep in touch</h2>
+                    <h2 id="contact-us" class="subscribe-title"><svg class="hand" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd;transform: rotate(-90deg);opacity: 0.1;width: 13%;/*! margin-left: -2em; */" xmlns:xlink="http://www.w3.org/1999/xlink" width="" height="">
+                      <g>
+                        <path style="opacity:0.979" fill="#fefffe" d="M 100.5,-0.5 C 167.167,-0.5 233.833,-0.5 300.5,-0.5C 314.379,3.54471 323.546,12.5447 328,26.5C 329.273,58.4731 329.939,90.4731 330,122.5C 330.806,125.446 332.139,128.112 334,130.5C 363.565,164.551 399.065,190.718 440.5,209C 452.269,215.295 462.102,223.795 470,234.5C 479.03,261.869 475.363,287.536 459,311.5C 446.341,328.132 429.507,336.965 408.5,338C 393.818,338.799 379.485,336.965 365.5,332.5C 365.667,371.168 365.5,409.835 365,448.5C 358.21,482.455 338.043,503.455 304.5,511.5C 296.5,511.5 288.5,511.5 280.5,511.5C 245.952,503.783 225.452,482.45 219,447.5C 218.5,428.503 218.333,409.503 218.5,390.5C 207.151,389.662 196.484,386.495 186.5,381C 169.959,382.086 153.959,379.753 138.5,374C 132.83,371.167 127.497,367.834 122.5,364C 69.9394,362.776 41.1061,335.942 36,283.5C 35.3043,272.804 35.6377,262.137 37,251.5C 42.4129,219.926 51.0796,189.26 63,159.5C 66.2806,149.325 68.9473,138.991 71,128.5C 72.268,94.8576 72.9346,61.1909 73,27.5C 77.0159,12.985 86.1825,3.65168 100.5,-0.5 Z M 123.5,36.5 C 135.934,36.2671 143.267,42.2671 145.5,54.5C 141.657,70.2536 132.324,75.0869 117.5,69C 105.721,55.6175 107.721,44.7842 123.5,36.5 Z M 109.5,109.5 C 170.167,109.5 230.833,109.5 291.5,109.5C 290.115,126.639 294.615,141.972 305,155.5C 328.092,180.274 353.592,202.107 381.5,221C 397.325,229.079 412.992,237.412 428.5,246C 431.63,248.128 434.463,250.628 437,253.5C 438.026,291.805 419.86,306.639 382.5,298C 376.051,295.609 369.718,292.942 363.5,290C 355.828,284.829 347.828,280.162 339.5,276C 335.986,274.438 332.319,273.605 328.5,273.5C 328.972,331.195 328.472,388.862 327,446.5C 318.704,469.064 302.871,477.564 279.5,472C 268.087,466.922 260.587,458.422 257,446.5C 255.723,412.193 255.056,377.86 255,343.5C 232.572,357.633 211.405,355.967 191.5,338.5C 169.317,347.246 150.484,342.579 135,324.5C 122.628,326.395 110.462,325.561 98.5,322C 84.0736,314.206 75.9069,302.04 74,285.5C 72.4556,263.977 75.1222,242.977 82,222.5C 90.6051,197.685 98.6051,172.685 106,147.5C 108.952,135.003 110.119,122.336 109.5,109.5 Z"></path>
+                      </g>
+  </svg> <span style="padding-left: .5em;">Let's keep in touch</span></h2>
                   </div>
 
                   <div class="co-12 col-md-6" style="text-align: center;">
@@ -1398,49 +1404,52 @@
 
 
 
-        <div class="col-md-6 col-sm-12 mt-md-0" style="padding-top: .6em;">
+        <div class="col-md-6 col-sm-12 mt-md-0 footer-links" style="padding-top: .6em;
+        padding-bottom: 1em;
+        padding-left: 2em;
+        padding-right: 2em;">
           
-          <a id="link-legal" style="float:right; color:#45336d;">Legal Notice
+          <a id="link-legal">Legal Notice
             <div class="summary-title" style="display:none;">Legal Notice</div>
             <div class="summary-subtitle" style="display:none;">Effective 01/10/2024</div>
             <div class="summary-description" style="display:none;">
               <br/>
       
-<p>
-In accordance with the provisions of French law no. 2004-575 of June 21, 2004 on confidence in the digital economy, users and visitors (hereinafter referred to as the “User”) to the website <span style="display: inline-block;">https://mycreativecoder.com</span> (hereinafter referred to as the “Site”) are hereby informed of the present legal notice. Connection to and browsing of the Site by the User implies full and unreserved acceptance of these legal notices. These legal notices are accessible on the Site under the heading “Legal Notices”.
-</p>
-<h3>SITE PUBLISHING</h3>
-<p>
-The Site is published by Amutio Sacha, an individual contractor registered with the Bordeaux Trade and Companies Register under number 512156373, whose head office is located at 5, rue Emile Zola, 33400 TALENCE, FRANCE
+              <p>
+              In accordance with the provisions of French law no. 2004-575 of June 21, 2004 on confidence in the digital economy, users and visitors (hereinafter referred to as the “User”) to the website <span style="display: inline-block;">https://mycreativecoder.com</span> (hereinafter referred to as the “Site”) are hereby informed of the present legal notice. Connection to and browsing of the Site by the User implies full and unreserved acceptance of these legal notices. These legal notices are accessible on the Site under the heading “Legal Notices”.
+              </p>
+              <h3>SITE PUBLISHING</h3>
+              <p>
+              The Site is published by Amutio Sacha, an individual contractor registered with the Bordeaux Trade and Companies Register under number 512156373, whose head office is located at 5, rue Emile Zola, 33400 TALENCE, FRANCE
 
-<ul>
-    <li>E-mail address: hello@mycreativecoder.com.</li>
-    <li>Director of publication: Amutio Sacha</li>
-  </ul>
-<br/>
-hereinafter the “Publisher”.
-</p>
-<h3>HOST</h3>
-<p>
-The Site is hosted by GitHub Pages, whose registered office is located at 88 Colin P. Kelly Jr. Street San Francisco .
-</p>
-<h3>SITE ACCESS</h3>
-<p>
-The Site is normally accessible to the User at all times. However, the Publisher may, at any time, suspend, limit or interrupt the Site in order, in particular, to update or modify its content. The Publisher shall in no event be held liable for any consequences of such unavailability on the User's activities.
-</p>
-<h3>DATA COLLECTION</h3>
-<p>
-The Site ensures that the User's personal data is collected and processed with respect for privacy in accordance with the French Data Protection Act no. 78-17 of January 6, 1978 and in compliance with the regulations applicable to the processing of personal data in accordance with Regulation (EU) 2016/679 of the European Parliament and of the Council of April 27, 2016 (hereinafter, together, the “Regulations applicable to the protection of Personal Data”).
-</p>
-<p>
-Under the applicable Regulations on the protection of Personal Data, the User has the right to access, rectify, delete and object to his or her personal data. The User may exercise this right :
-</p>
-<ul>
-  <li>by e-mail to hello@mycreativecoder.com</li>
-</ul><br/>
-<p>
-Any use, reproduction, distribution, marketing or modification of all or part of the Site, without the express authorization of the Publisher, is prohibited and may result in legal action and proceedings as provided for by the regulations in force.
-</p>
+              <ul>
+                  <li>E-mail address: hello@mycreativecoder.com.</li>
+                  <li>Director of publication: Amutio Sacha</li>
+                </ul>
+              <br/>
+              hereinafter the “Publisher”.
+              </p>
+              <h3>HOST</h3>
+              <p>
+              The Site is hosted by GitHub Pages, whose registered office is located at 88 Colin P. Kelly Jr. Street San Francisco .
+              </p>
+              <h3>SITE ACCESS</h3>
+              <p>
+              The Site is normally accessible to the User at all times. However, the Publisher may, at any time, suspend, limit or interrupt the Site in order, in particular, to update or modify its content. The Publisher shall in no event be held liable for any consequences of such unavailability on the User's activities.
+              </p>
+              <h3>DATA COLLECTION</h3>
+              <p>
+              The Site ensures that the User's personal data is collected and processed with respect for privacy in accordance with the French Data Protection Act no. 78-17 of January 6, 1978 and in compliance with the regulations applicable to the processing of personal data in accordance with Regulation (EU) 2016/679 of the European Parliament and of the Council of April 27, 2016 (hereinafter, together, the “Regulations applicable to the protection of Personal Data”).
+              </p>
+              <p>
+              Under the applicable Regulations on the protection of Personal Data, the User has the right to access, rectify, delete and object to his or her personal data. The User may exercise this right :
+              </p>
+              <ul>
+                <li>by e-mail to hello@mycreativecoder.com</li>
+              </ul><br/>
+              <p>
+              Any use, reproduction, distribution, marketing or modification of all or part of the Site, without the express authorization of the Publisher, is prohibited and may result in legal action and proceedings as provided for by the regulations in force.
+              </p>
 
 
 
@@ -1510,7 +1519,7 @@ Any use, reproduction, distribution, marketing or modification of all or part of
             </div>
           </a>
           
-          <a id="link-trademark" style="float:right; color: #45336d; ">
+          <a id="link-trademark">
             Trademark Disclaimer
             <div class="summary-title" style="display:none;">Trademark Disclaimer</div>
             <div class="summary-subtitle" style="display:none;"></div>
@@ -1520,7 +1529,6 @@ Any use, reproduction, distribution, marketing or modification of all or part of
               <p>All other trademarks cited herein are the property of their respective owners.</p>
             </div>
             
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </a>
           
           
