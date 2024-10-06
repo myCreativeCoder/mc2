@@ -240,6 +240,28 @@ a:hover {
   padding-left: 0.1em;
 }
 
+#make-pop {
+  font-size: 2em;
+  text-align: center;
+  width: 100%;
+  color: #eadbff;
+}
+
+//@font-face {
+  //font-family: "Fraktur";
+  //src: url("./fraktur/Plakat-Fraktur.ttf") format("truetype");
+//}
+
+
+.fraktur {
+  //font-family: "Fraktur";
+  font-style: italic;
+  color: #4815ff;
+  color: #2e0e9f;
+  color: #8070b8;
+  color: #c8a3e1;
+}
+
 #truly i {
   font-variant: initial;
   text-decoration-color: #5000f1;
@@ -1375,6 +1397,13 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
   cursor: pointer;
 }
 
+#link-legal, #link-trademark {
+  float:right; 
+  color:#45336d;
+}
+
+
+
 * > .widget-visible {
   display: none !important;
 }
@@ -1818,7 +1847,7 @@ ul.techstack li:nth-child(8) .techstack_icon {
 }
 
 .paused, .paused > *, .paused > * > * {
-  //animation-play-state: paused !important;
+  animation-play-state: paused !important;
 }
 #reel-wrap {
   position: relative;
@@ -1948,7 +1977,9 @@ ul.techstack li:nth-child(8) .techstack_icon {
 
   #contact-us {
     text-align: center;
+    margin-left: -3em;
   }
+  
 
   .full-bleed {
     font-size: 1em;
@@ -1956,6 +1987,21 @@ ul.techstack li:nth-child(8) .techstack_icon {
 
   .webkit.great {
     padding: .4em 0 0 1.2em;
+  }
+
+  #link-legal, #link-trademark {
+    float: none; 
+    
+  }
+
+  #link-trademark::before {
+    content: "|";
+    padding: 0 1em;
+    
+  }
+
+  .footer-links {
+    text-align: center;
   }
 }
 
@@ -2037,6 +2083,11 @@ ul.techstack li:nth-child(8) .techstack_icon {
   .desc-features {
     margin-top: -4em !important;
   }
+
+  #contact-us {
+
+    margin-left: -1em;
+  }
 }
 
 @media (max-width: 575px) {
@@ -2067,7 +2118,15 @@ ul.techstack li:nth-child(8) .techstack_icon {
   .webkit.great {
     padding: .3em 0 0 1.2em;
   }
+  #link-trademark::after {
+    content: "|";
+    padding: 0 1em;
+  }
 
+  #link-legal, #link-trademark {
+    float: right; 
+    
+  }
 }
 
 

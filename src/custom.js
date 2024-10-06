@@ -12,40 +12,48 @@ lenis.stop();
 
 const threshold = .01
 const options = {
-root: null,
-rootMargin: '0px',
-threshold
+  root: null,
+  rootMargin: '0px',
+  threshold
 }
 
 let revealIndex = 0;
 let scrollDirection = 'down';
 let lastScrollY = 0;
-
+/*
 window.addEventListener('scrollend', function () {
-setTimeout(function () {
-  revealIndex = 0;  // Reset index on scroll
-}, 100);
-
-
-
+  setTimeout(function () {
+    alert('scrollend')
+    revealIndex = 0;  // Reset index on scroll
+  }, 100);
 });
+*/
+let isScrolling;
+
+      window.addEventListener('scroll', function () {
+        // Clear the timeout if it's already set
+        clearTimeout(isScrolling);
+
+        // Set a timeout to run after scrolling ends
+        isScrolling = setTimeout(function () {
+          //alert('scrollend')
+          // Code to run after scrolling ends
+          revealIndex = 0;  // Reset index on scroll
+        }, 200); // Adjust timeout duration as needed
+      });
+
 
 // Function to detect scroll direction
 function detectScrollDirection() {
-const currentScrollY = window.scrollY;
-scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
-lastScrollY = currentScrollY;
+  const currentScrollY = window.scrollY;
+  scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+  lastScrollY = currentScrollY;
 }
 
 
 document.addEventListener("DOMContentLoaded", (event) => {
 
   console.log('dom content loaded ' + performance.now())
-  // preload custom eye cursor both states to prevent cursor jump on first blink (loading blink cursor image)
-
-  //setTimeout(function () {
-    //document.body.classList.remove('blink');
-  //}, 5);
 
   if (testMode) {
     // Prompt for test mode password
@@ -116,7 +124,7 @@ function spa() {
         });
       }
       
-      //lenis.scrollTo('#wrapper', { lerp: 0.05, lock: true});
+      //lenis.scrollTo('#home', { lerp: 0.05, lock: true});
 
       
     }
@@ -175,13 +183,13 @@ function spa() {
 
     detectScrollDirection();
 
-    adjustSunglasses();
+    //adjustSunglasses();
   });
-
+/*
   window.addEventListener('resize', function (event) {
     adjustSunglasses();
   }, true);
-
+*/
 
   // Get the sticky and target elements
   const stickyDiv = document.getElementById("sunglasses");
@@ -437,7 +445,7 @@ function spa() {
         div.classList.add('gradtext-rainbow', 'animate');
       });
     }
-
+/*
     if (isSafari) {
 
       let isScrolling;
@@ -448,11 +456,12 @@ function spa() {
 
         // Set a timeout to run after scrolling ends
         isScrolling = setTimeout(function () {
+          //alert('scrollend')
           // Code to run after scrolling ends
           revealIndex = 0;  // Reset index on scroll
         }, 200); // Adjust timeout duration as needed
       });
-    }
+    }*/
 
   }
 
@@ -663,17 +672,26 @@ function spa() {
 
         // Check if the entry does not have any class from reveal-1 to reveal-10
         const hasRevealClass = Array.from({ length: 10 }, (_, i) => `reveal-${i + 1}`).some(cls => targetDiv.classList.contains(cls));
+        const revealClass = Array.from({ length: 10 }, (_, i) => `reveal-${i + 1}`).find(cls => targetDiv.classList.contains(cls))
+        
+        if (hasRevealClass){
+          revealIndex = parseInt(revealClass.split('-')[1], 10) - 1;
+          //alert(revealIndex)
+        }
 
         if (!hasRevealClass || scrollDirection === 'up' && (firstFourItems.includes(targetDiv) || targetDiv.id == fifthItem.id)) {
 
           let delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`; // Use reveal-1 to reveal-10
 
+          
 
+          //alert(delayClass + ' ' + targetDiv.id)
           if (scrollDirection === 'down') {
             // If scrolling down, apply regular transition-delay order
 
             if (!hasRevealClass) {
               targetDiv.classList.add(delayClass);
+              
             }
             
 
@@ -714,8 +732,10 @@ function spa() {
               }
             } else {
               if (!hasRevealClass) {
+                
                 delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`;
                 targetDiv.classList.add(delayClass);
+                
               }
 
             }
@@ -743,7 +763,7 @@ function spa() {
 
 
         if (targetDiv.querySelector('#hand')) {
-          lenis.scrollTo('#wrapper', { lerp: 0.05, lock: true });
+          lenis.scrollTo('#home', { lerp: 0.05, lock: true });
         }
 
         if (targetDiv.id == 'inevitable') {
@@ -923,10 +943,10 @@ function spa() {
         //stickyDiv.style.transform = `scale(${scale})`;
         //stickyDiv.style.width = 270 * scale + "px";
         //stickyDiv.style.marginLeft = parseFloat(computedStyle.marginLeft) - (100 * (scale - 1)) + "px";
-        w = Math.min(parseFloat(computedStyle.width) + (parseFloat(computedStyle.width) * (scale - 1)), maxW);
-        ml = parseFloat(computedStyle.marginLeft) - (250 * (scale - 1));
+        w = Math.min(w + (w * (scale - 1)), maxW);
+        ml = ml - (250 * (scale - 1));
 
-        mt = parseFloat(computedStyle.marginTop) - (250 * (scale - 1));
+        mt = mt - (250 * (scale - 1));
 
         if (mt > parseFloat(computedStyle.marginTop)) {
           mt = parseFloat(computedStyle.marginTop);
@@ -951,6 +971,7 @@ function spa() {
 
   function raf(time) {
     lenis.raf(time)
+    adjustSunglasses();
     requestAnimationFrame(raf)
   }
 
@@ -1015,6 +1036,7 @@ function spa() {
   });
   splashDiv.addEventListener('click', (event) => {
     event.preventDefault(); // Prevent default link behavior
+    //alert('reveal index ' + revealIndex)
     revealIndex = 0;
     //let target = document.getElementById('projects-reel');
     //scroll.scrollTo(target);
