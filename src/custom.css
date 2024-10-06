@@ -283,6 +283,13 @@ a:hover {
   font-size: 1.4em;
 }
 
+.footer-links {
+  padding-top: .6em;
+  padding-bottom: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
 
 .about-info {
   text-align: center;
@@ -2087,6 +2094,11 @@ ul.techstack li:nth-child(8) .techstack_icon {
   #contact-us {
 
     margin-left: -1em;
+  }
+
+  .footer-links {
+    padding-left: 0;
+    padding-right: 0; 
   }
 }
 

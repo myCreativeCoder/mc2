@@ -718,6 +718,9 @@ function spa() {
                 });
               });
 
+              
+              lenis.scrollTo('#home', { lerp: 0.05, lock: true });
+            
 
             } else if (firstFourItems.includes(targetDiv)) {
               if (targetDiv.id == 'we-make') {
@@ -762,9 +765,7 @@ function spa() {
         }
 
 
-        if (targetDiv.querySelector('#hand')) {
-          lenis.scrollTo('#home', { lerp: 0.05, lock: true });
-        }
+        
 
         if (targetDiv.id == 'inevitable') {
 
