@@ -225,11 +225,23 @@ const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true
   }
 
   function lazyload() {
+    let avifSupport = false;
+    var avifTest = new Image();
+    avifTest.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
+    avifTest.onload = function () {
+      avifSupport = true;
+    };
+
     images.forEach(img => {
       const dataSrc = img.getAttribute('data-src');
       const dataSrcSet = img.getAttribute('data-src-set');
       if (dataSrcSet) {
-        img.srcset = dataSrcSet;
+        if (avifSupport){
+          img.srcset = dataSrcSet;
+        } else {
+          img.srcset = dataSrcSet.replace('.avif','.webp');
+        }
+        
       } else if (dataSrc) {  // Ensure data-src is available
         //console.log(`Setting src for img with data-src: ${dataSrc}`);
         img.src = dataSrc;  // Set the src
