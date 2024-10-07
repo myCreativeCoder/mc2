@@ -4,6 +4,8 @@ const isOnline = !(window.location.hostname === "localhost" ||
 window.location.hostname === "127.0.0.1" ||
 window.location.protocol === "file:");
 
+const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+
 //let testMode = isOnline;
 let testMode = false;
 
@@ -147,6 +149,8 @@ function updateImagesForFormat(avifSupport) {
 }
 
 function spa() {
+
+  
   
   console.log("spa " + performance.now())
   
@@ -157,9 +161,7 @@ function spa() {
   const isChrome = userAgent.indexOf("chrome") > -1 && userAgent.match("safari");
   const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
 
-  const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
-
-
+  
   const body = document.querySelector('.page-home');
 
   
@@ -479,16 +481,7 @@ function spa() {
         
         sunglasses.classList.remove('hidden');
         lenis.start();
-        if (!!isReduced) {
-          // DON'T use an animation here!
-        } else {
-          // DO use an animation here!
-          
-          var rellax = new Rellax('.rellax', {
-            center: true,
-            //wrapper:'#parallax_wrapper' 
-          });
-        }
+        
       } else { // font not ready yet
         document.fonts.ready.then(function () {
           console.log("Fonts have finished loading " + performance.now());
@@ -991,6 +984,17 @@ function spa() {
     console.log('window on load ' + performance.now())
 
     
+
+    if (!!isReduced) {
+      // DON'T use an animation here!
+    } else {
+      // DO use an animation here!
+      
+      var rellax = new Rellax('.rellax', {
+        center: true,
+        //wrapper:'#parallax_wrapper' 
+      });
+    }
     //body.classList.remove('js-hidden');
     //body.classList.remove('scroll-lock');
     //sunglasses.classList.remove('hidden');
@@ -1016,45 +1020,50 @@ function spa() {
   // clamp sunglasses div size in px
   let maxW = 600;
 
+  let lastScrollY = window.scrollY;
+
   function adjustSunglasses() {
+    const currentScrollY = window.scrollY; 
+    const isScrollingDown = currentScrollY > lastScrollY; // Check if the user is scrolling down
+    lastScrollY = currentScrollY; // Update the last scroll position
+  
+
     const stickyRect = stickyDiv.getBoundingClientRect();
     const targetRect = targetDiv.getBoundingClientRect();
     const computedStyle = window.getComputedStyle(targetDiv);
+
+    const astrodude = document.getElementById('astrodude-container');
+    const vh = window.innerHeight;
+    astrodude.style.marginTop = Math.max(70000 / vh, 120) + 'px';  
 
     // Get the translateY value of targetDiv
     let translateY = getTranslateY(targetDiv);
     stickyDiv.style.position = "absolute";
 
     let tmpY = -(parseFloat(translateY) - parseFloat(computedStyle.marginTop))
-    let stop = window.innerWidth > 480 ? 30 : 64;
+    let stop = (70000 / vh);
     let adjust = window.innerWidth > 480 ? 8 : 0;
 
-    stop = window.innerHeight < 420 ? 5 : stop;
-    adjust = window.innerHeight < 420 ? 56 : adjust;
+    //stop = window.innerHeight < 420 ? 5 : stop;
+    //adjust = window.innerHeight < 420 ? 56 : adjust;
 
     let w = parseFloat(computedStyle.width);
     let ml = parseFloat(computedStyle.marginLeft);
     let mt = parseFloat(computedStyle.marginTop);
 
-    mt = window.innerHeight < 420 ? mt + 48 : mt;
+    //mt = window.innerHeight < 420 ? mt + 48 : mt;
+    let tolerance = vh / 100;
 
-    if (tmpY > stop) {
-
-      tmpY = stop - ((stop + adjust) - Math.abs(translateY));
-
-      //if (tmpY < -8){
+    if (stickyRect.top + tolerance  >= targetRect.top){
+      tmpY = stop - ((stop) - Math.abs(translateY));
       if (translateY < 0) {
-        tmpY = translateY - adjust;
-
-      } else {
-
+        tmpY = translateY ;
+        
       }
-
-
-
+      //alert('ye')
     } else {
       tmpY = -(parseFloat(translateY) - parseFloat(computedStyle.marginTop));
-
+      //alert('no')
       if (tmpY < 0) {
         //const scale = Math.min(1 + (Math.abs((targetDiv.offsetTop) * scalingFactor) / maxOffsetTop), maxScale);  // Ensure the scale doesn't exceed 1
         //console.log(scale)
@@ -1067,28 +1076,16 @@ function spa() {
         w = Math.min(w + (w * (scale - 1)), maxW);
         ml = ml - ((w * (scale - 1))/2);
 
-        //if (window.innerWidth < 560){
-          //ml = window.innerWidth - w;
-        //}
-
-        
-
-        if (mt > parseFloat(computedStyle.marginTop)) {
-          //mt = parseFloat(computedStyle.marginTop);
-        }
-
-        if (mt < - (window.innerHeight / 2)){
-          //mt = -window.innerHeight/ 2;
-        }
-
         //if (window.innerHeight > 420){
-          mt = mt - (250 * (scale - 1));
-          //mt = parseFloat(computedStyle.marginTop);
-        //}
+          mt = Math.max(mt - ((w * 2) * (scale - 1)), -(vh/4)) ;
+          
+      } 
 
-      }
-
+      
     }
+
+
+    
     stickyDiv.style.transform = `translate3d(0px, ${tmpY}px, 0px)`;
     //}
     stickyDiv.style.marginTop = mt + "px";
