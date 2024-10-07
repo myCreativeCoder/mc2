@@ -88,34 +88,31 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 });
 
-function spa() {
+// Function to check AVIF support using a Promise
+function checkAvifSupport() {
   
-  console.log("spa " + performance.now())
-  
-  const greatDiv = document.querySelector('.great');
-  const userAgent = navigator.userAgent.toLowerCase();
-  // detect WebKit browsers
-  const isWebKit = !userAgent.match("gecko") && userAgent.match("webkit");
-  const isChrome = userAgent.indexOf("chrome") > -1 && userAgent.match("safari");
-  const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
+  return new Promise((resolve) => {
+    let avifTest = new Image();
+    avifTest.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
 
-  const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+    // If the image loads, AVIF is supported
+    avifTest.onload = function () {
+      //alert('true')
+      resolve(true);
+    };
 
+    // If the image fails to load, AVIF is not supported
+    avifTest.onerror = function () {
+      //alert('false')
+      resolve(false);
+    };
+  });
+}
 
-  const body = document.querySelector('.page-home');
-
-  
-  let avifSupport = false;
-  var avifTest = new Image();
-  avifTest.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
-  avifTest.onload = function () {
-    avifSupport = true;
-    //alert('avif supported')
-  };
-
-  const imagesAllSlides = document.querySelectorAll("img.slide");
-
-  if (avifSupport == false) {
+// Function to modify images based on AVIF support
+function updateImagesForFormat(avifSupport) {
+  if (!avifSupport){
+    const imagesAllSlides = document.querySelectorAll("img.slide");
     imagesAllSlides.forEach(img => {
       const dataSrc = img.getAttribute('data-src');
       const dataSrcSet = img.getAttribute('data-srcset');
@@ -146,6 +143,40 @@ function spa() {
       } 
     });
   }
+  
+}
+
+function spa() {
+  
+  console.log("spa " + performance.now())
+  
+  const greatDiv = document.querySelector('.great');
+  const userAgent = navigator.userAgent.toLowerCase();
+  // detect WebKit browsers
+  const isWebKit = !userAgent.match("gecko") && userAgent.match("webkit");
+  const isChrome = userAgent.indexOf("chrome") > -1 && userAgent.match("safari");
+  const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
+
+  const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+
+
+  const body = document.querySelector('.page-home');
+
+  
+  /*let avifSupport = false;
+  var avifTest = new Image();
+  avifTest.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
+  avifTest.onload = function () {
+    avifSupport = true;
+    //alert('avif supported')
+  };*/
+
+  
+
+  // Check AVIF support, then update images
+  checkAvifSupport().then((avifSupport) => {
+    updateImagesForFormat(avifSupport);
+  });
 
   const wrapper = document.getElementById('home');
 
@@ -571,36 +602,40 @@ function spa() {
   function lazyload() {
     
     console.log('go lazy ' + performance.now())
+    /*
     let avifSupport = false;
     var avifTest = new Image();
     avifTest.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
     avifTest.onload = function () {
       avifSupport = true;
       //alert('avif supported')
-    };
-    const imagesLazy = document.querySelectorAll("img.lazyload");
-    imagesLazy.forEach(img => {
-      const dataSrc = img.getAttribute('data-src');
-      const dataSrcSet = img.getAttribute('data-srcset');
-      if (dataSrcSet) {
-        if (avifSupport){
-          img.srcset = dataSrcSet;
+    };*/
+    checkAvifSupport().then((avifSupport) => {
+      const imagesLazy = document.querySelectorAll("img.lazyload");
+      imagesLazy.forEach(img => {
+        const dataSrc = img.getAttribute('data-src');
+        const dataSrcSet = img.getAttribute('data-srcset');
+        if (dataSrcSet) {
+          if (avifSupport){
+            img.srcset = dataSrcSet;
+          } else {
+            img.srcset = dataSrcSet.split('.avif').join('.webp');
+          }
+          
+        } else if (dataSrc) {  // Ensure data-src is available
+          //console.log(`Setting src for img with data-src: ${dataSrc}`);
+          if (avifSupport){
+            img.src = dataSrc;
+          } else {
+            img.src = dataSrc.split('.avif').join('.webp');  // Set the src
+          }
+          //img.setAttribute('src',dataSrc)
         } else {
-          img.srcset = dataSrcSet.split('.avif').join('.webp');
+          console.warn('No data-src found for this image:', img);
         }
-        
-      } else if (dataSrc) {  // Ensure data-src is available
-        //console.log(`Setting src for img with data-src: ${dataSrc}`);
-        if (avifSupport){
-          img.src = dataSrc;
-        } else {
-          img.src = dataSrc.split('.avif').join('.webp');  // Set the src
-        }
-        //img.setAttribute('src',dataSrc)
-      } else {
-        console.warn('No data-src found for this image:', img);
-      }
+      });
     });
+    
   }
 
 
@@ -946,15 +981,6 @@ function spa() {
     allowHTML: true,
     theme: 'astro',
   });
-
-
-
-
-
-
-
-  function spaStart(){}
-
 
 
   window.addEventListener('load', function () {
