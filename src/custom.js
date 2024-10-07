@@ -7,6 +7,9 @@ window.location.protocol === "file:");
 //let testMode = isOnline;
 let testMode = false;
 
+
+
+
 const lenis = new Lenis();
 lenis.stop();
 
@@ -39,7 +42,7 @@ let isScrolling;
           //alert('scrollend')
           // Code to run after scrolling ends
           revealIndex = 0;  // Reset index on scroll
-        }, 200); // Adjust timeout duration as needed
+        }, 100); // Adjust timeout duration as needed
       });
 
 
@@ -81,7 +84,16 @@ function spa() {
   
   console.log("spa " + performance.now())
   
-  
+  const greatDiv = document.querySelector('.great');
+const userAgent = navigator.userAgent.toLowerCase();
+// detect WebKit browsers
+const isWebKit = !userAgent.match("gecko") && userAgent.match("webkit");
+const isChrome = userAgent.indexOf("chrome") > -1 && userAgent.match("safari");
+const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
+
+const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+
+
   const body = document.querySelector('.page-home');
 
   const images = document.querySelectorAll("img.lazyload");
@@ -215,8 +227,10 @@ function spa() {
   function lazyload() {
     images.forEach(img => {
       const dataSrc = img.getAttribute('data-src');
-
-      if (dataSrc) {  // Ensure data-src is available
+      const dataSrcSet = img.getAttribute('data-src-set');
+      if (dataSrcSet) {
+        img.srcset = dataSrcSet;
+      } else if (dataSrc) {  // Ensure data-src is available
         //console.log(`Setting src for img with data-src: ${dataSrc}`);
         img.src = dataSrc;  // Set the src
         //img.setAttribute('src',dataSrc)
@@ -420,16 +434,6 @@ function spa() {
   };
 
 
-  const greatDiv = document.querySelector('.great');
-  const userAgent = navigator.userAgent.toLowerCase();
-  // detect WebKit browsers
-  const isWebKit = !userAgent.match("gecko") && userAgent.match("webkit");
-  const isChrome = userAgent.indexOf("chrome") > -1 && userAgent.match("safari");
-  const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
-
-  const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
-
-
   //console.log(userAgent)
 
   // Add class "webkit" to the div with class "great"
@@ -490,24 +494,7 @@ function spa() {
       }
   }));*/
 
-  if (!!isReduced) {
-    // DON'T use an animation here!
-  } else {
-    // DO use an animation here!
-    /*
-    // Reveal on scroll stuff
-    const observer = new IntersectionObserver(handleIntersect, options)
-    const targets = document.querySelectorAll('.animonItem')
-    targets.forEach(function (target) {
-      observer.observe(target)
-    })
-    */
-    // Accepts any class name
-    var rellax = new Rellax('.rellax', {
-      center: true,
-      //wrapper:'#parallax_wrapper' 
-    });
-  }
+  
 
   // Array of sentences
   const sentences = [
@@ -608,11 +595,14 @@ function spa() {
 
   function spaStart(){
 
-    console.log('spaStart ' + performance.now())
+    console.log('spaStart ' + performance.now());
+
+    
     
     // show document 
     body.classList.remove('js-hidden');
     body.classList.remove('scroll-lock');
+    
     sunglasses.classList.remove('hidden');
     lenis.start();
     
@@ -829,7 +819,12 @@ function spa() {
         
       } else {
         //alert('paused ' + targetDiv.id)
-        targetDiv.classList.add('paused');
+        if (firstFourItems.includes(targetDiv) || targetDiv.id == fifthItem.id){
+          
+        } else {
+          targetDiv.classList.add('paused')
+        }
+       // ;
       }
     });
 
@@ -877,7 +872,24 @@ function spa() {
     //}, 2000); 
     console.log('window on load ' + performance.now())
 
-    
+    if (!!isReduced) {
+      // DON'T use an animation here!
+    } else {
+      // DO use an animation here!
+      /*
+      // Reveal on scroll stuff
+      const observer = new IntersectionObserver(handleIntersect, options)
+      const targets = document.querySelectorAll('.animonItem')
+      targets.forEach(function (target) {
+        observer.observe(target)
+      })
+      */
+      // Accepts any class name
+      var rellax = new Rellax('.rellax', {
+        center: true,
+        //wrapper:'#parallax_wrapper' 
+      });
+    }
     //body.classList.remove('js-hidden');
     //body.classList.remove('scroll-lock');
     //sunglasses.classList.remove('hidden');
@@ -896,7 +908,7 @@ function spa() {
 
 
 
-  let maxScale = 8;
+  let maxScale = 2;
 
   // 1 to 16
   let scalingFactor = 5;
@@ -915,9 +927,15 @@ function spa() {
     let tmpY = -(parseFloat(translateY) - parseFloat(computedStyle.marginTop))
     let stop = window.innerWidth > 480 ? 30 : 64;
     let adjust = window.innerWidth > 480 ? 8 : 0;
+
+    stop = window.innerHeight < 420 ? 5 : stop;
+    adjust = window.innerHeight < 420 ? 56 : adjust;
+
     let w = parseFloat(computedStyle.width);
     let ml = parseFloat(computedStyle.marginLeft);
     let mt = parseFloat(computedStyle.marginTop);
+
+    mt = window.innerHeight < 420 ? mt + 48 : mt;
 
     if (tmpY > stop) {
 
@@ -946,15 +964,26 @@ function spa() {
         //stickyDiv.style.width = 270 * scale + "px";
         //stickyDiv.style.marginLeft = parseFloat(computedStyle.marginLeft) - (100 * (scale - 1)) + "px";
         w = Math.min(w + (w * (scale - 1)), maxW);
-        ml = ml - (250 * (scale - 1));
+        ml = ml - ((w * (scale - 1))/2);
 
-        mt = mt - (250 * (scale - 1));
+        //if (window.innerWidth < 560){
+          //ml = window.innerWidth - w;
+        //}
+
+        
 
         if (mt > parseFloat(computedStyle.marginTop)) {
-          mt = parseFloat(computedStyle.marginTop);
+          //mt = parseFloat(computedStyle.marginTop);
         }
 
+        if (mt < - (window.innerHeight / 2)){
+          //mt = -window.innerHeight/ 2;
+        }
 
+        //if (window.innerHeight > 420){
+          mt = mt - (250 * (scale - 1));
+          //mt = parseFloat(computedStyle.marginTop);
+        //}
 
       }
 
@@ -967,7 +996,7 @@ function spa() {
 
   }
 
-  adjustSunglasses();
+ 
 
 
 
@@ -1678,7 +1707,12 @@ function spa() {
           modalImg.classList.add('modal-slide');
           mainElement.append(modalImg)
         }
-        modalImg.src = childSlide.src;
+        if (childSlide.srcset){
+          modalImg.srcset = childSlide.srcset;
+        } else {
+          modalImg.src = childSlide.src;
+        }
+        
         modalImg.style.display = 'block';
         if (modalVideo) {
           modalVideo.style.display = 'none';
