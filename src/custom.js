@@ -12,32 +12,10 @@ let avifSupport = false;
     avifTest.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
     avifTest.onload = function () {
       avifSupport = true;
+      alert('avif supported')
     };
 
-    imagesAllSlides.forEach(img => {
-      const dataSrc = img.getAttribute('data-src');
-      const dataSrcSet = img.getAttribute('data-src-set');
-      if (dataSrcSet) {
-        if (avifSupport){
-          img.srcset = dataSrcSet;
-        } else {
-          img.srcset = dataSrcSet.replace('.avif','.webp');
-        }
-        
-      }
-      
-      if (dataSrc) {  // Ensure data-src is available
-        //console.log(`Setting src for img with data-src: ${dataSrc}`);
-        if (avifSupport){
-          img.src = dataSrc;
-        } else {
-          img.src = dataSrc.replace('.avif','.webp');
-        }
-        //img.setAttribute('src',dataSrc)
-      } else {
-        console.warn('No data-src found for this image:', img);
-      }
-    });
+    
 
 
 const lenis = new Lenis();
@@ -115,19 +93,59 @@ function spa() {
   console.log("spa " + performance.now())
   
   const greatDiv = document.querySelector('.great');
-const userAgent = navigator.userAgent.toLowerCase();
-// detect WebKit browsers
-const isWebKit = !userAgent.match("gecko") && userAgent.match("webkit");
-const isChrome = userAgent.indexOf("chrome") > -1 && userAgent.match("safari");
-const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
+  const userAgent = navigator.userAgent.toLowerCase();
+  // detect WebKit browsers
+  const isWebKit = !userAgent.match("gecko") && userAgent.match("webkit");
+  const isChrome = userAgent.indexOf("chrome") > -1 && userAgent.match("safari");
+  const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
 
-const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+  const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
 
 
   const body = document.querySelector('.page-home');
 
-  const imagesLazy = document.querySelectorAll("img.lazyload");
+  
+  let avifSupport = false;
+  var avifTest = new Image();
+  avifTest.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
+  avifTest.onload = function () {
+    avifSupport = true;
+    alert('avif supported')
+  };
+
   const imagesAllSlides = document.querySelectorAll("img.slide");
+
+  if (avifSupport == false) {
+    imagesAllSlides.forEach(img => {
+      const dataSrc = img.getAttribute('data-src');
+      const dataSrcSet = img.getAttribute('data-srcset');
+      if (dataSrcSet) {
+        
+          
+          img.setAttribute('data-srcset', dataSrcSet.split('.avif').join('.webp'));
+          
+        
+        
+      }
+
+      if (img.srcset){
+        
+          img.srcset = img.srcset.split('.avif').join('.webp');
+          
+        
+
+      }
+      
+      if (img.src) {  // Ensure data-src is available
+        //console.log(`Setting src for img with data-src: ${dataSrc}`);
+        
+          
+          img.src = img.src.split('.avif').join('.webp');
+        
+        //img.setAttribute('src',dataSrc)
+      } 
+    });
+  }
 
   const wrapper = document.getElementById('home');
 
@@ -257,29 +275,38 @@ const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true
 
   function lazyload() {
     
-
+    console.log('go lazy')
+    let avifSupport = false;
+    var avifTest = new Image();
+    avifTest.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
+    avifTest.onload = function () {
+      avifSupport = true;
+      //alert('avif supported')
+    };
+    const imagesLazy = document.querySelectorAll("img.lazyload");
     imagesLazy.forEach(img => {
       const dataSrc = img.getAttribute('data-src');
-      const dataSrcSet = img.getAttribute('data-src-set');
+      const dataSrcSet = img.getAttribute('data-srcset');
       if (dataSrcSet) {
         if (avifSupport){
           img.srcset = dataSrcSet;
         } else {
-          img.srcset = dataSrcSet.replace('.avif','.webp');
+          img.srcset = dataSrcSet.split('.avif').join('.webp');
         }
         
       } else if (dataSrc) {  // Ensure data-src is available
         //console.log(`Setting src for img with data-src: ${dataSrc}`);
-        img.src = dataSrc;  // Set the src
+        if (avifSupport){
+          img.src = dataSrc;
+        } else {
+          img.src = dataSrc.split('.avif').join('.webp');  // Set the src
+        }
         //img.setAttribute('src',dataSrc)
       } else {
         console.warn('No data-src found for this image:', img);
       }
     });
   }
-
-
-  
 
 
 
