@@ -7,7 +7,37 @@ window.location.protocol === "file:");
 //let testMode = isOnline;
 let testMode = false;
 
+let avifSupport = false;
+    var avifTest = new Image();
+    avifTest.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
+    avifTest.onload = function () {
+      avifSupport = true;
+    };
 
+    imagesAllSlides.forEach(img => {
+      const dataSrc = img.getAttribute('data-src');
+      const dataSrcSet = img.getAttribute('data-src-set');
+      if (dataSrcSet) {
+        if (avifSupport){
+          img.srcset = dataSrcSet;
+        } else {
+          img.srcset = dataSrcSet.replace('.avif','.webp');
+        }
+        
+      }
+      
+      if (dataSrc) {  // Ensure data-src is available
+        //console.log(`Setting src for img with data-src: ${dataSrc}`);
+        if (avifSupport){
+          img.src = dataSrc;
+        } else {
+          img.src = dataSrc.replace('.avif','.webp');
+        }
+        //img.setAttribute('src',dataSrc)
+      } else {
+        console.warn('No data-src found for this image:', img);
+      }
+    });
 
 
 const lenis = new Lenis();
@@ -96,7 +126,8 @@ const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true
 
   const body = document.querySelector('.page-home');
 
-  const images = document.querySelectorAll("img.lazyload");
+  const imagesLazy = document.querySelectorAll("img.lazyload");
+  const imagesAllSlides = document.querySelectorAll("img.slide");
 
   const wrapper = document.getElementById('home');
 
@@ -225,14 +256,9 @@ const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true
   }
 
   function lazyload() {
-    let avifSupport = false;
-    var avifTest = new Image();
-    avifTest.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
-    avifTest.onload = function () {
-      avifSupport = true;
-    };
+    
 
-    images.forEach(img => {
+    imagesLazy.forEach(img => {
       const dataSrc = img.getAttribute('data-src');
       const dataSrcSet = img.getAttribute('data-src-set');
       if (dataSrcSet) {
