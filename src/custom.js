@@ -1522,6 +1522,11 @@ const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true
       clonedSlide.classList.add('modal-slide');
       clonedSlide.classList.add('modal-img');
 
+      
+      if (clonedSlide.srcset){
+          clonedSlide.src = '';
+      }
+
 
 
     } else if (slide.classList.contains('video-slide')) {
