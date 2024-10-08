@@ -1174,7 +1174,8 @@ function spa() {
     }, 500);
     */
 
-    lenis.scrollTo('#projects-reel', { lerp: 0.05, lock: true });
+    lenis.scrollTo('#projects-reel', { lerp: 0.02, lock: true });
+
     setTimeout(() => { astrodudeInstance.show(); }, 3000);
     setTimeout(() => { astrodudeInstance.hide(); }, 13000);
     
@@ -1661,7 +1662,7 @@ function spa() {
     //}
   }
   function showSlideInModal(childSlide, parentSlidesCollection, modalSlideDirection) {
-
+    
 
     if (!parentSlidesCollection) {
 
@@ -1823,9 +1824,9 @@ function spa() {
 
         modal.classList.add('active');
 
-        parentSlidesCollection.classList.remove('hovered');
-        wrapper.classList.add('blurred');
-        document.body.classList.add('scroll-lock');
+        //parentSlidesCollection.classList.remove('hovered');
+        //wrapper.classList.add('blurred');
+        //document.body.classList.add('scroll-lock');
         //lenis.stop();
 
       } else if (childSlide.classList.contains('video-slide')) {
@@ -1896,22 +1897,24 @@ function spa() {
     document.body.classList.add('scroll-lock');
     //lenis.stop();
 
-
-    let title = childSlide.alt ? childSlide.alt : childSlide.title;
+    
+    let title = childSlide.alt ? childSlide.alt : childSlide.title || parentSlidesCollection.parentElement.querySelector('.slide-link').textContent;
     let client = parentSlidesCollection.parentElement.querySelector('.summary-client');
-    if (!client) {
+    
+    if (!client) {    
       client = '';
     } else {
       client = client.innerHTML;
     }
     let desc = parentSlidesCollection.parentElement.querySelector('.summary-description');
+    
     if (!desc) {
       desc = '';
     } else {
       desc = desc.innerHTML;
     }
 
-    modalDescription.innerHTML = "<div class='modal-title'>" + title + "</div>" + client + "<br/><div class='desc'>" + desc + "</div>"; // Set description text
+    modalDescription.innerHTML = "<div class='modal-title'>" + title + "</div>" + client + "<br/><br/><div class='desc'>" + desc + "</div>"; // Set description text
 
 
     setTimeout(function () {
