@@ -198,10 +198,10 @@ function spa() {
               });
             });
 
-            //if (isOnline){
+            if (isOnline){
               //alert('go')
               injectTawkScript();
-            //}
+            }
           }, hoverableDelay);
 
           observerIsSplashVisible.disconnect(); // Optionally disconnect after detecting
