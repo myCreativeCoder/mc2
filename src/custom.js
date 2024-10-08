@@ -464,7 +464,7 @@ function spa() {
       }
     
       // Call the function to inject the script
-      injectTawkScript();
+      //injectTawkScript();
     }
 
 
@@ -783,6 +783,10 @@ function spa() {
                   gradtext.classList.remove('animate');
                 });
               });
+
+              if (isOnline){
+                injectTawkScript();
+              }
             }, hoverableDelay);
 
             observer.disconnect(); // Optionally disconnect after detecting
@@ -799,6 +803,14 @@ function spa() {
 
 
 
+  } else {
+    if (isOnline){
+      setTimeout(function () {
+        injectTawkScript();
+      }, 2000); 
+      
+    }
+    
   }
 
   /*
