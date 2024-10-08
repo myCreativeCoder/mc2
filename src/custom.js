@@ -46,17 +46,17 @@ window.addEventListener('scrollend', function () {
 */
 let isScrolling;
 
-      window.addEventListener('scroll', function () {
-        // Clear the timeout if it's already set
-        clearTimeout(isScrolling);
+window.addEventListener('scroll', function () {
+  // Clear the timeout if it's already set
+  clearTimeout(isScrolling);
 
-        // Set a timeout to run after scrolling ends
-        isScrolling = setTimeout(function () {
-          //alert('scrollend')
-          // Code to run after scrolling ends
-          revealIndex = 0;  // Reset index on scroll
-        }, 100); // Adjust timeout duration as needed
-      });
+  // Set a timeout to run after scrolling ends
+  isScrolling = setTimeout(function () {
+    //alert('scrollend')
+    // Code to run after scrolling ends
+    revealIndex = 0;  // Reset index on scroll
+  }, 100); // Adjust timeout duration as needed
+});
 
 
 // Function to detect scroll direction
@@ -122,29 +122,15 @@ function updateImagesForFormat(avifSupport) {
       const dataSrc = img.getAttribute('data-src');
       const dataSrcSet = img.getAttribute('data-srcset');
       if (dataSrcSet) {
-        
-          
-          img.setAttribute('data-srcset', dataSrcSet.split('.avif').join('.webp'));
-          
-        
-        
+        img.setAttribute('data-srcset', dataSrcSet.split('.avif').join('.webp'));
       }
 
       if (img.srcset){
-        
-          img.srcset = img.srcset.split('.avif').join('.webp');
-          
-        
-
+        img.srcset = img.srcset.split('.avif').join('.webp');
       }
       
       if (img.src) {  // Ensure data-src is available
-        //console.log(`Setting src for img with data-src: ${dataSrc}`);
-        
-          
-          img.src = img.src.split('.avif').join('.webp');
-        
-        //img.setAttribute('src',dataSrc)
+        img.src = img.src.split('.avif').join('.webp');
       } 
     });
   }
@@ -153,21 +139,17 @@ function updateImagesForFormat(avifSupport) {
 
 function spa() {
 
-  
-  
   console.log("spa " + performance.now())
 
-   
-  
+  const body = document.querySelector('.page-home');
   const greatDiv = document.querySelector('.great');
   const userAgent = navigator.userAgent.toLowerCase();
   // detect WebKit browsers
   const isWebKit = !userAgent.match("gecko") && userAgent.match("webkit");
   const isChrome = userAgent.indexOf("chrome") > -1 && userAgent.match("safari");
   const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
-
+ 
   
-  const body = document.querySelector('.page-home');
 
   // Check AVIF support, then update images
   checkAvifSupport().then((avifSupport) => {
@@ -181,13 +163,7 @@ function spa() {
       if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
         // Check if the js-hidden class is removed
         if (!body.classList.contains('js-hidden')) {
-          //console.log('js-hidden class removed from body!');
-
           
-          
-          //setTimeout(function() {
-          //    lazyload();
-          //}, lazyloadDelay);
           setTimeout(function () {
             splashDiv.classList.add('finished'); // TODO ? : check if splash is in viewport
             sunglasses.classList.remove('hidden');
@@ -244,15 +220,6 @@ function spa() {
   let loadedCount = 0;
   const totalFirstThumbnailImages = firstThumbnailImages.length;
 
-
-
-
-
-    
-    
-  
-  
-
   let hasLazyLoaded = false;
 
   // Get all elements with class 'animonItem'
@@ -263,12 +230,6 @@ function spa() {
   const fifthItem = animonItems[4];
 
   const handleIntersect = function (entries, observer) {
-    //entries.forEach(function (entry) {
-    //if (entry.intersectionRatio > threshold) {
-
-
-    //let visibleBatch = [];
-
 
     // Iterate over each entry (each observed element)
     entries.forEach(function (entry) {
@@ -276,35 +237,14 @@ function spa() {
       if (entry.intersectionRatio > threshold) {
 
         //console.log('interesect ' + entry.target.id)
-        //console.log('Scroll direction: ' + scrollDirection);
-
-        // Add the box to the array of visible elements for this batch
-        //visibleBatch.push(entry.target);
-        // Ensure entry.target is a valid DOM element
-        
-
+      
         if (targetDiv.id == 'we-make') {
           //console.log(document.getElementById('we-make'));
           setTimeout(function () { // TODO : check if splash is in viewport
             splashDiv.classList.add('finished');
-            /*
-            // Créer un nouvel élément <style>
-            var style = document.createElement('style');
-
-            // Ajouter la règle CSS à l'élément <style>
-            style.innerHTML = `
-              .paused, .paused > *, .paused > * > * {
-                animation-play-state: paused !important;
-              }
-            `;
-
-            // Ajouter l'élément <style> au <head> du document
-            document.head.appendChild(style);
-            */
             //alert("finished")
           }, hoverableDelay);
         }
-
 
         // Check if the entry does not have any class from reveal-1 to reveal-10
         const hasRevealClass = Array.from({ length: 10 }, (_, i) => `reveal-${i + 1}`).some(cls => targetDiv.classList.contains(cls));
@@ -405,8 +345,6 @@ function spa() {
         }
 
 
-        
-
         if (targetDiv.id == 'inevitable') {
 
           let lightbulb = document.getElementById('lightbulb-shape');
@@ -447,16 +385,6 @@ function spa() {
 
         }
 
-
-        /*if (targetDiv.id == 'about-us'){
-            
-            let fullBleed = targetDiv.querySelector('.full-bleed');
-            if (fullBleed){
-
-                fullBleed.classList.add('show')
-
-            }
-        }*/
         if (!targetDiv.classList.contains('reveal-delegated')) {
           targetDiv.classList.remove('reveal-prehide');
           targetDiv.classList.remove('paused');
@@ -478,40 +406,29 @@ function spa() {
       }
     });
 
-
-
-
-
-    //}
-    //})
   }
     // Reveal on scroll stuff
-    const observerIntersectReveal = new IntersectionObserver(handleIntersect, options)
-    const targets = document.querySelectorAll('.animonItem')
+    const observerIntersectReveal = new IntersectionObserver(handleIntersect, options);
+    const targets = document.querySelectorAll('.animonItem');
     targets.forEach(function (target) {
       observerIntersectReveal.observe(target)
-    })
+    });
 
-    //if (isOnline) {
-      function injectTawkScript() {
-        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    
-        // Create the script element
-        var s1 = document.createElement("script");
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/66f6c86ae5982d6c7bb5abe3/1i8pvtogp';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-    
-        // Find the first script tag on the page and insert the new script before it
-        var s0 = document.getElementsByTagName("script")[0];
-        s0.parentNode.insertBefore(s1, s0);
-      }
-    
-      // Call the function to inject the script
-      //injectTawkScript();
-    //}
 
+  function injectTawkScript() {
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+
+    // Create the script element
+    var s1 = document.createElement("script");
+    s1.async = true;
+    s1.src = 'https://embed.tawk.to/66f6c86ae5982d6c7bb5abe3/1i8pvtogp';
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+
+    // Find the first script tag on the page and insert the new script before it
+    var s0 = document.getElementsByTagName("script")[0];
+    s0.parentNode.insertBefore(s1, s0);
+  }
 
   // Function to check if all images are loaded
   function checkIfAllImagesLoaded() {
@@ -843,23 +760,6 @@ function spa() {
         div.classList.add('gradtext-rainbow', 'animate');
       });
     }
-/*
-    if (isSafari) {
-
-      let isScrolling;
-
-      window.addEventListener('scroll', function () {
-        // Clear the timeout if it's already set
-        clearTimeout(isScrolling);
-
-        // Set a timeout to run after scrolling ends
-        isScrolling = setTimeout(function () {
-          //alert('scrollend')
-          // Code to run after scrolling ends
-          revealIndex = 0;  // Reset index on scroll
-        }, 200); // Adjust timeout duration as needed
-      });
-    }*/
 
   }
 
@@ -1329,6 +1229,7 @@ function spa() {
 
   let fadeLoopTimeout;
   let timeBetweenFades = 3000;
+  let timeBetweenChecksShouldFade = 1000;
 
   for (let i = 0; i < slides.length; i++) {
     let thisSlide = slides.item(i);
@@ -1475,7 +1376,7 @@ function spa() {
           if (thisSlide.classList.contains('hovered')) {
             // Get all child elements with the class 'slide'
             let childSlides = thisSlide.querySelectorAll('.slide');
-            let currentChildSlideType;
+            //let currentChildSlideType;
             let currentChildSlideDuration;
 
             
@@ -1487,10 +1388,8 @@ function spa() {
               // Check if the current child slide has the 'shown' class
               if (childSlide.classList.contains('shown')) {
                 // Get the tag type of the shown slide (e.g., IMG, VIDEO)
-                currentChildSlideType = childSlide.tagName;
+                //currentChildSlideType = childSlide.tagName;
 
-
-                
                 // Get the duration based on the element type
                 if (childSlide.classList.contains('video-slide')) {
                   let vid = childSlide.getElementsByTagName('video')[0];
@@ -1503,7 +1402,7 @@ function spa() {
 
                 } else {
                   // For other types of elements, set a default duration or handle as needed
-                  currentChildSlideDuration = timeBetweenFades; // Example: default 2 seconds
+                  currentChildSlideDuration = timeBetweenFades; // default 3 seconds
                 }
 
                 // Calculate the elapsed time since the slide started
@@ -1534,7 +1433,7 @@ function spa() {
 
           // Continue looping while the slide is hovered
           startFadeLoop();
-        }, timeBetweenFades);
+        }, timeBetweenChecksShouldFade);
       }
 
       startFadeLoop();  // Start loop when mouse enters

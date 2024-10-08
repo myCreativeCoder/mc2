@@ -657,7 +657,7 @@ a.arrow:hover .hand {
 }
 
 
-#flip div:first-child {
+.animonItem #flip div:first-child {
   animation-name: show;
   animation-delay: 4s;
   animation-timing-function: cubic-bezier(0,2,1.5,1);
