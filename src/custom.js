@@ -200,7 +200,9 @@ function spa() {
 
             if (isOnline){
               //alert('go')
-              injectTawkScript();
+              setTimeout(function () {
+                injectTawkScript();
+              }, 1000)
             }
           }, hoverableDelay);
 
