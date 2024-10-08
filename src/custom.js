@@ -453,6 +453,7 @@ function spa() {
           
           sunglasses.classList.remove('hidden');
           lenis.start();
+          /*
           if (!!isReduced) {
             // DON'T use an animation here!
           } else {
@@ -462,7 +463,7 @@ function spa() {
               center: true,
               //wrapper:'#parallax_wrapper' 
             });
-          }
+          }*/
         });
       }
       
@@ -890,7 +891,7 @@ function spa() {
     console.log('window on load ' + performance.now())
 
     
-
+    
     if (!!isReduced) {
       // DON'T use an animation here!
     } else {
