@@ -153,6 +153,8 @@ function spa() {
   
   
   console.log("spa " + performance.now())
+
+   
   
   const greatDiv = document.querySelector('.great');
   const userAgent = navigator.userAgent.toLowerCase();
@@ -164,21 +166,55 @@ function spa() {
   
   const body = document.querySelector('.page-home');
 
-  
-  /*let avifSupport = false;
-  var avifTest = new Image();
-  avifTest.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
-  avifTest.onload = function () {
-    avifSupport = true;
-    //alert('avif supported')
-  };*/
-
-  
-
   // Check AVIF support, then update images
   checkAvifSupport().then((avifSupport) => {
     updateImagesForFormat(avifSupport);
   });
+
+
+  // Create a MutationObserver instance
+  const observerIsSplashVisible = new MutationObserver((mutationsList) => {
+    mutationsList.forEach(mutation => {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        // Check if the js-hidden class is removed
+        if (!body.classList.contains('js-hidden')) {
+          //console.log('js-hidden class removed from body!');
+
+          
+          
+          //setTimeout(function() {
+          //    lazyload();
+          //}, lazyloadDelay);
+          setTimeout(function () {
+            splashDiv.classList.add('finished'); // TODO ? : check if splash is in viewport
+            sunglasses.classList.remove('hidden');
+
+            // Find all elements with the class .logo in #header
+            headerElem.querySelectorAll('.logo').forEach(logo => {
+              // Find all elements with the class .gradtext inside the logo element
+              logo.querySelectorAll('.gradtext-rainbow').forEach(gradtext => {
+                // Remove the class .animate from the gradtext element
+                gradtext.classList.remove('animate');
+              });
+            });
+
+            //if (isOnline){
+              //alert('go')
+              injectTawkScript();
+            //}
+          }, hoverableDelay);
+
+          observerIsSplashVisible.disconnect(); // Optionally disconnect after detecting
+        }
+      }
+    });
+  });
+
+  // Observer configuration: Watch for attribute changes
+  const config = { attributes: true };
+
+  // Start observing the body element for class attribute changes
+  observerIsSplashVisible.observe(body, config);
 
   const wrapper = document.getElementById('home');
 
@@ -757,49 +793,8 @@ function spa() {
 
   //if ('loading' in HTMLImageElement.prototype) {
 
-
-    // Create a MutationObserver instance
-    const observerIsSplashVisible = new MutationObserver((mutationsList) => {
-      mutationsList.forEach(mutation => {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-          // Check if the js-hidden class is removed
-          if (!body.classList.contains('js-hidden')) {
-            //console.log('js-hidden class removed from body!');
-
-
-            
-            //setTimeout(function() {
-            //    lazyload();
-            //}, lazyloadDelay);
-            setTimeout(function () {
-              splashDiv.classList.add('finished'); // TODO ? : check if splash is in viewport
-              sunglasses.classList.remove('hidden');
-
-              // Find all elements with the class .logo in #header
-              headerElem.querySelectorAll('.logo').forEach(logo => {
-                // Find all elements with the class .gradtext inside the logo element
-                logo.querySelectorAll('.gradtext-rainbow').forEach(gradtext => {
-                  // Remove the class .animate from the gradtext element
-                  gradtext.classList.remove('animate');
-                });
-              });
-
-              if (isOnline){
-                injectTawkScript();
-              }
-            }, hoverableDelay);
-
-            observerIsSplashVisible.disconnect(); // Optionally disconnect after detecting
-          }
-        }
-      });
-    });
-
-    // Observer configuration: Watch for attribute changes
-    const config = { attributes: true };
-
-    // Start observing the body element for class attribute changes
-    observerIsSplashVisible.observe(body, config);
+    
+   
 
 
 
