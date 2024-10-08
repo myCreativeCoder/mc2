@@ -447,7 +447,7 @@ function spa() {
       observerIntersectReveal.observe(target)
     })
 
-    if (isOnline) {
+    //if (isOnline) {
       function injectTawkScript() {
         var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
     
@@ -465,7 +465,7 @@ function spa() {
     
       // Call the function to inject the script
       //injectTawkScript();
-    }
+    //}
 
 
   // Function to check if all images are loaded
@@ -755,11 +755,11 @@ function spa() {
   // REM: last splash screen reveal element is .reveal-4 with 1s duration after 2s delay
 
 
-  if ('loading' in HTMLImageElement.prototype) {
+  //if ('loading' in HTMLImageElement.prototype) {
 
 
     // Create a MutationObserver instance
-    const observer = new MutationObserver((mutationsList) => {
+    const observerIsSplashVisible = new MutationObserver((mutationsList) => {
       mutationsList.forEach(mutation => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
           // Check if the js-hidden class is removed
@@ -789,7 +789,7 @@ function spa() {
               }
             }, hoverableDelay);
 
-            observer.disconnect(); // Optionally disconnect after detecting
+            observerIsSplashVisible.disconnect(); // Optionally disconnect after detecting
           }
         }
       });
@@ -799,19 +799,9 @@ function spa() {
     const config = { attributes: true };
 
     // Start observing the body element for class attribute changes
-    observer.observe(body, config);
+    observerIsSplashVisible.observe(body, config);
 
 
-
-  } else {
-    if (isOnline){
-      setTimeout(function () {
-        injectTawkScript();
-      }, 2000); 
-      
-    }
-    
-  }
 
   /*
   // Obfuscating the email parts
