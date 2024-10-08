@@ -17,7 +17,10 @@ let avifSupport = false;
       //alert('avif supported')
     };
 
-    
+let isTouchDevice = false;
+window.addEventListener('touchstart', function() {
+  isTouchDevice = true;
+})
 
 
 const lenis = new Lenis();
@@ -351,8 +354,12 @@ function spa() {
                 });
               });
 
+
+              if (!isTouchDevice){
+                // poor man's scroll snap
+                lenis.scrollTo('#home', { lerp: 0.05, lock: true });
+              }
               
-              lenis.scrollTo('#home', { lerp: 0.05, lock: true });
             
 
             } else if (firstFourItems.includes(targetDiv)) {
