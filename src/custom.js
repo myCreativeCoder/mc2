@@ -495,7 +495,7 @@ function spa() {
 
   //const chatWidgetCustom = document.getElementById('chat-widget-custom');
 
- 
+  const reelwrap = document.getElementById('reel-wrap');
 
   let acceptabeDelay = 10000;
 
@@ -2003,6 +2003,25 @@ function spa() {
     // hide tooltips on scroll
     astrodudeInstance.hide();
     donutInstance.hide();
+    // Get computed styles of reelwrap's ::before pseudo-element
+    let computedStyle = window.getComputedStyle(reelwrap, "::before");
+
+    // Get current background position values from CSS variables
+    let xPosition = parseFloat(computedStyle.getPropertyValue("--x-pos")) || 50; // Default to 50% if not set
+    let yPosition = parseFloat(computedStyle.getPropertyValue("--y-pos")) || 50;
+
+    // Decrease background position by 1%
+    //xPosition -= 0.1;
+    if (scrollDirection == "down"){
+      yPosition -= 0.2;
+    } else {
+      yPosition += 0.2;
+    }
+    
+
+    // Apply the new background position by setting the CSS variables
+    reelwrap.style.setProperty('--x-pos', `${xPosition}%`);
+    reelwrap.style.setProperty('--y-pos', `${yPosition}%`);
 
     // Set a timeout to run after scrolling ends
    
