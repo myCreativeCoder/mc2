@@ -842,6 +842,10 @@ a.arrow:hover .hand {
   top: 0;
 }
 
+.crossfaded .slide:not(.placeholder).hidden {
+  //display: none;
+}
+
 .crossfaded .slide:not(.placeholder):last-child {
   position: relative;
 }
@@ -870,6 +874,7 @@ video.slide {
   transform: translateY(100px);
   
   will-change: transform, opacity;
+  transition: transform, opacity;
 }
 body:not(.js-hidden) .fade-in:not(.reveal-prehide) {
   transition-property: opacity;  /* The properties you're animating */
@@ -880,7 +885,7 @@ body:not(.js-hidden) .fade-in:not(.reveal-prehide) {
 
 }
 
-body:not(.js-hidden) .animonItem.reverse.reveal-prehide {
+body .animonItem.reverse.reveal-prehide {
   transform: translateY(-100px) !important;
 }
 
@@ -1262,6 +1267,8 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
   margin: auto;
   border-radius: 8px 8px 0 0;
   display: block;
+  max-width: 100%;
+  background: #180120;
 }
 
 

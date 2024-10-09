@@ -44,19 +44,7 @@ window.addEventListener('scrollend', function () {
   }, 100);
 });
 */
-let isScrolling;
 
-window.addEventListener('scroll', function () {
-  // Clear the timeout if it's already set
-  clearTimeout(isScrolling);
-
-  // Set a timeout to run after scrolling ends
-  isScrolling = setTimeout(function () {
-    //alert('scrollend')
-    // Code to run after scrolling ends
-    revealIndex = 0;  // Reset index on scroll
-  }, 100); // Adjust timeout duration as needed
-});
 
 
 // Function to detect scroll direction
@@ -137,6 +125,298 @@ function updateImagesForFormat(avifSupport) {
   
 }
 
+function lazyload() {
+    
+  console.log('go lazy ' + performance.now())
+  /*
+  let avifSupport = false;
+  var avifTest = new Image();
+  avifTest.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
+  avifTest.onload = function () {
+    avifSupport = true;
+    //alert('avif supported')
+  };*/
+  checkAvifSupport().then((avifSupport) => {
+    const imagesLazy = document.querySelectorAll("img.lazyload");
+    imagesLazy.forEach(img => {
+      const dataSrc = img.getAttribute('data-src');
+      const dataSrcSet = img.getAttribute('data-srcset');
+      if (dataSrcSet) {
+        if (avifSupport){
+          img.srcset = dataSrcSet;
+        } else {
+          img.srcset = dataSrcSet.split('.avif').join('.webp');
+        }
+        
+      } else if (dataSrc) {  // Ensure data-src is available
+        //console.log(`Setting src for img with data-src: ${dataSrc}`);
+        if (avifSupport){
+          img.src = dataSrc;
+        } else {
+          img.src = dataSrc.split('.avif').join('.webp');  // Set the src
+        }
+        //img.setAttribute('src',dataSrc)
+      } else {
+        console.warn('No data-src found for this image:', img);
+      }
+    });
+  });
+  
+}
+
+function spaStart(){
+
+  console.log('spa start ' + performance.now())
+  const body = document.querySelector('.page-home');
+  const greatDiv = document.querySelector('.great');
+  const splashDiv = document.getElementById('splash');
+  const userAgent = navigator.userAgent.toLowerCase();
+  // detect WebKit browsers
+  const isWebKit = !userAgent.match("gecko") && userAgent.match("webkit");
+  const isChrome = userAgent.indexOf("chrome") > -1 && userAgent.match("safari");
+  const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
+
+  const hoverableDelay = 3000;
+
+  body.classList.remove('js-hidden');
+  body.classList.remove('scroll-lock');
+        
+  sunglasses.classList.remove('hidden');
+  lenis.start();
+
+  
+  
+
+  let hasLazyLoaded = false;
+
+  // Get all elements with class 'animonItem'
+  const animonItems = document.querySelectorAll('.animonItem');
+
+  animonItems.forEach(function (item) {
+    item.classList.add('paused');
+  });
+  // Convert NodeList to an array and get the first 3 items
+  const firstFourItems = Array.from(animonItems).slice(0, 8);
+  const fifthItem = animonItems[4];
+
+  const maxRevealClassModulo = 6;
+
+  requestAnimationFrame(() => {
+    const handleIntersect = function (entries, observer) {
+
+      // Iterate over each entry (each observed element)
+      entries.forEach(function (entry) {
+        const targetDiv = entry.target;
+        if (entry.intersectionRatio > threshold) {
+
+          //console.log('interesect ' + entry.target.id)
+        
+          if (targetDiv.id == 'we-make') {
+            //console.log(document.getElementById('we-make'));
+            setTimeout(function () { // TODO : check if splash is in viewport
+              splashDiv.classList.add('finished');
+              //alert("finished")
+            }, hoverableDelay);
+          }
+
+          // Check if the entry does not have any class from reveal-1 to reveal-10
+          const hasRevealClass = Array.from({ length: maxRevealClassModulo}, (_, i) => `reveal-${i + 1}`).some(cls => targetDiv.classList.contains(cls));
+          const revealClass = Array.from({ length: maxRevealClassModulo }, (_, i) => `reveal-${i + 1}`).find(cls => targetDiv.classList.contains(cls))
+          
+          if (hasRevealClass){
+            revealIndex = parseInt(revealClass.split('-')[1], 10) - 1;
+            //alert(revealIndex)
+          }
+
+          if (!hasRevealClass || scrollDirection === 'up' && (firstFourItems.includes(targetDiv) || targetDiv.id == fifthItem.id)) {
+
+            let delayClass; // Use reveal-1 to reveal-10
+            if (revealIndex + 1 >= maxRevealClassModulo){
+              //delayClass = `reveal-${5}`;
+              revealIndex = 3;
+              delayClass = `reveal-${Math.min(revealIndex)}`;
+            } else {
+              delayClass = `reveal-${Math.min(revealIndex + 1, maxRevealClassModulo)}`
+            }
+            
+
+            //alert(delayClass + ' ' + targetDiv.id)
+            if (scrollDirection === 'down') {
+              // If scrolling down, apply regular transition-delay order
+
+              if (!hasRevealClass) {
+                targetDiv.classList.add(delayClass);
+                
+              }
+              
+
+            } else if (scrollDirection === 'up') {
+              if (targetDiv.querySelector('#hand')) {
+                //alert("hand")
+                /*
+                if (splashDiv.classList.contains('finished')){
+                  splashDiv.classList.remove('finished');
+                } else {
+
+                }
+                if (!splashDiv.classList.contains('finished')){
+
+                }
+                // If scrolling up, invert the delay order
+                const invertedIndex = 10 - revealIndex; // Calculate the reverse index
+                delayClass = `reveal-${Math.min(invertedIndex, 10)}`; // Use inverted index for delay class
+
+
+                // Loop through the first three items and add the 'reveal-prehide' class
+                firstFourItems.forEach(item => {
+                  item.classList.add('reveal-prehide');
+
+
+                });
+
+                requestAnimationFrame(() => {
+                  firstFourItems.forEach(item => {
+                    // Remove 'reveal-prehide' class in the next animation frame
+                    item.classList.remove('reveal-prehide');
+                  });
+                });*/
+
+
+                if (!isTouchDevice){
+                  // poor man's scroll snap
+                  lenis.scrollTo('#home', { lerp: 0.05, lock: true });
+                }
+                
+              
+
+              } else if (firstFourItems.includes(targetDiv)) {
+                if (targetDiv.id == 'we-make') {
+                  //console.log(document.getElementById('we-make'));
+                  setTimeout(function () { // TODO : check if splash is in viewport
+                    splashDiv.classList.add('finished');
+                    
+                    //alert("finished")
+                  }, hoverableDelay);
+                } else {
+
+                }
+              } else {
+                if (!hasRevealClass) {
+                  if (revealIndex + 1 >= maxRevealClassModulo){
+                    delayClass = `reveal-${8}`;
+                    
+                  } else {
+                    delayClass = `reveal-${Math.min(revealIndex + 1, maxRevealClassModulo)}`;
+                  }
+                  
+                  targetDiv.classList.add(delayClass);
+                  
+                }
+
+              }
+
+            }
+
+
+            //targetDiv.classList.remove('reveal-prehide');
+
+          }
+
+          if (hasLazyLoaded == false) {
+
+            // Check if the target contains a div with the ID 'crossfaded-1'
+            const hasCrossfadedDiv = targetDiv.querySelector('#crossfaded-1') !== null;
+
+            if (hasCrossfadedDiv) {
+              //console.log('go lazy')
+              setTimeout(function () {
+                lazyload();
+              }, 3000);
+              hasLazyLoaded = true;
+            }
+          }
+
+
+          if (targetDiv.id == 'inevitable') {
+
+            let lightbulb = document.getElementById('lightbulb-shape');
+
+            const revealClassRegex = /^reveal-(\d+)$/;
+
+            // Find the 'reveal-N' class using the regex
+            const targetClass = [...targetDiv.classList].find(cls => revealClassRegex.test(cls));
+            
+            if (targetClass) {
+              // Extract the number (N) from the matched class 'reveal-N'
+              const num = parseInt(targetClass.match(revealClassRegex)[1], 10);
+              
+              // Create the new class 'reveal-(N+1)'
+              delayClass = `reveal-${Math.min(num + 1, maxRevealClassModulo)}`;
+              
+            } else {
+              delayClass = `reveal-${Math.min(revealIndex + 1, maxRevealClassModulo)}`;
+            }
+
+            //const revealNClass = Array.from(element.classList).find(cls => cls.startsWith('reveal-'));
+            const classListArray = Array.from(lightbulb.classList);
+            const revealRegex = /^reveal-\d+$/;
+
+            // Loop through and remove each class that matches the regex
+            classListArray.forEach(cls => {
+              if (revealRegex.test(cls)) {
+                lightbulb.classList.remove(cls);
+              }
+            });
+            
+            // set class to targetDiv reveal-n + 1
+            //revealIndex++
+            
+            lightbulb.classList.add(delayClass);
+            lightbulb.classList.remove('reveal-prehide');
+            lightbulb.classList.remove('paused');
+
+          }
+
+          if (!targetDiv.classList.contains('reveal-delegated')) {
+            targetDiv.classList.remove('reveal-prehide');
+            targetDiv.classList.remove('paused');
+            if (revealIndex + 1 >= maxRevealClassModulo){
+              revealIndex = 0;
+            } else {
+              revealIndex++
+            }
+              
+
+          }
+
+          // Stop observing once the element is animated
+          //observer.unobserve(entry.target)
+
+          
+        } else {
+          //alert('paused ' + targetDiv.id + ' ' + fifthItem.id + ' ' + firstFourItems.includes(targetDiv))
+          if (firstFourItems.includes(targetDiv)){
+            
+          } else {
+            targetDiv.classList.add('paused');
+          }
+        // ;
+        }
+      });
+
+    }
+    // Reveal on scroll stuff
+    const observerIntersectReveal = new IntersectionObserver(handleIntersect, options);
+    const targets = document.querySelectorAll('.animonItem');
+    targets.forEach(function (target) {
+      observerIntersectReveal.observe(target)
+    });
+  });
+
+  
+
+}
+
 function spa() {
 
   console.log("spa " + performance.now())
@@ -149,7 +429,11 @@ function spa() {
   const isChrome = userAgent.indexOf("chrome") > -1 && userAgent.match("safari");
   const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
  
-  
+  const hoverableDelay = 3000;
+
+
+  // sticky header
+  const headerElem = document.querySelector('.sticky');
 
   // Check AVIF support, then update images
   checkAvifSupport().then((avifSupport) => {
@@ -165,8 +449,8 @@ function spa() {
         if (!body.classList.contains('js-hidden')) {
           
           setTimeout(function () {
-            splashDiv.classList.add('finished'); // TODO ? : check if splash is in viewport
-            sunglasses.classList.remove('hidden');
+            //splashDiv.classList.add('finished'); // TODO ? : check if splash is in viewport
+            //sunglasses.classList.remove('hidden');
 
             // Find all elements with the class .logo in #header
             headerElem.querySelectorAll('.logo').forEach(logo => {
@@ -202,217 +486,24 @@ function spa() {
   const splashDiv = document.getElementById('splash');
   const linksHome = document.getElementsByClassName('linkHome');
 
-  const linkProjects = document.getElementById('linkProjects');
-  const linkAbout = document.getElementById('linkAbout');
-  const linkContact = document.getElementById('linkContact');
+  const linksProjects = document.getElementsByClassName('linkProjects');
+  const linksAbout = document.getElementsByClassName('linkAbout');
+  const linksContact = document.getElementsByClassName('linkContact');
 
   const linkLegal = document.getElementById('link-legal');
   const linkTrademark = document.getElementById('link-trademark');
 
   const chatWidgetCustom = document.getElementById('chat-widget-custom');
 
-  const hoverableDelay = 3000;
+ 
 
   let acceptabeDelay = 10000;
 
   const firstThumbnailImages = document.querySelectorAll('img.shown');
 
+
   let loadedCount = 0;
   const totalFirstThumbnailImages = firstThumbnailImages.length;
-
-  let hasLazyLoaded = false;
-
-  // Get all elements with class 'animonItem'
-  const animonItems = document.querySelectorAll('.animonItem');
-
-  // Convert NodeList to an array and get the first 3 items
-  const firstFourItems = Array.from(animonItems).slice(0, 4);
-  const fifthItem = animonItems[4];
-
-  const handleIntersect = function (entries, observer) {
-
-    // Iterate over each entry (each observed element)
-    entries.forEach(function (entry) {
-      const targetDiv = entry.target;
-      if (entry.intersectionRatio > threshold) {
-
-        //console.log('interesect ' + entry.target.id)
-      
-        if (targetDiv.id == 'we-make') {
-          //console.log(document.getElementById('we-make'));
-          setTimeout(function () { // TODO : check if splash is in viewport
-            splashDiv.classList.add('finished');
-            //alert("finished")
-          }, hoverableDelay);
-        }
-
-        // Check if the entry does not have any class from reveal-1 to reveal-10
-        const hasRevealClass = Array.from({ length: 10 }, (_, i) => `reveal-${i + 1}`).some(cls => targetDiv.classList.contains(cls));
-        const revealClass = Array.from({ length: 10 }, (_, i) => `reveal-${i + 1}`).find(cls => targetDiv.classList.contains(cls))
-        
-        if (hasRevealClass){
-          revealIndex = parseInt(revealClass.split('-')[1], 10) - 1;
-          //alert(revealIndex)
-        }
-
-        if (!hasRevealClass || scrollDirection === 'up' && (firstFourItems.includes(targetDiv) || targetDiv.id == fifthItem.id)) {
-
-          let delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`; // Use reveal-1 to reveal-10
-
-          
-
-          //alert(delayClass + ' ' + targetDiv.id)
-          if (scrollDirection === 'down') {
-            // If scrolling down, apply regular transition-delay order
-
-            if (!hasRevealClass) {
-              targetDiv.classList.add(delayClass);
-              
-            }
-            
-
-          } else if (scrollDirection === 'up') {
-            if (targetDiv.querySelector('#hand')) {
-              //alert("hand")
-              splashDiv.classList.remove('finished');
-              // If scrolling up, invert the delay order
-              const invertedIndex = 10 - revealIndex; // Calculate the reverse index
-              delayClass = `reveal-${Math.min(invertedIndex, 10)}`; // Use inverted index for delay class
-
-
-              // Loop through the first three items and add the 'reveal-prehide' class
-              firstFourItems.forEach(item => {
-                item.classList.add('reveal-prehide');
-
-
-              });
-
-              requestAnimationFrame(() => {
-                firstFourItems.forEach(item => {
-                  // Remove 'reveal-prehide' class in the next animation frame
-                  item.classList.remove('reveal-prehide');
-                });
-              });
-
-
-              if (!isTouchDevice){
-                // poor man's scroll snap
-                lenis.scrollTo('#home', { lerp: 0.05, lock: true });
-              }
-              
-            
-
-            } else if (firstFourItems.includes(targetDiv)) {
-              if (targetDiv.id == 'we-make') {
-                //console.log(document.getElementById('we-make'));
-                setTimeout(function () { // TODO : check if splash is in viewport
-                  splashDiv.classList.add('finished');
-                  
-                  //alert("finished")
-                }, hoverableDelay);
-              } else {
-
-              }
-            } else {
-              if (!hasRevealClass) {
-                
-                delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`;
-                targetDiv.classList.add(delayClass);
-                
-              }
-
-            }
-
-          }
-
-
-          //targetDiv.classList.remove('reveal-prehide');
-
-        }
-
-        if (hasLazyLoaded == false) {
-
-          // Check if the target contains a div with the ID 'crossfaded-1'
-          const hasCrossfadedDiv = targetDiv.querySelector('#crossfaded-1') !== null;
-
-          if (hasCrossfadedDiv) {
-            //console.log('go lazy')
-            setTimeout(function () {
-              lazyload();
-            }, 3000);
-            hasLazyLoaded = true;
-          }
-        }
-
-
-        if (targetDiv.id == 'inevitable') {
-
-          let lightbulb = document.getElementById('lightbulb-shape');
-
-          const revealClassRegex = /^reveal-(\d+)$/;
-
-          // Find the 'reveal-N' class using the regex
-          const targetClass = [...targetDiv.classList].find(cls => revealClassRegex.test(cls));
-          
-          if (targetClass) {
-            // Extract the number (N) from the matched class 'reveal-N'
-            const num = parseInt(targetClass.match(revealClassRegex)[1], 10);
-            
-            // Create the new class 'reveal-(N+1)'
-            delayClass = `reveal-${Math.min(num + 1, 10)}`;
-            
-          } else {
-            delayClass = `reveal-${Math.min(revealIndex + 1, 10)}`;
-          }
-
-          //const revealNClass = Array.from(element.classList).find(cls => cls.startsWith('reveal-'));
-          const classListArray = Array.from(lightbulb.classList);
-          const revealRegex = /^reveal-\d+$/;
-
-          // Loop through and remove each class that matches the regex
-          classListArray.forEach(cls => {
-            if (revealRegex.test(cls)) {
-              lightbulb.classList.remove(cls);
-            }
-          });
-          
-          // set class to targetDiv reveal-n + 1
-          //revealIndex++
-          
-          lightbulb.classList.add(delayClass);
-          lightbulb.classList.remove('reveal-prehide');
-          lightbulb.classList.remove('paused');
-
-        }
-
-        if (!targetDiv.classList.contains('reveal-delegated')) {
-          targetDiv.classList.remove('reveal-prehide');
-          targetDiv.classList.remove('paused');
-          revealIndex++
-        }
-
-        // Stop observing once the element is animated
-        //observer.unobserve(entry.target)
-
-        
-      } else {
-        //alert('paused ' + targetDiv.id)
-        if (firstFourItems.includes(targetDiv) || targetDiv.id == fifthItem.id){
-          
-        } else {
-          targetDiv.classList.add('paused')
-        }
-      // ;
-      }
-    });
-
-  }
-    // Reveal on scroll stuff
-    const observerIntersectReveal = new IntersectionObserver(handleIntersect, options);
-    const targets = document.querySelectorAll('.animonItem');
-    targets.forEach(function (target) {
-      observerIntersectReveal.observe(target)
-    });
 
 
   function injectTawkScript() {
@@ -438,21 +529,13 @@ function spa() {
       if (document.fonts.check('1em Poppins')) {
         console.log("Font has been loaded " + performance.now());
         // show document 
-        body.classList.remove('js-hidden');
-        body.classList.remove('scroll-lock');
-        
-        sunglasses.classList.remove('hidden');
-        lenis.start();
+        spaStart(); 
         
       } else { // font not ready yet
         document.fonts.ready.then(function () {
           console.log("Fonts have finished loading " + performance.now());
           // show document 
-          body.classList.remove('js-hidden');
-          body.classList.remove('scroll-lock');
-          
-          sunglasses.classList.remove('hidden');
-          lenis.start();
+          spaStart();
           /*
           if (!!isReduced) {
             // DON'T use an animation here!
@@ -498,8 +581,6 @@ function spa() {
 
 
 
-  // sticky header
-  const headerElem = document.querySelector('.sticky');
   /* set the offset on which the hide effect has to wait */
   const scrollOffset = 100;
 
@@ -555,44 +636,7 @@ function spa() {
     return 0;
   }
 
-  function lazyload() {
-    
-    console.log('go lazy ' + performance.now())
-    /*
-    let avifSupport = false;
-    var avifTest = new Image();
-    avifTest.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
-    avifTest.onload = function () {
-      avifSupport = true;
-      //alert('avif supported')
-    };*/
-    checkAvifSupport().then((avifSupport) => {
-      const imagesLazy = document.querySelectorAll("img.lazyload");
-      imagesLazy.forEach(img => {
-        const dataSrc = img.getAttribute('data-src');
-        const dataSrcSet = img.getAttribute('data-srcset');
-        if (dataSrcSet) {
-          if (avifSupport){
-            img.srcset = dataSrcSet;
-          } else {
-            img.srcset = dataSrcSet.split('.avif').join('.webp');
-          }
-          
-        } else if (dataSrc) {  // Ensure data-src is available
-          //console.log(`Setting src for img with data-src: ${dataSrc}`);
-          if (avifSupport){
-            img.src = dataSrc;
-          } else {
-            img.src = dataSrc.split('.avif').join('.webp');  // Set the src
-          }
-          //img.setAttribute('src',dataSrc)
-        } else {
-          console.warn('No data-src found for this image:', img);
-        }
-      });
-    });
-    
-  }
+
 
 
 
@@ -929,6 +973,8 @@ function spa() {
 
   let lastScrollY = window.scrollY;
 
+  let sticked = false;
+
   function adjustSunglasses() {
     const currentScrollY = window.scrollY; 
     const isScrollingDown = currentScrollY > lastScrollY; // Check if the user is scrolling down
@@ -941,14 +987,27 @@ function spa() {
 
     const astrodude = document.getElementById('astrodude-container');
     const vh = window.innerHeight;
-    astrodude.style.marginTop = Math.max(70000 / vh, 120) + 'px';  
+    let mtAstro 
+    let ratio = window.innerHeight / window.innerWidth;
+
+    mtAstro = Math.max((70000 / vh) * (1 - ratio), 180);
+    /*
+    if (window.innerWidth < 600 && window.innerHeight < 900){
+
+      mtAstro = Math.max(70000 / vh, 200);
+    } else if (window.innerWidth < 1200 && window.innerHeight > 900){
+      mtAstro = Math.max(70000 / vh, 200);
+    } else if (window.innerHeight < 900){
+      mtAstro = Math.max(70000 / vh, 0)
+    }*/
+    astrodude.style.marginTop = mtAstro + 'px';  
 
     // Get the translateY value of targetDiv
     let translateY = getTranslateY(targetDiv);
     stickyDiv.style.position = "absolute";
 
     let tmpY = -(parseFloat(translateY) - parseFloat(computedStyle.marginTop))
-    let stop = (70000 / vh);
+    let stop = mtAstro;
     let adjust = window.innerWidth > 480 ? 8 : 0;
 
     //stop = window.innerHeight < 420 ? 5 : stop;
@@ -961,16 +1020,17 @@ function spa() {
     //mt = window.innerHeight < 420 ? mt + 48 : mt;
     let tolerance = vh / 100;
 
-    if (stickyRect.top + tolerance  >= targetRect.top){
+    if (!sticked && stickyRect.top + tolerance >= targetRect.top){
       tmpY = stop - ((stop) - Math.abs(translateY));
       if (translateY < 0) {
         tmpY = translateY ;
-        
+        sticked = true;
       }
       //alert('ye')
-    } else {
+    } else if (!sticked && stickyRect.top + tolerance < targetRect.top) {
       tmpY = -(parseFloat(translateY) - parseFloat(computedStyle.marginTop));
-      //alert('no')
+      //console.log(tmpY)
+      /*
       if (tmpY < 0) {
         //const scale = Math.min(1 + (Math.abs((targetDiv.offsetTop) * scalingFactor) / maxOffsetTop), maxScale);  // Ensure the scale doesn't exceed 1
         //console.log(scale)
@@ -986,9 +1046,28 @@ function spa() {
         //if (window.innerHeight > 420){
           mt = Math.max(mt - ((w * 2) * (scale - 1)), -(vh/4)) ;
           
-      } 
+          
+      } */
 
+      //tmpY = translateY * (-1) * (Math.abs(tmpY) / maxOffsetTop) * 40;
+      tmpY = Math.max(-400 + (tmpY * 2), -(vh/2));
+
+      //w = Math.min(1 + (1 - (Math.abs(tmpY)/200)) * w , 300);
+
+      if (tmpY > 0){
+        tmpY = 0;
+      }
       
+    } else {
+      
+
+      // Set the position and size of the second div to match the first
+      stickyDiv.style.position = computedStyle.position;
+      stickyDiv.style.top = computedStyle.top;
+      stickyDiv.style.left = computedStyle.left;
+      stickyDiv.style.width = computedStyle.width;
+      stickyDiv.style.height = computedStyle.height;
+      tmpY = translateY ;
     }
 
 
@@ -1027,49 +1106,64 @@ function spa() {
   const closeBtn = document.querySelector('.close');
   const modalDescription = document.getElementById('modal-description');
 
-  linkProjects.addEventListener('click', (event) => {
-    event.preventDefault(); // Prevent default link behavior
-    revealIndex = 0;
-    //let target = document.getElementById('projects-reel');
-    //scroll.scrollTo(target);
-
-    slidesContainer.classList.add('locked');
-
-    // preload custom eye cursor blink state to prevent cursor jump on first blink (loading blink cursor image)
-    /*document.body.classList.add('blink');
-    setTimeout(function () {
-      document.body.classList.remove('blink');
-    }, 500);*/
-
-    lenis.scrollTo('#projects-reel', { lerp: 0.05, lock: true });
-    setTimeout(() => { astrodudeInstance.show(); }, 3000);
-    setTimeout(() => { astrodudeInstance.hide(); }, 13000);
-
-    // if mouse is already/still hovering a slide at this point, start crossfading
-    setTimeout(() => { 
-      slidesContainer.classList.remove('locked');
-      for (let i = 0; i < slides.length; i++) {
-        let thisSlide = slides.item(i);
-        if (thisSlide.classList.contains('hovered')){
-          sliderActive(thisSlide);
-          break
-        }
-      }
-    }, 3000);
+  for (let i=0; i < linksProjects.length; i++){
     
-  });
-  linkAbout.addEventListener('click', (event) => {
-    event.preventDefault(); // Prevent default link behavior
-    lenis.scrollTo('#about-us', { lerp: 0.05, easing: 'ease-in', lock: true });
+    linksProjects[i].addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent default link behavior
+      revealIndex = 0;
+      //let target = document.getElementById('projects-reel');
+      //scroll.scrollTo(target);
 
-  });
-  linkContact.addEventListener('click', (event) => {
-    event.preventDefault(); // Prevent default link behavior
-    Tawk_API.toggle();
-    /*
-    lenis.scrollTo('#contact-us', { lerp: 0.05, easing: 'ease-in', lock: true});
-    //console.log('contact clicked')*/
-  });
+      slidesContainer.classList.add('locked');
+
+      // preload custom eye cursor blink state to prevent cursor jump on first blink (loading blink cursor image)
+      /*document.body.classList.add('blink');
+      setTimeout(function () {
+        document.body.classList.remove('blink');
+      }, 500);*/
+
+      document.getElementById('close-overlay').click();
+
+      lenis.scrollTo('#projects-reel', { lerp: 0.05, lock: true });
+      setTimeout(() => { astrodudeInstance.show(); }, 3000);
+      setTimeout(() => { astrodudeInstance.hide(); }, 13000);
+
+      // if mouse is already/still hovering a slide at this point, start crossfading
+      /*
+      setTimeout(() => { 
+        slidesContainer.classList.remove('locked');
+        for (let i = 0; i < slides.length; i++) {
+          let thisSlide = slides.item(i);
+          if (thisSlide.classList.contains('hovered')){
+            sliderActive(thisSlide);
+            break
+          }
+        }
+      }, 3000);
+    */
+    });
+  }
+  
+  
+  for (let i=0; i < linksAbout.length; i++){
+    
+    linksAbout[i].addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent default link behavior
+      lenis.scrollTo('#about-us', { lerp: 0.05, easing: 'ease-in', lock: true });
+      document.getElementById('close-overlay').click();
+    });
+  }
+  for (let i=0; i < linksContact.length; i++){
+    
+    linksContact[i].addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent default link behavior
+      Tawk_API.toggle();
+      document.getElementById('close-overlay').click();
+      /*
+      lenis.scrollTo('#contact-us', { lerp: 0.05, easing: 'ease-in', lock: true});
+      //console.log('contact clicked')*/
+    });
+  }
   splashDiv.addEventListener('click', (event) => {
     event.preventDefault(); // Prevent default link behavior
     //alert('reveal index ' + revealIndex)
@@ -1089,6 +1183,7 @@ function spa() {
     setTimeout(() => { astrodudeInstance.show(); }, 3000);
     setTimeout(() => { astrodudeInstance.hide(); }, 13000);
     
+    /*
     // if mouse is already/still hovering a slide at this point, start crossfading 
     setTimeout(() => { 
       slidesContainer.classList.remove('locked');
@@ -1100,6 +1195,7 @@ function spa() {
         }
       }
     }, 3000);
+    */
 
   });
 
@@ -1108,6 +1204,7 @@ function spa() {
     linksHome[i].addEventListener('click', (event) => {
       event.preventDefault();
       lenis.scrollTo('#home', { lerp: 0.025, easing: 'ease-in', lock: true });
+      document.getElementById('close-overlay').click();
     });
     
   }
@@ -1231,6 +1328,8 @@ function spa() {
   let fadeLoopTimeout;
   let timeBetweenFades = 3000;
   let timeBetweenChecksShouldFade = 1000;
+  // .crossfaded .slide:not(.placeholder) transition opacity 1s
+  let transitionDuration = 1000;
 
   for (let i = 0; i < slides.length; i++) {
     let thisSlide = slides.item(i);
@@ -1315,12 +1414,12 @@ function spa() {
   }
 
   function sliderActive(thisSlide){
-    thisSlide.classList.add('hovered');
+      thisSlide.classList.add('hovered');
       if (!!isReduced || slidesContainer.classList.contains('locked')) {
         // DON'T use an amination here!
         return
       }
-
+      
 
 
       clearTimeout(fadeLoopTimeout);  // Stop the loop
@@ -1461,10 +1560,16 @@ function spa() {
     slides[parent.n].style.opacity = "0";
     slides[parent.n].classList.remove('shown');
     slides[parent.n].setAttribute('started', '');
+    let s = slides[parent.n];
+    /*setTimeout(function () {
+      alert(transitionDuration)
+      //s.classList.add('hidden');
+    }, transitionDuration);*/
     // Move to the next slide in the sequence
     parent.n = (parent.n - 1 + slides.length) % slides.length;
 
     // Fade in the new current slide
+    //slides[parent.n].classList.remove('hidden');
     slides[parent.n].style.opacity = "1";
     //console.log('new shown ' + slides[parent.n])
     slides[parent.n].setAttribute('started', performance.now());
@@ -1836,5 +1941,41 @@ function spa() {
 
 
   }
+
+
+  let isScrolling;
+
+
+
+  window.addEventListener('scroll', function () {
+    // Clear the timeout if it's already set
+    clearTimeout(isScrolling);
+    slidesContainer.classList.add('locked');
+    // Set a timeout to run after scrolling ends
+   
+      isScrolling = setTimeout(function () {
+        //alert('scrollend')
+        // Code to run after scrolling ends
+        
+        revealIndex = 0;  // Reset index on scroll
+
+
+        setTimeout(function () {
+          if (!lenis.isScrolling){
+            slidesContainer.classList.remove('locked');
+            for (let i = 0; i < slides.length; i++) {
+              let thisSlide = slides.item(i);
+              if (thisSlide.classList.contains('hovered')){
+                sliderActive(thisSlide);
+                break
+              }
+            }
+          }
+        }, 1000)
+
+      }, 100); // Adjust timeout duration as needed
+    
+    
+  });
 
 }
