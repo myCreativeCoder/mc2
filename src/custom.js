@@ -2013,9 +2013,9 @@ function spa() {
     // Decrease background position by 1%
     //xPosition -= 0.1;
     if (scrollDirection == "down"){
-      yPosition -= 0.2;
+      yPosition -= 0.2 * (window.innerWidth / window.innerHeight);
     } else {
-      yPosition += 0.2;
+      yPosition += 0.2 * (window.innerWidth / window.innerHeight);
     }
     
 
