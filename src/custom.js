@@ -516,7 +516,7 @@ function spa() {
     s1.charset = 'UTF-8';
     s1.setAttribute('crossorigin', '*');
 
-    window.Tawk_API.onLoad = function(){
+    Tawk_API.onLoad = function(){
         // show document after tawk is loaded
         spaStart();
     };
