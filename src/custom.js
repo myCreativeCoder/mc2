@@ -870,7 +870,9 @@ function spa() {
       // Calculate how long the tooltip has been visible
       const elapsedTime = Date.now() - instance._startTime;
 
-      if (elapsedTime < MINIMUM_DISPLAY_TIME) {
+      if (isScrollingCurrently){
+        
+      } else if (elapsedTime < MINIMUM_DISPLAY_TIME) {
         // Prevent the tooltip from hiding immediately if the minimum display time is not met
         setTimeout(() => {
           instance.hide();
@@ -920,11 +922,13 @@ function spa() {
   // Access the individual Tippy instance (since it's a collection)
   const astrodudeInstance = astrodudetip[0]; // First (and only) instance
 
-  tippy('#donut', {
+  const donuttip = tippy('#donut', {
     content: "You wouldn't download...<br/> a donut ?",
     allowHTML: true,
     theme: 'astro',
   });
+
+  const donutInstance = donuttip[0]; // First (and only) instance
 
 
   window.addEventListener('load', function () {
@@ -1125,7 +1129,9 @@ function spa() {
         document.body.classList.remove('blink');
       }, 500);*/
 
-      document.getElementById('close-overlay').click();
+      if (window.getComputedStyle(document.getElementById('toggle-menu-main-mobile')).display != 'none'){
+        document.getElementById('close-overlay').click();
+      }
 
       lenis.scrollTo('#projects-reel', { lerp: 0.05, lock: true });
       setTimeout(() => { astrodudeInstance.show(); }, 3000);
@@ -1153,7 +1159,9 @@ function spa() {
     linksAbout[i].addEventListener('click', (event) => {
       event.preventDefault(); // Prevent default link behavior
       lenis.scrollTo('#about-us', { lerp: 0.05, easing: 'ease-in', lock: true });
-      document.getElementById('close-overlay').click();
+      if (window.getComputedStyle(document.getElementById('toggle-menu-main-mobile')).display != 'none'){
+        document.getElementById('close-overlay').click();
+      }
     });
   }
   for (let i=0; i < linksContact.length; i++){
@@ -1161,7 +1169,10 @@ function spa() {
     linksContact[i].addEventListener('click', (event) => {
       event.preventDefault(); // Prevent default link behavior
       Tawk_API.toggle();
-      document.getElementById('close-overlay').click();
+      
+      if (window.getComputedStyle(document.getElementById('toggle-menu-main-mobile')).display != 'none'){
+        document.getElementById('close-overlay').click();
+      }
       /*
       lenis.scrollTo('#contact-us', { lerp: 0.05, easing: 'ease-in', lock: true});
       //console.log('contact clicked')*/
@@ -1183,8 +1194,8 @@ function spa() {
 
     lenis.scrollTo('#projects-reel', { lerp: 0.02, lock: true });
 
-    setTimeout(() => { astrodudeInstance.show(); }, 3000);
-    setTimeout(() => { astrodudeInstance.hide(); }, 13000);
+    setTimeout(() => { astrodudeInstance.show(); }, 6500);
+    setTimeout(() => { astrodudeInstance.hide(); }, 16000);
     
     /*
     // if mouse is already/still hovering a slide at this point, start crossfading 
@@ -1207,7 +1218,10 @@ function spa() {
     linksHome[i].addEventListener('click', (event) => {
       event.preventDefault();
       lenis.scrollTo('#home', { lerp: 0.025, easing: 'ease-in', lock: true });
-      document.getElementById('close-overlay').click();
+      if (window.getComputedStyle(document.getElementById('toggle-menu-main-mobile')).display != 'none'){
+        document.getElementById('close-overlay').click();
+      }
+      
     });
     
   }
@@ -1947,20 +1961,27 @@ function spa() {
 
 
   let isScrolling;
-
+  let isScrollingCurrently = false;;
 
 
   window.addEventListener('scroll', function () {
     // Clear the timeout if it's already set
     clearTimeout(isScrolling);
     slidesContainer.classList.add('locked');
+    isScrollingCurrently = true;
+    // hide tooltips on scroll
+    astrodudeInstance.hide();
+    donutInstance.hide();
+
     // Set a timeout to run after scrolling ends
    
       isScrolling = setTimeout(function () {
         //alert('scrollend')
         // Code to run after scrolling ends
-        
+        isScrollingCurrently = false;
         revealIndex = 0;  // Reset index on scroll
+
+        
 
 
         setTimeout(function () {
