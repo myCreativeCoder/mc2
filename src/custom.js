@@ -180,8 +180,8 @@ function spaStart(){
 
   body.classList.remove('js-hidden');
   body.classList.remove('scroll-lock');
-        
-  sunglasses.classList.remove('hidden');
+
+  
   lenis.start();
 
   
@@ -431,7 +431,7 @@ function spa() {
  
   const hoverableDelay = 3000;
 
-
+  
   // sticky header
   const headerElem = document.querySelector('.sticky');
 
@@ -975,6 +975,8 @@ function spa() {
 
   let sticked = false;
 
+  
+
   function adjustSunglasses() {
     const currentScrollY = window.scrollY; 
     const isScrollingDown = currentScrollY > lastScrollY; // Check if the user is scrolling down
@@ -1080,7 +1082,8 @@ function spa() {
 
   }
 
- 
+  adjustSunglasses();
+  sunglasses.classList.remove('hidden');
 
 
 
