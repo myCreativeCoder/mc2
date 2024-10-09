@@ -1994,10 +1994,7 @@ ul.techstack li:nth-child(8) .techstack_icon {
     margin-top: 3.4em;
   }
 
-  #contact-us {
-    text-align: center;
-    margin-left: -3em;
-  }
+  
   
 
   .full-bleed {
@@ -2008,11 +2005,16 @@ ul.techstack li:nth-child(8) .techstack_icon {
     padding: .4em 0 0 1.2em;
   }
 
+  
+
+  
+}
+
+@media (max-width: 767px) {
   #link-legal, #link-trademark {
     float: none; 
     
   }
-
   #link-trademark::before {
     content: "|";
     padding: 0 1em;
@@ -2023,8 +2025,6 @@ ul.techstack li:nth-child(8) .techstack_icon {
     text-align: center;
   }
 }
-
-
 
 /* For screens smaller than 480px (mobile) */
 @media (max-width: 480px) {
@@ -2142,15 +2142,24 @@ ul.techstack li:nth-child(8) .techstack_icon {
   .webkit.great {
     padding: .3em 0 0 1.2em;
   }
+
+  
+
   #link-trademark::after {
     content: "|";
     padding: 0 1em;
   }
 
+  
   #link-legal, #link-trademark {
     float: right; 
     
   }
+  
+}
+
+@media (min-width: 767px) {
+  
 }
 
 
