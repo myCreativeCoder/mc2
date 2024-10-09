@@ -847,6 +847,7 @@ function spa() {
   ];
 
   const MINIMUM_DISPLAY_TIME = 4000; // 4s
+  const BARE_MINIMUM_DISPLAY_TIME = 1000; // 4s
 
   const astrodudetip = tippy('#astrodude', {
     content: "Hey there !",
@@ -855,22 +856,30 @@ function spa() {
     //flipBehaviour: ['top', 'left'],
     placement: 'left',
     offset: [-100, -40],
-    zIndex: 4,
+    zIndex: 2,
     //flipOnUpdate: true
     trigger: "mouseenter focus manual click",
     onShow(instance) {
       // Record the time the tooltip is shown
-      instance._startTime = Date.now();
-      // Initialize first state to control the sentence flow
-      if (instance._state == undefined) {
-        instance._state = 'first';
+      if (!lenis.isScrolling){
+        // Record the time the tooltip is shown
+        instance._startTime = Date.now();
+        // Initialize first state to control the sentence flow
+        if (instance._state == undefined) {
+          instance._state = 'first';
+        }
+      } else {
+        // Cancel the current show request
+        return false;
       }
+      
     },
     onHide(instance) {
       // Calculate how long the tooltip has been visible
       const elapsedTime = Date.now() - instance._startTime;
 
-      if (isScrollingCurrently){
+      if (isScrollingCurrently && elapsedTime > BARE_MINIMUM_DISPLAY_TIME){
+        
         
       } else if (elapsedTime < MINIMUM_DISPLAY_TIME) {
         // Prevent the tooltip from hiding immediately if the minimum display time is not met
@@ -926,6 +935,36 @@ function spa() {
     content: "You wouldn't download...<br/> a donut ?",
     allowHTML: true,
     theme: 'astro',
+    placement: 'left',
+    offset: [10, 0],
+    zIndex: 4,
+    onShow(instance) {
+      if (!lenis.isScrolling){
+        // Record the time the tooltip is shown
+        instance._startTime = Date.now();
+      } else {
+        // Cancel the current show request
+        return false;
+      }
+      
+    },
+    onHide(instance) {
+      // Calculate how long the tooltip has been visible
+      const elapsedTime = Date.now() - instance._startTime;
+
+      if (isScrollingCurrently && elapsedTime > BARE_MINIMUM_DISPLAY_TIME){
+        
+        
+      } else if (elapsedTime < MINIMUM_DISPLAY_TIME) {
+        // Prevent the tooltip from hiding immediately if the minimum display time is not met
+        setTimeout(() => {
+          instance.hide();
+        }, MINIMUM_DISPLAY_TIME - elapsedTime);
+
+        // Cancel the current hide request
+        return false;
+      }
+    },
   });
 
   const donutInstance = donuttip[0]; // First (and only) instance
