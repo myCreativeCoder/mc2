@@ -609,11 +609,15 @@ function spa() {
 
     //adjustSunglasses();
   });
-/*
+
   window.addEventListener('resize', function (event) {
-    adjustSunglasses();
+    astrodudeInstance.hide();
+    donutInstance.hide();
+    requestAnimationFrame(() => {
+      adjustSunglasses();
+    });
   }, true);
-*/
+
 
   // Get the sticky and target elements
   const stickyDiv = document.getElementById("sunglasses");
@@ -757,18 +761,6 @@ function spa() {
   });
 
 
-  // lazy load images with lazyload class once core stuff has been loaded
-  // REM : let the splash screen transition finish before lazyloading to avoid cluttering the main thread
-  // REM: last splash screen reveal element is .reveal-4 with 1s duration after 2s delay
-
-
-  //if ('loading' in HTMLImageElement.prototype) {
-
-    
-   
-
-
-
   /*
   // Obfuscating the email parts
   var u = 'olleh'.split("").reverse().join("");  // Obfuscated 'email' by reversing it
@@ -788,9 +780,6 @@ function spa() {
     Tawk_API.toggle();
 
   };
-
-
-  //console.log(userAgent)
 
   // Add class "webkit" to the div with class "great"
   if (isWebKit || isChrome || isSafari) {
@@ -991,7 +980,8 @@ function spa() {
     }
     //body.classList.remove('js-hidden');
     //body.classList.remove('scroll-lock');
-    //sunglasses.classList.remove('hidden');
+    adjustSunglasses();
+    sunglasses.classList.remove('hidden');
     //lenis.start();
 
     //spaStart()
@@ -1125,14 +1115,20 @@ function spa() {
 
   }
 
-  adjustSunglasses();
-  sunglasses.classList.remove('hidden');
-
+  /*
+  requestAnimationFrame(() => {
+    adjustSunglasses();
+    sunglasses.classList.remove('hidden');
+  });
+  */
 
 
   function raf(time) {
     lenis.raf(time)
-    adjustSunglasses();
+    if (lenis.isScrolling){
+      adjustSunglasses();
+    }
+    
     requestAnimationFrame(raf)
   }
 
