@@ -1177,7 +1177,7 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
 
 .modal.active .modal-content .modal-description {
   opacity: 1;
-  padding: 16px 20px 20px 20px;
+  padding: 16px 2vw 20px 2vw;
   font-size: 1em;
   /* unshrink, then fade in */
   transition: font-size .25s,
@@ -2074,9 +2074,10 @@ ul.techstack li:nth-child(8) .techstack_icon {
   .modal-content {
     margin: 80px auto 0;
     max-width: 100vw;
+    
   }
 
-  .modal-description {
+  .modal.active .modal-content .modal-description {
     padding: 16px 65px 20px 48px;
   }
   
