@@ -460,13 +460,13 @@ function spa() {
                 gradtext.classList.remove('animate');
               });
             });
-
+            /*
             if (isOnline){
               //alert('go')
               setTimeout(function () {
                 injectTawkScript();
               }, 1000)
-            }
+            }*/
           }, hoverableDelay);
 
           observerIsSplashVisible.disconnect(); // Optionally disconnect after detecting
@@ -516,6 +516,11 @@ function spa() {
     s1.charset = 'UTF-8';
     s1.setAttribute('crossorigin', '*');
 
+    window.Tawk_API.onLoad = function(){
+        // show document after tawk is loaded
+        spaStart();
+    };
+
     // Find the first script tag on the page and insert the new script before it
     var s0 = document.getElementsByTagName("script")[0];
     s0.parentNode.insertBefore(s1, s0);
@@ -528,14 +533,30 @@ function spa() {
       console.log('All first thumbnails images have loaded ' + performance.now());
       if (document.fonts.check('1em Poppins')) {
         console.log("Font has been loaded " + performance.now());
-        // show document 
-        spaStart(); 
+        
+        if (isOnline){ // show document after tawk is loaded
+          //alert('go')
+          //setTimeout(function () {
+            injectTawkScript();
+          //}, 1000)
+        } else {
+          // show document
+          spaStart();
+        }
+        
         
       } else { // font not ready yet
         document.fonts.ready.then(function () {
           console.log("Fonts have finished loading " + performance.now());
-          // show document 
-          spaStart();
+          if (isOnline){ // show document after tawk is loaded
+            //alert('go')
+            //setTimeout(function () {
+              injectTawkScript();
+            //}, 1000)
+          } else {
+            // show document
+            spaStart();
+          }
           /*
           if (!!isReduced) {
             // DON'T use an animation here!
