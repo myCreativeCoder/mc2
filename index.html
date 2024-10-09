@@ -15,7 +15,7 @@
     font-src https://*.tawk.to https://fonts.gstatic.com https://mycreativecoder.com;
     img-src 'unsafe-inline' data: https://*.tawk.to https://cdn.jsdelivr.net https://tawk.link https://s3.amazonaws.com https://mycreativecoder.com;
     connect-src https://*.tawk.to wss://*.tawk.to https://mycreativecoder.com;
-    media-src https://embed.tawk.to https://mycreativecoder.com;  /* Autoriser le chargement des médias depuis Tawk.to */
+    media-src https://embed.tawk.to https://mycreativecoder.com;
     form-action https://*.tawk.to;">
   
 
@@ -221,19 +221,19 @@
 
 
         <li class="menu-item-home active">
-          <a href="#home" data-nav-section-id-target="1" class="linkHome">Home</a>
+          <a class="linkHome" href="#home" data-nav-section-id-target="1" >Home</a>
         </li>
 
         <li class="menu-item-projects">
-          <a href="https://mycreativecoder.com/projects/" data-nav-section-id-target="2">Projects</a>
+          <a class="linkProjects" data-nav-section-id-target="2">Projects</a>
         </li>
 
         <li class="menu-item-about">
-          <a href="https://mycreativecoder.com/about/" data-nav-section-id-target="3">About</a>
+          <a class="linkAbout" data-nav-section-id-target="3">About</a>
         </li>
 
         <li class="menu-item-contact">
-          <a onclick="javascript:void(Tawk_API.toggle());">Contact</a>
+          <a class="linkContact" onclick="javascript:void(Tawk_API.toggle());">Contact</a>
         </li>
 
       </ul>
@@ -478,21 +478,21 @@
         
         
           <li class="">
-            <a href="#projects-reel" id="linkProjects" data-nav-section-id-target="2">Projects</a>
+            <a href="#projects-reel" class="linkProjects" id="linkProjects" data-nav-section-id-target="2">Projects</a>
           </li>
         
         
         
         
           <li class="">
-            <a href="#about-us" id="linkAbout" data-nav-section-id-target="3">About</a>
+            <a href="#about-us" class="linkAbout" id="linkAbout" data-nav-section-id-target="3">About</a>
           </li>
         
         
         
         
           <li class="">
-            <a id="linkContact" class="btn-sm btn-primary"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16" width="20" height="20" style="margin-top: -5px;
+            <a class="linkContact" id="linkContact" class="btn-sm btn-primary"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16" width="20" height="20" style="margin-top: -5px;
               margin-right: 4px;
               margin-left: 0px;">
               <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"></path>
@@ -614,7 +614,7 @@
 
                 <div id="projects-reel" class="col-12">
                   <div id="parallax_wrapper" class="col-12" style="overflow-x: visible;">
-                    <div id="sunglasses" class="hidden" style="background: rgba(255, 0, 0, 0.541); z-index: 9; height: 0px; ">
+                    <div id="sunglasses" class="hidden" style="z-index: 3; height: 0px; ">
                       <img src="src/sunglasses.png" style="width:100%;">
                   </div>
                     <div id="astrodude-container" class="rellax astrodude" data-rellax-speed="3" style="z-index: 2;">
