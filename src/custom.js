@@ -431,7 +431,7 @@ function spa() {
  
   const hoverableDelay = 3000;
 
-  
+  let isResizing = false;
   // sticky header
   const headerElem = document.querySelector('.sticky');
 
@@ -610,13 +610,7 @@ function spa() {
     //adjustSunglasses();
   });
 
-  window.addEventListener('resize', function (event) {
-    astrodudeInstance.hide();
-    donutInstance.hide();
-    requestAnimationFrame(() => {
-      adjustSunglasses();
-    });
-  }, true);
+  
 
 
   // Get the sticky and target elements
@@ -801,29 +795,7 @@ function spa() {
   document.addEventListener("dragstart", function (event) {
     event.preventDefault();
   });
-  /*
-  function debounce(func){
-    var timer;
-    return function(event){
-      if(timer) clearTimeout(timer);
-      timer = setTimeout(func,100,event);
-    };
-  }
-
-  window.addEventListener('resize', function(event) {
-      if (!document.body.classList.contains('resizing')){
-          document.body.classList.add('resizing')
-      }
-  }, true);
-
-  window.addEventListener('resize' ,debounce(function(e) {
-    if (document.body.classList.contains('resizing')){
-          document.body.classList.remove('resizing')
-      }
-  }));*/
-
-  
-
+ 
   // Array of sentences
   const sentences = [
     "The stars are beautiful tonight.",
@@ -867,7 +839,7 @@ function spa() {
       // Calculate how long the tooltip has been visible
       const elapsedTime = Date.now() - instance._startTime;
 
-      if (isScrollingCurrently && elapsedTime > BARE_MINIMUM_DISPLAY_TIME){
+      if (isScrollingCurrently && elapsedTime > BARE_MINIMUM_DISPLAY_TIME || isResizing){
         
         
       } else if (elapsedTime < MINIMUM_DISPLAY_TIME) {
@@ -941,7 +913,7 @@ function spa() {
       // Calculate how long the tooltip has been visible
       const elapsedTime = Date.now() - instance._startTime;
 
-      if (isScrollingCurrently && elapsedTime > BARE_MINIMUM_DISPLAY_TIME){
+      if (isScrollingCurrently && elapsedTime > BARE_MINIMUM_DISPLAY_TIME || isResizing){
         
         
       } else if (elapsedTime < MINIMUM_DISPLAY_TIME) {
@@ -986,9 +958,33 @@ function spa() {
 
     //spaStart()
   });
-  //lenis.on('scroll', (e) => {
-  //console.log(e)
-  //})
+
+  
+
+  function debounce(func){
+    var timer;
+    return function(event){
+      if(timer) clearTimeout(timer);
+      timer = setTimeout(func,100,event);
+    };
+  }
+
+  window.addEventListener('resize' ,debounce(function(e) {
+    //if (document.body.classList.contains('resizing')){
+          //document.body.classList.remove('resizing')
+          isResizing = false;
+      //}
+  }));
+
+  window.addEventListener('resize', function (event) {
+    isResizing = true;
+    requestAnimationFrame(() => {
+      astrodudeInstance.hide();
+      donutInstance.hide();
+      adjustSunglasses();
+    });
+  }, true);
+
 
   let ty = getTranslateY(targetDiv);
   let maxOffsetTop = targetDiv.offsetTop + ty;
