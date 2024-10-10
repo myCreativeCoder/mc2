@@ -846,7 +846,7 @@ a.arrow:hover .hand {
 }
 
 .placeholder {
-  opacity: 0;
+  //opacity: 0;
   left: 0px;
   z-index: 1;
 }
