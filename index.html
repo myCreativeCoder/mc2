@@ -136,9 +136,6 @@
 <meta name="msapplication-TileColor" content="#603cba">
 <meta name="theme-color" content="#320a68">
 
-
-
-
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mycreativecoder.com">
 
@@ -168,10 +165,6 @@
   <link href="src/custom.css" rel="stylesheet">
 
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">
-
-  <!--<script src="https://unpkg.com/scrollreveal"></script>-->
-
-  
 
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script> 
 
@@ -322,7 +315,7 @@
 
   <header id="header" class="header sticky">
     <div class="container">
-      <div class="logos">
+      <div class="logos ">
         <div class="logo logo-desktop">
           <a href="#home" data-nav-section-id-target="1" class="linkHome">
             <div class="logo-image">
@@ -340,13 +333,14 @@
         <div class="logo logo-desktop-invert">
 
           <a href="#home" data-nav-section-id-target="1">
-            <div class="logo-image">
+            <div class="logo-image fade-in">
 
               <img height="44px" width="44px" alt="Creative Coder Logo" src="src/logo.png">
 
 
             </div>
-            <span class="logospan"><i><small>my</small><b style=" font-variant: small-caps;"><span class="gradtext-rainbow animate">Creative</span><span>Coder</span></b><small></small></i><i style="font-size: 2em;margin-left: .05em;line-height: 0em;">.</i><small style="opacity: 0.8; line-height: 2em;">com</small></span>
+            <span class="logospan"><i><small class="fade-in" style="display: block; float:left; margin-top: 5px;">my</small><b style=" font-variant: small-caps; "><span id="creative" class="gradtext-rainbow animate animonItem reveal-prehide reveal-1 reverse" style="display: block; float:left; margin-top: 3px;">Creative</span><span id="coder" class="animonItem reveal-prehide reverse reveal-2" style="display: block; float:left;margin-top: 3px;">Coder</span></b><small></small></i><i id="dot" style="font-size: 2em;margin-left: .05em; line-height: .5em; display: block; float:left; margin-top: 1px;" class="animonItem reveal-prehide reverse reveal-3">.</i><small id="tld" class="fade-in" style="line-height: 2em; display: block; float:left;margin-top: 2px;
+            color: #ae92ae;">com</small></span>
           </a>
 
 
@@ -400,7 +394,7 @@
         
         
         
-          <li class="active ">
+          <li class="active animonItem reveal-prehide reveal-4 fade-in">
             <a href="#home" data-nav-section-id-target="1" class="linkHome">Home</a>
           </li>
         
@@ -477,21 +471,21 @@
         
         
         
-          <li class="">
+          <li class="animonItem reveal-prehide reveal-5 fade-in">
             <a href="#projects-reel" class="linkProjects" id="linkProjects" data-nav-section-id-target="2">Projects</a>
           </li>
         
         
         
         
-          <li class="">
+          <li class="animonItem reveal-prehide reveal-6 fade-in">
             <a href="#about-us" class="linkAbout" id="linkAbout" data-nav-section-id-target="3">About</a>
           </li>
         
         
         
         
-          <li class="">
+          <li class="animonItem reveal-prehide reveal-7 fade-in">
             <a class="linkContact btn-sm btn-primary" id="linkContact"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16" width="20" height="20" style="margin-top: -5px;
               margin-right: 4px;
               margin-left: 0px;">
@@ -555,12 +549,12 @@
             <h2 class="shout">
               <span>&gt;</span>
               <span class="">
-                <div class="animonItem reveal-prehide reveal-2" id="we-make" style="display: inline-block;">We</div>
-                <div class="animonItem reveal-prehide reveal-3" style="display: inline-block;">Make</div></span>
-              <div class="animonItem reveal-prehide reveal-4 gradtext-rainbow great animate" style="white-space: nowrap;">
+                <div class="animonItem reveal-prehide reveal-5" id="we-make" style="display: inline-block;">We</div>
+                <div class="animonItem reveal-prehide reveal-6" style="display: inline-block;">Make</div></span>
+              <div class="animonItem reveal-prehide reveal-7 gradtext-rainbow great animate" style="white-space: nowrap;">
                 <div>G</div><div>R</div><div>E</div><div>A</div><div>T</div>&nbsp;
               </div>
-              <span class="animonItem reveal-prehide reveal-5 reverse" style="white-space: nowrap;">Web
+              <span class="animonItem reveal-prehide reveal-8 reverse" style="white-space: nowrap;">Web
                 <div id=flip>
                   <div><div>sites</div></div>
                   <div><div>apps</div></div>
@@ -572,7 +566,7 @@
               <span>&lt;</span>
 
             </h2>
-            <div class="animonItem reveal-prehide reveal-4 reverse nav-section" data-nav-section-id="1" style="display: block;">
+            <div class="animonItem reveal-prehide reveal-7 reverse nav-section" data-nav-section-id="1" style="display: block;">
               <a class="arrow scrolly" id="hand" style="display: block;">
                 <svg class="hand" xmlns="http://www.w3.org/2000/svg" version="1.1" width="512px" height="512px"
                   viewBox="0 0 512 512"
@@ -591,7 +585,7 @@
       
           </div>
 
-          <div class="animonItem reveal-prehide reveal-1" style="position: absolute;
+          <div class="animonItem reveal-prehide reveal-3" style="position: absolute;
           width: 17vw;
           top: 33vh;
           z-index: 9;
@@ -617,15 +611,15 @@
                     <div id="sunglasses" class="hidden" style="z-index: 3; height: 0px; ">
                       <img src="src/sunglasses.png" style="width:100%;">
                   </div>
-                    <div id="astrodude-container" class="rellax astrodude" data-rellax-speed="3" style="z-index: 2;">
+                    <div id="astrodude-container" class="rellax astrodude" data-rellax-speed="6" style="z-index: 2;">
                       <a onclick="javascript:void(Tawk_API.toggle());">
                       <img id="astrodude" src="src/astrodude.png" style="width:100%;">
                       </a>
                     </div>
-                    <div class="rellax donut" data-rellax-speed="10">
+                    <div class="rellax donut" data-rellax-speed="8">
                       <img id="donut" src="src/donut.png" style="width:100%;">
                     </div>
-                    <div class="rellax device" data-rellax-speed="3">
+                    <div class="rellax device" data-rellax-speed="7">
                       <img src="src/mbp2.png">
                     </div>
 
@@ -1049,18 +1043,7 @@
 
       <div id="about-us" class="section pt-16 nav-section nav-section-start" data-nav-section-id="3" style="padding-top: 0;">
         <div class="container">
-          <!--
-          <div class="row">
-            <div style="filter: drop-shadow(22px 34px 0px #1d1c456b);text-align: center;">
-              <div class="lightbulb">
-            <svg class="animonItem reveal-prehide reveal-3" style="filter: drop-shadow(0px 0px 54px #00f3ff);" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-lightbulb-fill" viewBox="0 0 16 16" style="/*! margin-top: -150px; */text-align: center;" width="64" height="64">
-  <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5"></path>
-          </svg>
-        </div>
-          <div class="full-bleed mx-auto animonItem reveal-prehide reveal-2" style="font-weight: bold;">Making awesome ideas <br>go from <i><quote>« impossible »</quote></i> <br>to <strong><strong>INEVITABLE.</strong></strong></div>
-          </div>
-          </div>
-          -->
+       
           <div class="row">
 
             <div class="col-md-8 col-xl-5 mx-auto  pb-12">
@@ -1104,10 +1087,6 @@
           <div class="row">
             <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-0 mt-md-0 mb-0 " style="padding: 0;">
               <div class="techstack-halo animonItem reveal-prehide fade-in">
-                <!--col-12 col-md-6 col-lg-6 mb-gutter mt-gutter  mb-0 mt-md-0 
-                            <ul class="actions special">
-                              <li><a href="#URL_RUBRIQUE" class="button"><:info_articles_tous:></a></li>
-                            </ul>-->
 
                 <ul class="techstack">
                   <li class="techstack_item">
@@ -1174,30 +1153,7 @@
                     </div>
                     TypeScript
                   </li>
-                  <!--
-                                    <li>
-                                      <div class="techstack_item">
-                                        <i class="devicon-nodejs-plain"></i>
-                                        
-                                      </div>
-                                      NodeJS
-                                    </li>
-                                    <li>
-                                      <div class="techstack_item">
-                                         <i class="devicon-electron-original"></i>
-                                        
-                                      </div>
-                                      Electron
-                                    </li>
-                                    
-                                    <li>
-                                      <div class="techstack_item">
-                                        <i class="devicon-jquery-plain"></i>
-                                        
-                                      </div>  
-                                      Jquery
-                                    </li>
-                                    -->
+
                   <li class="techstack_item techstack_main">
                     <div class="techstack_icon">
                       <img height="44px" width="44px" alt="MyCreativeCoder.com Logo"
@@ -1231,30 +1187,7 @@
                     </div>
                     MySQL
                   </li>
-                  <!--
-                                    <li>
-                                      <div class="techstack_item">
-                                       <i class="devicon-apache-plain"></i>
-                                        
-                                      </div>
-                                      Apache
-                                    </li>
-                                    <li>
-                                      <div class="techstack_item">
-                                        <i class="devicon-nginx-original"></i>
-                                        
-                                      </div>
-                                      Nginx
-                                    </li>
-                            
-                                    <li>
-                                      <div class="techstack_item">
-                                        <i class="devicon-bootstrap-plain"></i>
-                                        
-                                      </div>
-                                      Bootstrap
-                                    </li>
-                            -->
+
                   <li class="techstack_item make-neg">
                     <div class="techstack_icon">
                       <svg viewBox="0 0 128 128">
@@ -1266,15 +1199,7 @@
                     </div>
                     Less
                   </li>
-                  <!--
-                                    <li>
-                                      <div class="techstack_item">
-                                         <i class="devicon-sass-original"></i>
-                                        
-                                      </div>
-                                      Sass
-                                    </li>
-                            -->
+
                   <li class="techstack_item">
                     <div class="techstack_icon">
 
@@ -1351,15 +1276,6 @@
 
 
       </div>
-
-
-
-
-
-
-
-
-
 
 
       <div class="section section-base-bg-2 nav-section-start" data-nav-section-id="4" id="contact">
@@ -1725,12 +1641,8 @@
   <script src="https://unpkg.com/@popperjs/core@2"></script>
   <script src="https://unpkg.com/tippy.js@6"></script>
 
-  <!--Start of Tawk.to Script-->
 
-  <!--End of Tawk.to Script-->
-
-  <!--<link rel="stylesheet" href="src/locomotive-scroll.css">
-
+ <!--
   <script>
     window.addEventListener('load', function () {
 
@@ -1742,22 +1654,6 @@
         current_lang: 'en',
         autoclear_cookies: true,
         page_scripts: true,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         onFirstAction: function (user_preferences, cookie) {
 
@@ -1863,9 +1759,6 @@ other sensitive data, please read the full <a href="#" class="cc-link">privacy p
 </div>
 </div>
 -->
-
-  
-
 
 </body>
 
