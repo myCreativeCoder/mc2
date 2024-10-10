@@ -209,7 +209,7 @@ function spaStart(){
         const targetDiv = entry.target;
         if (entry.intersectionRatio > threshold) {
 
-          //console.log('interesect ' + entry.target.id)
+          
         
           if (targetDiv.id == 'we-make') {
             //console.log(document.getElementById('we-make'));
@@ -394,10 +394,12 @@ function spaStart(){
 
           
         } else {
-          //alert('paused ' + targetDiv.id + ' ' + fifthItem.id + ' ' + firstFourItems.includes(targetDiv))
-          if (firstFourItems.includes(targetDiv)){
+          if (targetDiv.id == "creative" || targetDiv.id == "dot" || targetDiv.id == "coder"){
+            targetDiv.classList.remove('reveal-prehide');
+          } else if (firstFourItems.includes(targetDiv)){
             
           } else {
+            //alert('paused ' + targetDiv.id + ' ' + fifthItem.id + ' ' + firstFourItems.includes(targetDiv))
             targetDiv.classList.add('paused');
           }
         // ;
@@ -2013,9 +2015,9 @@ function spa() {
     // Decrease background position by 1%
     //xPosition -= 0.1;
     if (scrollDirection == "down"){
-      yPosition -= 0.2 * (window.innerWidth / window.innerHeight);
+      yPosition -= 0.06 * (window.innerWidth / window.innerHeight);
     } else {
-      yPosition += 0.2 * (window.innerWidth / window.innerHeight);
+      yPosition += 0.06 * (window.innerWidth / window.innerHeight);
     }
     
 

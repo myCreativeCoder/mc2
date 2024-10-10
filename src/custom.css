@@ -85,6 +85,24 @@ body:not(.js-hidden) #splash.finished:hover {
       padding-bottom: 0; padding-top: 60px;
 }
 
+.logos .logo a .fade-in, .logos .logo a .logospan i small.fade-in, .logos .logo a .logospan i b .fade-in, .logos .logo a .logospan small.fade-in {
+  opacity: 0;
+}
+
+body:not(.js-hidden) .logos .logo a > .fade-in, body:not(.js-hidden) .logos .logo a .logospan i small.fade-in, body:not(.js-hidden) .logos .logo a .logospan i b .fade-in, body:not(.js-hidden) .logos .logo a .logospan small.fade-in {
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+#tld.fade-in {
+  transition-delay: 2s !important;
+  transition-duration: .5s !important;
+}
+
+#dot.reveal-3:not(.reveal-prehide){
+  transition-timing-function: cubic-bezier(.47,1.64,.41,.8) !important;
+}
+
 .menu-main-mobile:not(.open){
 
   pointer-events: none;
@@ -413,11 +431,14 @@ a:hover {
   z-index: 0;
   color: #5b00fe30;
   transform: translateX(0px);
-  transition: all 1s ease;
+  transition: transform 1s ease, opacity 1s ease;
+  transition-delay: 2s;
+  opacity: 1;
 }
 
 .js-hidden .shout>span:nth-of-type(1) {
   transform: translateX(-100px);
+  opacity: 0;
 }
 
 .shout>span:nth-of-type(2) {
@@ -547,11 +568,14 @@ a:hover {
   position: absolute;
   color: #5b00fe0d;
   transform: translateX(0px);
-  transition: all 1s ease;
+  transition: transform 1s ease, opacity 1s ease;
+  transition-delay: 4s;
+  opacity: 1;
 }
 
 .js-hidden .shout>span:nth-of-type(4) {
   transform: translateX(100px);
+  opacity: 0;
 }
 
 a.arrow {
@@ -659,7 +683,7 @@ a.arrow:hover .hand {
 
 .animonItem #flip div:first-child {
   animation-name: show;
-  animation-delay: 4s;
+  animation-delay: 6.5s;
   animation-timing-function: cubic-bezier(0,2,1.5,1);
   animation-iteration-count: infinite;
   animation-duration: 6s;
@@ -667,7 +691,7 @@ a.arrow:hover .hand {
   animation-play-state: paused;
 }
 
-.animonItem:not(.reveal-prehide) #flip div:first-child {
+.animonItem:not(.reveal-prehide):not(.paused) #flip div:first-child {
   animation-play-state: running;
 }
 
