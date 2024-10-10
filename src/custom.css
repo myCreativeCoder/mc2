@@ -284,10 +284,6 @@ a:hover {
   text-align: right;
 }
 
-#cube {
-
-}
-
 #solutions img {
   width: 50%;
 }
@@ -742,6 +738,7 @@ a.arrow:hover .hand {
   object-position: top left;
   width: 100%;
   height: 100%;
+  
 }
 .summary-project .summary-thumbnail a::after {
   content: "";
@@ -853,6 +850,8 @@ a.arrow:hover .hand {
   opacity: 0;
   left: 0px;
   z-index: 1;
+  position: relative;
+  line-height: 0;
 }
 
 .crossfaded:not(.hovered) .shown.playbtn::before {
@@ -878,7 +877,7 @@ a.arrow:hover .hand {
   top: 0;
 }
 
-.crossfaded .slide:not(.placeholder).hidden {
+.placeholder.hidden {
   //display: none;
 }
 
