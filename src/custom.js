@@ -806,6 +806,7 @@ function spa() {
     "By the way, has anyone <br/>seen my donut ?",
     "In space, noone can <br/>hear <i><strong>bugs</strong></i> scream",
     "We get the spacing just right!",
+    "What's your favorite color space ?",
     "Send us an email, or a <br/>carrier pigeon in a spacesuit !"
   ];
 
