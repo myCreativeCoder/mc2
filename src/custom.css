@@ -280,7 +280,15 @@ a:hover {
   color: #c8a3e1;
 }
 
-#truly i {
+#solutions {
+  text-align: right;
+}
+
+#solutions img {
+  width: 50%;
+}
+
+#truly i, #solutions h2 i {
   font-variant: initial;
   text-decoration-color: #5000f1;
   text-decoration-line: underline;
@@ -2030,7 +2038,21 @@ ul.techstack li:nth-child(8) .techstack_icon {
     padding: .4em 0 0 1.2em;
   }
 
-  
+  #solutions {
+    flex-direction: column-reverse;
+  }
+
+  #solutions .col-12 {
+    text-align: left;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    padding-top: 0px !important;
+    
+  }
+
+  #solutions img {
+    width: 80%;
+  }
 
   
 }
@@ -2298,6 +2320,15 @@ ul.techstack li:nth-child(8) .techstack_icon {
     height: 187px;
     padding: 3rem 1rem 0;
     
+  }
+
+  #solutions .col-12 {
+    text-align: left;
+
+  }
+
+  #solutions img {
+    width: 80%;
   }
 }
 
