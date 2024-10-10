@@ -284,6 +284,10 @@ a:hover {
   text-align: right;
 }
 
+#cube {
+
+}
+
 #solutions img {
   width: 50%;
 }
@@ -846,7 +850,7 @@ a.arrow:hover .hand {
 }
 
 .placeholder {
-  //opacity: 0;
+  opacity: 0;
   left: 0px;
   z-index: 1;
 }
