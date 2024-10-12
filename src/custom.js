@@ -4,7 +4,15 @@ const isOnline = !(window.location.hostname === "localhost" ||
 window.location.hostname === "127.0.0.1" ||
 window.location.protocol === "file:");
 
+location.hash = '';
+
 const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+
+const userAgent = navigator.userAgent.toLowerCase();
+  // detect WebKit browsers
+  const isWebKit = !userAgent.match("gecko") && userAgent.match("webkit");
+  const isChrome = userAgent.indexOf("chrome") > -1 && userAgent.match("safari");
+  const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
 
 //let testMode = isOnline;
 let testMode = false;
@@ -23,8 +31,8 @@ window.addEventListener('touchstart', function() {
 })
 
 
-const lenis = new Lenis();
-lenis.stop();
+//const lenis = new Lenis();
+//lenis.stop();
 
 const threshold = .01
 const options = {
@@ -33,9 +41,21 @@ const options = {
   threshold
 }
 
+let forceShowHeader = false;
+
 let revealIndex = 0;
 let scrollDirection = 'down';
 let lastScrollY = 0;
+let scrollLock = false;
+
+let doCustomScroll = false;
+let cancelSmoothScrollTo = false;
+
+
+let defaultScrollDuration = 4000;
+let isSmoothScrolling = false;
+
+
 /*
 window.addEventListener('scrollend', function () {
   setTimeout(function () {
@@ -45,7 +65,95 @@ window.addEventListener('scrollend', function () {
 });
 */
 
+// Element to move, time in ms to animate
+function scrollToCustom(element, duration) {
+  //if (isSafari){
+  //  return
+  //}
+  
+  var e = document.documentElement;
+  if (!doCustomScroll){
+    if (isSafari) {
 
+      location.hash = element.id;
+      requestAnimationFrame(() => {
+        adjustSunglasses();
+      });
+      //element.scrollIntoView({ behavior: "smooth"});
+    } else if (!isSafari && isChrome){
+      location.hash = element.id;
+      requestAnimationFrame(() => {
+        adjustSunglasses();
+      });
+    }
+    
+    return
+  }
+  cancelSmoothScrollTo = false;
+  //alert(element.id)
+  /*
+  if (e.scrollTop === 0) {
+    var t = e.scrollTop;
+    ++e.scrollTop;
+    e = t + 1 === e.scrollTop-- ? e : document.body;
+  }*/
+  const rect = element.getBoundingClientRect();
+  
+  const elementTop = rect.top + e.scrollTop; // Adjust for current scroll position
+  
+  requestAnimationFrame(() => {
+
+    scrollToC(e, e.scrollTop, elementTop, duration);
+  });
+}
+
+// Element to move, element or px from, element or px to, time in ms to animate
+function scrollToC(element, from, to, duration) {
+  if (duration <= 0) return;
+  if (typeof from === "object") from = from.offsetTop;
+  if (typeof to === "object") to = to.offsetTop;
+  //alert(to)
+  scrollToX(element, from, to, 0, 1 / duration, 20, easeOutCuaic);
+}
+
+function scrollToX(element, xFrom, xTo, t01, speed, step, motion) {
+  
+  //scrollLock = true;
+  if (t01 < 0 || t01 > 1 || speed <= 0 || cancelSmoothScrollTo) {
+    element.scrollTop = xTo;
+    // update current section when scrolling is over to prevents problems when scrolling is interupted
+    
+    //alert(section.id)
+    
+    //alert('stop ' + t01 + 'speed ' + speed)
+    isSmoothScrolling = false;
+    return;
+  }
+  element.scrollTop = xFrom - (xFrom - xTo) * motion(t01);
+  t01 += speed * step;
+  //debugger;
+  //alert(cancelSmoothScrollTo)
+  //if (!cancelSmoothScrollTo){
+    isSmoothScrolling = true;
+    requestAnimationFrame(() => {
+      isSmoothScrolling = true;
+      scrollToX(element, xFrom, xTo, t01, speed, step, motion);
+    });
+    /*
+    setTimeout(function() {
+      //scrollLock = true;
+      scrollToX(element, xFrom, xTo, t01, speed, step, motion);
+    }, step);*/
+  //}
+}
+  
+  
+//}
+
+function easeOutCuaic(t) {
+  t--;
+  return t * t * t + 1;
+}
 
 // Function to detect scroll direction
 function detectScrollDirection() {
@@ -56,7 +164,18 @@ function detectScrollDirection() {
 
 
 document.addEventListener("DOMContentLoaded", (event) => {
-
+  //location.hash = 'home';
+  setTimeout(() => {
+    forceShowHeader = true;
+    window.scroll({ top: -1, left: 0, behavior: "smooth" });
+    /*
+    setTimeout(() => {
+      forceShowHeader = true;
+      window.scroll({ top: 100, left: 0, behavior: "smooth" });
+  
+    }, 500);*/
+  }, 100);
+  
   console.log('dom content loaded ' + performance.now())
 
   if (testMode) {
@@ -166,15 +285,16 @@ function lazyload() {
 
 function spaStart(){
 
+  
+
   console.log('spa start ' + performance.now())
   const body = document.querySelector('.page-home');
   const greatDiv = document.querySelector('.great');
   const splashDiv = document.getElementById('splash');
-  const userAgent = navigator.userAgent.toLowerCase();
-  // detect WebKit browsers
-  const isWebKit = !userAgent.match("gecko") && userAgent.match("webkit");
-  const isChrome = userAgent.indexOf("chrome") > -1 && userAgent.match("safari");
-  const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
+  
+
+  defaultScrollDuration = isSafari ? 2000 : 4000;
+  doCustomScroll = isChrome || isSafari ? false : true;
 
   const hoverableDelay = 3000;
 
@@ -182,10 +302,15 @@ function spaStart(){
   body.classList.remove('scroll-lock');
 
   
-  lenis.start();
+  //lenis.start();
 
-  
-  
+  /*
+  // Get all elements with class 'animonItem'
+  const placeholders = document.querySelectorAll('.placeholder');
+
+  placeholders.forEach(function (item) {
+    item.classList.add('hidden');
+  });*/
 
   let hasLazyLoaded = false;
 
@@ -212,6 +337,7 @@ function spaStart(){
           
         
           if (targetDiv.id == 'we-make') {
+            
             //console.log(document.getElementById('we-make'));
             setTimeout(function () { // TODO : check if splash is in viewport
               splashDiv.classList.add('finished');
@@ -252,6 +378,7 @@ function spaStart(){
 
             } else if (scrollDirection === 'up') {
               if (targetDiv.querySelector('#hand')) {
+                
                 //alert("hand")
                 /*
                 if (splashDiv.classList.contains('finished')){
@@ -282,9 +409,21 @@ function spaStart(){
                 });*/
 
 
-                if (!isTouchDevice){
-                  // poor man's scroll snap
-                  lenis.scrollTo('#home', { lerp: 0.05, lock: true });
+                if (!isTouchDevice && !isSafari && !isChrome){
+                  // poor man's scroll snap, works ok only on firefox
+                  let targetScrollSnap = document.getElementById('home');
+                  targetScrollSnap.scrollIntoView({ behavior: "smooth"});
+                  
+                  //lenis.scrollTo('#home', { lerp: 0.05, lock: true });
+                  //splashDiv.scrollIntoView({ behavior: "smooth" });
+                  //cancelSmoothScrollTo = true;
+                  //requestAnimationFrame(() => {
+                  //  let target = document.getElementById('home')
+                  //  scrollTo(target, defaultScrollDuration)
+                  //});
+                  
+                } else {
+                  //location.hash = 'home';
                 }
                 
               
@@ -338,8 +477,8 @@ function spaStart(){
 
 
           if (targetDiv.id == 'inevitable') {
-
-            let lightbulb = document.getElementById('lightbulb-shape');
+            
+            let lightbulb = document.getElementById('lightbulb-container');
 
             const revealClassRegex = /^reveal-(\d+)$/;
 
@@ -552,7 +691,7 @@ function spa() {
         });
       }
       
-      //lenis.scrollTo('#home', { lerp: 0.05, lock: true});
+      ////lenis.scrollTo('#home', { lerp: 0.05, lock: true});
 
       
     }
@@ -592,7 +731,7 @@ function spa() {
   /* monitor when the page is being scrolled */
   window.addEventListener('scroll', () => {
     /* check if the scroll offset is passed */
-    if (window.pageYOffset > scrollOffset) {
+    if (window.pageYOffset > scrollOffset || forceShowHeader) {
       /* get the new page position after scrolling */
       let currentScrollPos = window.pageYOffset;
       /* check the new page position with the old position */
@@ -643,12 +782,13 @@ function spa() {
   const navSections = document.querySelectorAll('.nav-section');
   const navSectionsStart = document.querySelectorAll('.nav-section-start');
   let currentSection = navSectionsStart[0];  // Start with the first section
+  
   const menuItems = document.querySelectorAll('[data-nav-section-id-target]');
 
   const observerOptions = {
     root: null, // Viewport as root
     rootMargin: '0px', // Adjust if necessary (e.g., '-50px 0px' to trigger earlier)
-    threshold: 0.5 // Ensure that 50% of the element is in view before triggering
+    threshold: 0.2 // Ensure that 20% of the element is in view before triggering
   };
 
   let activeSectionId = null;
@@ -658,8 +798,60 @@ function spa() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const sectionId = entry.target.getAttribute('data-nav-section-id');
-        //console.log("nav intersect " + sectionId)
-        setActiveMenuItem(sectionId);
+        //console.log("nav intersect " + sectionId + ' ' + entry.target.id + ' ' + entry.target.classList)
+        //if (!lenis.isScrolling){
+        //if (!isSmoothScrolling){
+          //if (sectionId){
+            setActiveMenuItem(sectionId);
+          //} else {
+            
+          //}
+          
+        //}
+         
+        //}
+        //entry.target.classList.add('active')
+        
+          
+        //} else {
+          
+              entry.target.classList.add('active')
+            
+          if (entry.target.id == 'reel'){
+            
+            // poor man's scroll snap
+            //let targetScrollSnap = document.getElementById('reel');
+            /*
+            const targetScrollSnap = document.querySelector(`.nav-section-start[data-nav-section-id="${2}"]`)
+            cancelSmoothScrollTo = false;
+            isSmoothScrolling = false;
+            scrollToCustom(targetScrollSnap, defaultScrollDuration);
+            */
+            /*
+            let y = targetScrollSnap.getBoundingClientRect().top;
+            console.log('reel ' + targetScrollSnap + ' ' + y )
+            window.scrollBy({
+                top: y,
+                behavior: 'smooth'
+            }); */
+
+            //targetScrollSnap.setAttribute('tabindex', '-1')
+
+            //targetScrollSnap.focus()
+
+            //targetScrollSnap.removeAttribute('tabindex')
+            //targetScrollSnap.scrollIntoView({ behavior: "smooth"});
+            
+            //window.scrollTo({ top: targetScrollSnap, behavior: 'smooth'});
+          }
+          
+          
+        //}
+        
+      } else {
+        if (entry.target.getAttribute('data-nav-section-id') !== currentSection.getAttribute('data-nav-section-id')){
+          entry.target.classList.remove('active');
+        }
       }
     });
   };
@@ -672,25 +864,32 @@ function spa() {
   });
 
   function setActiveMenuItem(sectionId) {
+    //alert(sectionId)
     if (sectionId !== activeSectionId) {
-
-      // Remove active class from all menu items
-      menuItems.forEach(item => {
-        const parentLi = item.closest('li'); // Find the closest parent <li>
-        if (parentLi) {
-          parentLi.classList.remove('active'); // Remove the 'active' class from the <li>
-        }
-      });
-
-      // Find the menu item that matches the section and set it as active
-      const targetMenuItems = document.querySelectorAll(`[data-nav-section-id-target="${sectionId}"]`);
-      if (targetMenuItems.length) {
-        targetMenuItems.forEach(item => {
-          const parentLi = item.closest('li'); // Find the closest parent <li> of the <a> element
+      
+      if (!isSmoothScrolling || !doCustomScroll){
+        // Remove active class from all menu items
+        menuItems.forEach(item => {
+          const parentLi = item.closest('li'); // Find the closest parent <li>
           if (parentLi) {
-            parentLi.classList.add('active'); // Add the 'active' class to the <li> element
+            parentLi.classList.remove('active'); // Remove the 'active' class from the <li>
           }
         });
+
+        // Find the menu item that matches the section and set it as active
+        const targetMenuItems = document.querySelectorAll(`[data-nav-section-id-target="${sectionId}"]`);
+        if (targetMenuItems.length) {
+          targetMenuItems.forEach(item => {
+            const parentLi = item.closest('li'); // Find the closest parent <li> of the <a> element
+            if (parentLi) {
+              parentLi.classList.add('active'); // Add the 'active' class to the <li> element
+            }
+          });
+        } else {
+          //alert('no menu item')
+        }
+      } else {
+        console.log('is smooth scrolling or !doCustomScroll')
       }
 
       // Update the active section id
@@ -698,18 +897,44 @@ function spa() {
 
       currentSection = document.querySelector(`.nav-section-start[data-nav-section-id="${sectionId}"]`);
       //alert(currentSection.id)
+    } else {
+      //alert('active')
+      //cancelSmoothScrollTo = true;
+      //isSmoothScrolling = false;
     }
-
+    
 
   }
 
 
   // Function to scroll to a specific section using Lenis
   const scrollToSection = (section) => {
-    const sectionId = section.id;  // Get the section ID
-    lenis.scrollTo(`#${sectionId}`, { lerp: 0.025, lock: true });  // Smooth scroll using Lenis
+    const sectionId = section.getAttribute('data-nav-section-id');  // Get the section ID
+    //console.log('scrollToSection ' + sectionId)
+    //lenis.scrollTo(`#${sectionId}`, { lerp: 0.025, lock: true });  // Smooth scroll using Lenis
+    let dataId = section.getAttribute('data-nav-section-id');
+    
+    // Find the element with .nav-start class and the matching nav-section-id
+    const navstart = document.querySelector(`.nav-section-start[data-nav-section-id="${dataId}"]`);
+    
+    //alert(navstart.id)
+    if (navstart) {
+      
+        // Scroll the found navstart element into view smoothly
+        //navstart.scrollIntoView({ behavior: "smooth" });
+        //alert(navstart.id)
+        
+        scrollToCustom(navstart, defaultScrollDuration);
+    } else {
+        console.error(`Element with data-nav-section-id="${sectionId}" not found.`);
+        navstart = document.querySelector(`.nav-section[data-nav-section-id="${dataId}"]`);
+        
+        scrollToCustom(navstart, defaultScrollDuration);
+    }
+    
     currentSection = section;  // Update the current section
-    //setActiveMenuItem(sectionId);  // Update the active menu item
+    isSmoothScrolling = false;
+    setActiveMenuItem(sectionId);  // Update the active menu item
   };
 
   // Listen for keydown events to navigate sections
@@ -717,7 +942,11 @@ function spa() {
     // Check if the document has focus, if not, return early
     // TODO : handle arrow left / right keys for modal-prev/next, 
     // and allow default scrolling in modal with arrow down/up
-    if (!document.hasFocus() || e.repeat || lenis.isScrolling || modal.classList.contains('active')) {
+    //if (!document.hasFocus() || e.repeat || lenis.isScrolling || modal.classList.contains('active')) {
+    if (!document.hasFocus() || e.repeat || modal.classList.contains('active') || isScrollingCurrently) {
+      //if (isScrollingCurrently){
+      //  console.log('isScrollingCurrently')
+      //}
       e.stopPropagation();
       e.preventDefault();
       return;
@@ -735,7 +964,9 @@ function spa() {
         // Calculate the next section
         const nextSection = sectionsArrayDown[currentIndexDown + 1];
         if (nextSection) {
+          //let data = nextSection.getAttribute('data-nav-section-id');
           scrollToSection(nextSection); // Scroll to the next section if it exists
+          
         }
         break;
       }
@@ -747,9 +978,11 @@ function spa() {
         const currentIndexUp = sectionsArrayUp.indexOf(currentSection);
 
         // Calculate the previous section
-        const prevSection = sectionsArrayUp[currentIndexUp - 1];
+        const prevSection = sectionsArrayUp[Math.max(currentIndexUp - 1,0)];
         if (prevSection) {
+          //let data = prevSection.getAttribute('data-nav-section-id');
           scrollToSection(prevSection); // Scroll to the previous section if it exists
+          
         }
         break;
       }
@@ -825,17 +1058,17 @@ function spa() {
     trigger: "mouseenter focus manual click",
     onShow(instance) {
       // Record the time the tooltip is shown
-      if (!lenis.isScrolling){
+      //if (!lenis.isScrolling){
         // Record the time the tooltip is shown
         instance._startTime = Date.now();
         // Initialize first state to control the sentence flow
         if (instance._state == undefined) {
           instance._state = 'first';
         }
-      } else {
+      //} else {
         // Cancel the current show request
-        return false;
-      }
+      //  return false;
+      //}
       
     },
     onHide(instance) {
@@ -903,13 +1136,13 @@ function spa() {
     offset: [10, 0],
     zIndex: 4,
     onShow(instance) {
-      if (!lenis.isScrolling){
+      //if (!lenis.isScrolling){
         // Record the time the tooltip is shown
         instance._startTime = Date.now();
-      } else {
+      //} else {
         // Cancel the current show request
-        return false;
-      }
+        //return false;
+      //}
       
     },
     onHide(instance) {
@@ -942,6 +1175,7 @@ function spa() {
     console.log('window on load ' + performance.now())
 
     
+    adjustSunglasses();
     
     if (!!isReduced) {
       // DON'T use an animation here!
@@ -955,6 +1189,7 @@ function spa() {
     }
     //body.classList.remove('js-hidden');
     //body.classList.remove('scroll-lock');
+    
     adjustSunglasses();
     sunglasses.classList.remove('hidden');
     //lenis.start();
@@ -976,6 +1211,7 @@ function spa() {
     //if (document.body.classList.contains('resizing')){
           //document.body.classList.remove('resizing')
           isResizing = false;
+          
       //}
   }));
 
@@ -1010,6 +1246,7 @@ function spa() {
   
 
   function adjustSunglasses() {
+    
     const currentScrollY = window.scrollY; 
     const isScrollingDown = currentScrollY > lastScrollY; // Check if the user is scrolling down
     lastScrollY = currentScrollY; // Update the last scroll position
@@ -1038,7 +1275,7 @@ function spa() {
 
     // Get the translateY value of targetDiv
     let translateY = getTranslateY(targetDiv);
-    stickyDiv.style.position = "absolute";
+    //stickyDiv.style.position = "absolute";
 
     let tmpY = -(parseFloat(translateY) - parseFloat(computedStyle.marginTop))
     let stop = mtAstro;
@@ -1049,7 +1286,9 @@ function spa() {
 
     let w = parseFloat(computedStyle.width);
     let ml = parseFloat(computedStyle.marginLeft);
-    let mt = parseFloat(computedStyle.marginTop);
+    //let mt = parseFloat(computedStyle.marginTop);
+
+    let mt = mtAstro;
 
     //mt = window.innerHeight < 420 ? mt + 48 : mt;
     let tolerance = vh / 100;
@@ -1123,10 +1362,35 @@ function spa() {
 
 
   function raf(time) {
-    lenis.raf(time)
-    if (lenis.isScrolling){
+    //lenis.raf(time)
+    //if (lenis.isScrolling){
+     if (isScrollingCurrently){
       adjustSunglasses();
-    }
+     } 
+
+     /*
+     let computedStyle = window.getComputedStyle(reelwrap, "::before");
+
+     // Get current background position values from CSS variables
+     
+     let val = scrollDirection == 'down' ? - 0.1 : 0.1;
+     let classToAdd = scrollDirection == 'down' ? 'BgScrollDown' : 'BgScrollUp';
+     let classToRemove = scrollDirection == 'down' ? 'BgScrollUp' : 'BgScrollDown';
+     reelwrap.classList.remove(classToRemove)
+     reelwrap.classList.add(classToAdd)
+     */
+     /*
+     let xPosition = parseFloat(computedStyle.getPropertyValue("--x-pos")) || 50; // Default to 50% if not set
+     let yPosition = parseFloat(computedStyle.getPropertyValue("--y-pos")) + val || 50;
+      
+
+      // Apply the new background position by setting the CSS variables
+      reelwrap.style.setProperty('--x-pos', `${xPosition}%`);
+      reelwrap.style.setProperty('--y-pos', `${yPosition}%`);
+      */
+    
+      
+    //}
     
     requestAnimationFrame(raf)
   }
@@ -1150,26 +1414,46 @@ function spa() {
   for (let i=0; i < linksProjects.length; i++){
     
     linksProjects[i].addEventListener('click', (event) => {
-      event.preventDefault(); // Prevent default link behavior
-      revealIndex = 0;
-      //let target = document.getElementById('projects-reel');
-      //scroll.scrollTo(target);
-
-      slidesContainer.classList.add('locked');
-
-      // preload custom eye cursor blink state to prevent cursor jump on first blink (loading blink cursor image)
-      /*document.body.classList.add('blink');
-      setTimeout(function () {
-        document.body.classList.remove('blink');
-      }, 500);*/
-
-      if (window.getComputedStyle(document.getElementById('toggle-menu-main-mobile')).display != 'none'){
-        document.getElementById('close-overlay').click();
+      if (doCustomScroll){
+        event.preventDefault(); // Prevent default link behavior
+      } else {
+        location.hash = '';
       }
+      
+      if (isSmoothScrolling){
+        return
+      }
+      revealIndex = 0;
+      
+        
+       // return
+      //} else {
+        
+      //}
+      requestAnimationFrame(() => {
+        //let target = document.getElementById('projects-reel');
+        //scroll.scrollTo(target, defaultScrollDuration);
+        const sectionId = event.target.getAttribute('data-nav-section-id-target');
+        isSmoothScrolling = false;
+        setActiveMenuItem(sectionId);
+        slidesContainer.classList.add('locked');
+        
+        // preload custom eye cursor blink state to prevent cursor jump on first blink (loading blink cursor image)
+        /*document.body.classList.add('blink');
+        setTimeout(function () {
+          document.body.classList.remove('blink');
+        }, 500);*/
 
-      lenis.scrollTo('#projects-reel', { lerp: 0.05, lock: true });
-      setTimeout(() => { astrodudeInstance.show(); }, 3000);
-      setTimeout(() => { astrodudeInstance.hide(); }, 13000);
+        if (window.getComputedStyle(document.getElementById('toggle-menu-main-mobile')).display != 'none'){
+          document.getElementById('close-overlay').click();
+        }
+
+        //lenis.scrollTo('#projects-reel', { lerp: 0.05, lock: true });
+        let target = document.getElementById('reel')
+        scrollToCustom(target, defaultScrollDuration)
+        setTimeout(() => { astrodudeInstance.show(); }, 3000);
+        setTimeout(() => { astrodudeInstance.hide(); }, 13000);
+      });
 
       // if mouse is already/still hovering a slide at this point, start crossfading
       /*
@@ -1191,11 +1475,30 @@ function spa() {
   for (let i=0; i < linksAbout.length; i++){
     
     linksAbout[i].addEventListener('click', (event) => {
-      event.preventDefault(); // Prevent default link behavior
-      lenis.scrollTo('#about-us', { lerp: 0.05, easing: 'ease-in', lock: true });
-      if (window.getComputedStyle(document.getElementById('toggle-menu-main-mobile')).display != 'none'){
-        document.getElementById('close-overlay').click();
+      if (doCustomScroll){
+        event.preventDefault(); // Prevent default link behavior
       }
+      
+      const sectionId = event.target.getAttribute('data-nav-section-id-target');
+      if (!doCustomScroll){
+        location.hash = '';
+      }
+        
+       // return
+      //} else {
+        
+      //}
+      requestAnimationFrame(() => {
+        console.log(sectionId)
+        setActiveMenuItem(sectionId);
+        //lenis.scrollTo('#about-us', { lerp: 0.05, easing: 'ease-in', lock: true });
+        let target = document.getElementById('about-us')
+        
+        scrollToCustom(target, defaultScrollDuration)
+        if (window.getComputedStyle(document.getElementById('toggle-menu-main-mobile')).display != 'none'){
+          document.getElementById('close-overlay').click();
+        }
+      });
     });
   }
   for (let i=0; i < linksContact.length; i++){
@@ -1207,17 +1510,26 @@ function spa() {
       if (window.getComputedStyle(document.getElementById('toggle-menu-main-mobile')).display != 'none'){
         document.getElementById('close-overlay').click();
       }
+      let target = document.getElementById('contact-us')
+      
+      scrollToCustom(target, defaultScrollDuration)
+      
       /*
-      lenis.scrollTo('#contact-us', { lerp: 0.05, easing: 'ease-in', lock: true});
+      //lenis.scrollTo('#contact-us', { lerp: 0.05, easing: 'ease-in', lock: true});
       //console.log('contact clicked')*/
     });
   }
   splashDiv.addEventListener('click', (event) => {
-    event.preventDefault(); // Prevent default link behavior
+    if (doCustomScroll){
+      event.preventDefault(); // Prevent default link behavior
+    }
+    
     //alert('reveal index ' + revealIndex)
     revealIndex = 0;
     //let target = document.getElementById('projects-reel');
-    //scroll.scrollTo(target);
+    //scroll.scrollTo(target, defaultScrollDuration);
+    let target = document.getElementById('reel')
+    scrollToCustom(target, defaultScrollDuration)
     slidesContainer.classList.add('locked');
     /*
     document.body.classList.add('blink');
@@ -1226,7 +1538,7 @@ function spa() {
     }, 500);
     */
 
-    lenis.scrollTo('#projects-reel', { lerp: 0.02, lock: true });
+    //lenis.scrollTo('#projects-reel', { lerp: 0.02, lock: true });
 
     setTimeout(() => { astrodudeInstance.show(); }, 6500);
     setTimeout(() => { astrodudeInstance.hide(); }, 16000);
@@ -1250,11 +1562,37 @@ function spa() {
   for (let i=0; i < linksHome.length; i++){
     
     linksHome[i].addEventListener('click', (event) => {
-      event.preventDefault();
-      lenis.scrollTo('#home', { lerp: 0.025, easing: 'ease-in', lock: true });
-      if (window.getComputedStyle(document.getElementById('toggle-menu-main-mobile')).display != 'none'){
-        document.getElementById('close-overlay').click();
+      if (doCustomScroll){
+        event.preventDefault(); // Prevent default link behavior
       }
+     
+      //lenis.scrollTo('#home', { lerp: 0.025, easing: 'ease-in', lock: true });
+      //if (currentSection.id == 'splash'){
+
+      if (!doCustomScroll){
+        location.hash = '';
+      }
+        
+       // return
+      //} else {
+        
+      //}
+      
+      
+      
+      requestAnimationFrame(() => {
+        let target = document.getElementById('home')
+        scrollToCustom(target, defaultScrollDuration)
+        const sectionId = event.target.getAttribute('data-nav-section-id-target');
+        if (currentSection.id == 'home'){
+          //alert(currentSection.id)
+          cancelSmoothScrollTo = true;
+        }
+        setActiveMenuItem(sectionId);
+        if (window.getComputedStyle(document.getElementById('toggle-menu-main-mobile')).display != 'none'){
+          document.getElementById('close-overlay').click();
+        }
+      });
       
     });
     
@@ -1996,35 +2334,85 @@ function spa() {
 
   let isScrolling;
   let isScrollingCurrently = false;;
+  // Initialize current rotation
+  let currentRotation = 0;
 
 
-  window.addEventListener('scroll', function () {
+  window.addEventListener('scroll', (event) => {
+    
     // Clear the timeout if it's already set
     clearTimeout(isScrolling);
+    //scrollFunction();
     slidesContainer.classList.add('locked');
+    if (!isScrollingCurrently){
+      revealIndex = 0;  // Reset index on scroll start
+      //cancelSmoothScrollTo = true;
+      scrollLock = false;
+    }
+
     isScrollingCurrently = true;
     // hide tooltips on scroll
     astrodudeInstance.hide();
     donutInstance.hide();
+    /*
     // Get computed styles of reelwrap's ::before pseudo-element
     let computedStyle = window.getComputedStyle(reelwrap, "::before");
 
     // Get current background position values from CSS variables
     let xPosition = parseFloat(computedStyle.getPropertyValue("--x-pos")) || 50; // Default to 50% if not set
     let yPosition = parseFloat(computedStyle.getPropertyValue("--y-pos")) || 50;
+    */
 
     // Decrease background position by 1%
     //xPosition -= 0.1;
-    if (scrollDirection == "down"){
-      yPosition -= 0.06 * (window.innerWidth / window.innerHeight);
-    } else {
-      yPosition += 0.06 * (window.innerWidth / window.innerHeight);
-    }
-    
+    requestAnimationFrame(() => {
+      if (scrollDirection == "down"){
+        //yPosition -= 0.06 * (window.innerWidth / window.innerHeight);
+        let scrollTarget = document.getElementById('scroll-target')
+        scrollTarget.style.marginTop = '-1000px';
+        scrollTarget.style.position = 'absolute';
 
-    // Apply the new background position by setting the CSS variables
-    reelwrap.style.setProperty('--x-pos', `${xPosition}%`);
-    reelwrap.style.setProperty('--y-pos', `${yPosition}%`);
+        //currentRotation -= 5;
+      } else {
+        //yPosition += 0.06 * (window.innerWidth / window.innerHeight);
+        let scrollTarget = document.getElementById('scroll-target')
+        scrollTarget.style.marginTop = '20vh';
+        scrollTarget.style.position = 'absolute';
+        //currentRotation += 5;
+      }
+      
+      /*
+      // Apply the new background position by setting the CSS variables
+      reelwrap.style.setProperty('--x-pos', `${xPosition}%`);
+      reelwrap.style.setProperty('--y-pos', `${yPosition}%`);*/
+    });
+
+    //const cube = document.getElementById('cube');
+
+    // Get current transform value
+    //const currentTransform = window.getComputedStyle(cube).transform;
+
+    
+    /*
+    if (currentTransform && currentTransform !== 'none') {
+        // Extract rotation from the matrix
+        const matrixValues = currentTransform.match(/matrix.*\((.+)\)/);
+        if (matrixValues) {
+            const values = matrixValues[1].split(', ');
+            const a = parseFloat(values[0]);
+            const b = parseFloat(values[1]);
+            // Calculate rotation in degrees
+            //currentRotation = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+        }
+    }*/
+
+    // Increment rotation by 1 degree
+    //const newRotation = currentRotation + 1;
+
+    // Set new transform value
+    //cube.style.transform = `translateY(${currentRotation}px)`;
+    
+    
 
     // Set a timeout to run after scrolling ends
    
@@ -2032,14 +2420,16 @@ function spa() {
         //alert('scrollend')
         // Code to run after scrolling ends
         isScrollingCurrently = false;
-        revealIndex = 0;  // Reset index on scroll
-
+        revealIndex = 0;  // Reset index on scroll end
+        cancelSmoothScrollTo = false;
         
 
 
         setTimeout(function () {
-          if (!lenis.isScrolling){
+          //if (!lenis.isScrolling){
+          if (!isSmoothScrolling){
             slidesContainer.classList.remove('locked');
+            scrollLock = false;
             for (let i = 0; i < slides.length; i++) {
               let thisSlide = slides.item(i);
               if (thisSlide.classList.contains('hovered')){
@@ -2048,11 +2438,35 @@ function spa() {
               }
             }
           }
+            
+          //}
         }, 1000)
 
       }, 100); // Adjust timeout duration as needed
+
+      if (scrollLock){
+        //event.preventDefault();
+        //return false
+      }
     
     
   });
+
+  // Event listener to stop default scroll behavior when necessary
+  window.addEventListener('wheel', (event) => {
+    if (scrollLock){
+      event.preventDefault(); // Prevent default scroll behavior
+    }
+    cancelSmoothScrollTo = true;
+    isSmoothScrolling = false;
+  }, { passive: false });
+
+  window.addEventListener('touchmove', (event) => {
+    if (scrollLock){
+      event.preventDefault(); // Prevent default scroll behavior on touch devices
+    }
+    cancelSmoothScrollTo = true;
+    isSmoothScrolling = false;
+  }, { passive: false });
 
 }

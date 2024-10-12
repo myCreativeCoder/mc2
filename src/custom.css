@@ -1,4 +1,6 @@
 html {
+
+  scroll-behavior: smooth;
   //overflow: hidden;
 }
 
@@ -15,10 +17,15 @@ body {
   user-drag: none;
   /* Standard property */
 
-  min-width: 375px;
+  min-width: 100px;
   padding-top: 60px;
 }
 
+#scroll-target {
+  position: absolute;
+  margin-top: -1000px;
+  height: 1px;
+}
 
 .loading {
   transition: all .3s ease;
@@ -355,13 +362,15 @@ a:hover {
 
   font-weight: bold;
                   border-radius: 12px;
-                  background: #5000f1;
+                  //background: #5000f1;
+                  //background: radial-gradient(ellipse at top, #b22d5f 1%, #73005b 30%, #210068);
+                  background: linear-gradient(45deg, #c85a38 1%, #73005b 30%, #210068);
                   margin: 200px 0 2em;
                   padding: 4rem 1rem;
                   width: 100%;
                   height: 300px;
                   position: absolute;
-                  
+                  background: linear-gradient(-10deg, #210066 1%, #73005b 85%, #c85a38 120%);
 }
 
 .full-bleed.show {
@@ -371,6 +380,53 @@ a:hover {
 .lightbulb {
   color: var(--color-primary-shout);
   animation: float 6s ease-in-out infinite;
+}
+
+#reel-wrap::before {
+  content: '';
+  position: absolute;
+  background: url("./starrybg2.png");
+  background-color: #0b03269e;
+
+  -webkit-mask-image: linear-gradient(transparent 0%, #000 5%, #000 90%, transparent 99%);
+  mask-image: linear-gradient(transparent 0%, #000 5%, #000 90%, transparent 99%);
+  width: 100%;
+  height: 100%;
+
+  background-repeat: repeat-y;
+  background-repeat: round;
+  animation: bgScrollUp 30s infinite linear;
+  background-size: 100% auto;
+  background-position: 0 100%; /* Initial position */
+  animation: bgScrollDown 40s infinite linear;
+}
+
+#reel-wrap.BgScrollUp {
+  background-position: 0 0%; /* Start at the top */
+  animation: bgScrollUp 40s infinite linear;
+}
+
+
+@keyframes bgScrollUp {
+  0% {
+    //transform: translateY(0%);
+    background-position: 0 0%; /* Start at the top */
+  }
+  100% {
+    //transform: translateY(100%);
+    background-position: 0 100%; /* End at the bottom */
+  }
+}
+
+@keyframes bgScrollDown {
+  0% {
+    //transform: translateY(0%);
+    background-position: 0 100%; /* Start at the top */
+  }
+  100% {
+    //transform: translateY(100%);
+    background-position: 0 0%; /* End at the bottom */
+  }
 }
 
 .logospan {
@@ -738,7 +794,7 @@ a.arrow:hover .hand {
   object-position: top left;
   width: 100%;
   height: 100%;
-  
+  background: #180120;
 }
 .summary-project .summary-thumbnail a::after {
   content: "";
@@ -792,7 +848,7 @@ a.arrow:hover .hand {
   background-color: transparent;
 }
 
-.summary.summary-project .summary-thumbnail img:hover {
+.summary.summary-project .summary-thumbnail img:not(.placeholder):hover {
   opacity: 1;
 }
 
@@ -1088,6 +1144,7 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
   will-change: transform, opacity;
   padding-top: 4em;
   margin-top: -4em;
+  
 }
 
 
@@ -1372,6 +1429,7 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
   scale: 1;
   margin-top: 4em;
   will-change: transform, margin-top, margin-left;
+  position: absolute;
 }
 #sunglasses img {
   animation: float 6s ease-in-out infinite;
@@ -1852,6 +1910,55 @@ ul.techstack li:nth-child(8) .techstack_icon {
   width: 80%;
 }
 
+#lightbulb-container::before {
+  content: ' ';
+  width: 100%;
+  min-height: 200px;
+  background: radial-gradient(45% 80% at 50% 50%, rgba(133, 76, 255, 0.1) 10%, transparent 60%);
+  display: block;
+  margin-top: -50px;
+  opacity: 0;
+  transition: opacity .2s;
+  
+}
+body:not(.js-hidden) .reveal-2:not(.reveal-prehide)#lightbulb-container::before {
+  transition-delay: 2s; 
+}
+body:not(.js-hidden) .reveal-3:not(.reveal-prehide)#lightbulb-container::before {
+  transition-delay: 2.5s; 
+}
+body:not(.js-hidden) .reveal-4:not(.reveal-prehide)#lightbulb-container::before {
+  transition-delay: 3s; 
+}
+body:not(.js-hidden) .reveal-5:not(.reveal-prehide)#lightbulb-container::before {
+  transition-delay: 3.5s; 
+}
+body:not(.js-hidden) .reveal-6:not(.reveal-prehide)#lightbulb-container::before {
+  transition-delay: 4s; 
+}
+body:not(.js-hidden) #lightbulb-container::before.reveal-7:not(.reveal-prehide)  {
+  transition-delay: 4.5s; 
+}
+
+body:not(.js-hidden) #lightbulb-container:not(.reveal-prehide)::before {
+  opacity: 1;
+}
+
+#lightbulb-shape {
+  margin-top: -100px;
+  shape-rendering:geometricPrecision; 
+  text-rendering:geometricPrecision; 
+  image-rendering:optimizeQuality; 
+  fill-rule:evenodd; 
+  clip-rule:evenodd
+}
+
+.halo {
+  background: radial-gradient(80% 80% at 50% 50%, rgba(80, 0, 255, 0.1) 0%, transparent 60%);
+  width: 100%;
+  
+}
+
 .techstack-halo {
   padding: 5em 0em 1.5em 32px;
   background: radial-gradient(20em 20em at 48% 43%, rgba(80, 0, 255, 0.1) 0%, transparent 60%);
@@ -1907,16 +2014,16 @@ ul.techstack li:nth-child(8) .techstack_icon {
   position: relative;
 }
 #reel-wrap::before {
-  content: '';
-  position: absolute;
-  background: url("./starrybg2.png");
-  background-color: #0b03269e;
-  background-size: 100%;
-  -webkit-mask-image: linear-gradient(transparent 0%, #000 5%, #000 90%, transparent 99%);
-  mask-image: linear-gradient(transparent 0%, #000 5%, #000 90%, transparent 99%);
-  width: 100%;
-  height: 100%;
-  background-position: var(--x-pos, 50%) var(--y-pos, 50%);
+  
+  //background-position: var(--x-pos, 50%) var(--y-pos, 50%);
+}
+#reel {
+  //width: 0px;
+  //height: 0px;
+}
+#reel.active {
+  width: auto;
+  height: auto;
 }
 
 @media (max-width: 1300px) {
