@@ -660,6 +660,27 @@ function spa() {
     // Find the first script tag on the page and insert the new script before it
     var s0 = document.getElementsByTagName("script")[0];
     s0.parentNode.insertBefore(s1, s0);
+
+    Tawk_API.onChatMinimized = function(){
+      document.body.click();
+      // Give the document focus
+      window.focus();
+
+      // Remove focus from any focused element
+      if (document.activeElement) {
+          document.activeElement.blur();
+      }
+    };
+    Tawk_API.onChatHidden = function(){
+      document.body.click();
+      // Give the document focus
+      window.focus();
+
+      // Remove focus from any focused element
+      if (document.activeElement) {
+          document.activeElement.blur();
+      }
+    };
   }
 
   // Function to check if all images are loaded
