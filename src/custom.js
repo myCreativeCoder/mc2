@@ -660,7 +660,7 @@ function spa() {
     // Find the first script tag on the page and insert the new script before it
     var s0 = document.getElementsByTagName("script")[0];
     s0.parentNode.insertBefore(s1, s0);
-
+    /*
     Tawk_API.onChatMinimized = function(){
       document.body.click();
       // Give the document focus
@@ -681,6 +681,7 @@ function spa() {
           document.activeElement.blur();
       }
     };
+    */
   }
 
   // Function to check if all images are loaded
@@ -964,7 +965,26 @@ function spa() {
     // TODO : handle arrow left / right keys for modal-prev/next, 
     // and allow default scrolling in modal with arrow down/up
     //if (!document.hasFocus() || e.repeat || lenis.isScrolling || modal.classList.contains('active')) {
+    
+
     if (!document.hasFocus() || e.repeat || modal.classList.contains('active') || isScrollingCurrently) {
+
+      if (!document.hasFocus()){
+        let widget = document.querySelector('.widget-visible iframe:nth-of-type(2)');
+
+        let widgetFrameIsVisibile = widget.classList.contains('open');
+        if (!widget || !widgetFrameIsVisibile){
+          document.body.click();
+          // Give the document focus
+          window.focus();
+
+          // Remove focus from any focused element
+          if (document.activeElement) {
+              document.activeElement.blur();
+          }
+        }
+        
+      }
       //if (isScrollingCurrently){
       //  console.log('isScrollingCurrently')
       //}
