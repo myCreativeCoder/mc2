@@ -395,8 +395,8 @@ a:hover {
 
   background-repeat: repeat-y;
   background-repeat: round;
-  animation: bgScrollUp 30s infinite linear;
-  background-size: 100% auto;
+
+  background-size: 100% 800px;
   background-position: 0 100%; /* Initial position */
   animation: bgScrollDown 40s infinite linear;
 }
