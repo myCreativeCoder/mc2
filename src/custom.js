@@ -1522,6 +1522,10 @@ function spa() {
   splashDiv.addEventListener('click', (event) => {
     if (doCustomScroll){
       event.preventDefault(); // Prevent default link behavior
+    } else {
+      
+        location.hash = '';
+      
     }
     
     //alert('reveal index ' + revealIndex)
