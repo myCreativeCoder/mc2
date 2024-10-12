@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" class="" data-bs-theme="dark">
+<html lang="en" class="" data-bs-theme="dark" style="background: #0b0326;">
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="generator" content="MyCreativeCoder">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+  <!--
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self' https://mycreativecoder.com;
     style-src 'unsafe-inline' https://*.tawk.to https://fonts.googleapis.com https://cdn.jsdelivr.net https://unpkg.com https://*.unpkg.com https://mycreativecoder.com;
@@ -17,7 +17,7 @@
     connect-src https://*.tawk.to wss://*.tawk.to https://mycreativecoder.com;
     media-src https://embed.tawk.to https://mycreativecoder.com;
     form-action https://*.tawk.to;">
-  
+  -->
 
 <!--
   <script>
@@ -218,11 +218,11 @@
         </li>
 
         <li class="menu-item-projects">
-          <a class="linkProjects" data-nav-section-id-target="2">Projects</a>
+          <a class="linkProjects" href="#reel" data-nav-section-id-target="2">Projects</a>
         </li>
 
         <li class="menu-item-about">
-          <a class="linkAbout" data-nav-section-id-target="3">About</a>
+          <a href="#about-us" class="linkAbout" data-nav-section-id-target="3">About</a>
         </li>
 
         <li class="menu-item-contact">
@@ -472,7 +472,7 @@
         
         
           <li class="animonItem reveal-prehide reveal-5 fade-in">
-            <a href="#projects-reel" class="linkProjects" id="linkProjects" data-nav-section-id-target="2">Projects</a>
+            <a href="#reel" class="linkProjects" href="#projects-reel" id="linkProjects" data-nav-section-id-target="2">Projects</a>
           </li>
         
         
@@ -540,16 +540,17 @@
 
   
 
-    <div id="home" class="wrapper">
+    <div id="home" class="wrapper nav-section nav-section-start" data-nav-section-id="1" >
 
-      <div id="splash" class="section nav-section nav-section-start" data-nav-section-id="1" >
+      <div id="splash" class="section" >
         <div class="container">
           
           <div class="row" style="display: flex;justify-content: center;align-items: center;">
             <h2 class="shout">
+              <div id="scroll-target" class="nav-section" data-nav-section-id="1">&nbsp;</div> 
               <span>&gt;</span>
               <span class="">
-                <div class="animonItem reveal-prehide reveal-5" id="we-make" style="display: inline-block;">We</div>
+                <div class="animonItem reveal-prehide reveal-5 nav-section" id="we-make" style="display: inline-block;" data-nav-section-id="1">We</div>
                 <div class="animonItem reveal-prehide reveal-6" style="display: inline-block;">Make</div></span>
               <div class="animonItem reveal-prehide reveal-7 gradtext-rainbow great animate" style="white-space: nowrap;">
                 <div>G</div><div>R</div><div>E</div><div>A</div><div>T</div>&nbsp;
@@ -566,7 +567,7 @@
               <span>&lt;</span>
 
             </h2>
-            <div class="animonItem reveal-prehide reveal-7 reverse nav-section" data-nav-section-id="1" style="display: block;">
+            <div class="animonItem reveal-prehide reveal-7 reverse" style="display: block;">
               <a class="arrow scrolly" id="hand" style="display: block;">
                 <svg class="hand" xmlns="http://www.w3.org/2000/svg" version="1.1" width="512px" height="512px"
                   viewBox="0 0 512 512"
@@ -599,7 +600,7 @@
 
       
       
-      <div id="reel-wrap">
+      <div id="reel-wrap" >
         <div class="section pt-0 nav-section nav-section-start" data-nav-section-id="2" id="reel">
           <div class="container">
             <div class="row">
@@ -778,7 +779,7 @@
                   <div class="summary-content">
                     <div class="summary-title">
                       <h2>
-                        <a class="slide-link" href="https://mycreativecoder.com/projects/project-4/">AirAir</a>
+                        <a class="slide-link nav-section" data-nav-section-id="2" href="https://mycreativecoder.com/projects/project-4/">AirAir</a>
                       </h2>
                     </div>
 
@@ -903,7 +904,7 @@
 
                   </div>
 
-                  <div class="summary-thumbnail crossfaded" id="crossfaded-3">
+                  <div id="crossfaded-3" class="summary-thumbnail crossfaded" >
                     <a href="https://mycreativecoder.com/projects/project-3/">
                       <img class="slide lazyload" alt="Institut Français de Gestalt-thérapie" loading="lazy"
                         data-srcset="src/media/project-3-1-thumbnail-400w.avif 400w, src/media/project-3-1-thumbnail-600w.avif 600w, src/media/project-3-1-thumbnail-800w.avif 800w, src/media/project-3-1-thumbnail-1000w.avif 1000w, src/media/project-3-1-thumbnail-1200w.avif 1200w, src/media/project-3-1-thumbnail-1600w.avif 1600w"
@@ -927,7 +928,7 @@
                   <div class="summary-content">
                     <div class="summary-title">
                       <h2>
-                        <a class="slide-link" href="https://mycreativecoder.com/projects/project-3/">Institut Français de
+                        <a class="slide-link nav-section" data-nav-section-id="2" href="https://mycreativecoder.com/projects/project-3/">Institut Français de
                           Gestalt-thérapie</a>
                       </h2>
                     </div>
@@ -1011,11 +1012,24 @@
 
                 <div class="summary summary-project summary- summary-has-thumbnail">
 
-                  <div style="filter: drop-shadow(22px 34px 0px #1d1c456b);text-align: center;">
-                    <div style="" class="lightbulb  pt-10">
-                      <svg id="lightbulb-shape" class="animonItem reveal-prehide reveal-delegated" style="filter: drop-shadow(0px 0px 54px #00f3ff);width: 4rem;height: 4rem;" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="64" height="64">
-                        <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5"></path>
-                      </svg>
+                  <div class=" rellax" data-rellax-speed="2" style="text-align: center;">
+                    <div id="lightbulb-container" style="" class="pt-2 reveal-prehide reveal-delegated">
+                      
+                      <svg id="lightbulb-shape" class="lightbulb " fill="currentColor" viewBox="0 0 1024 1024" width="128" height="128" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        
+                        <g><path style="opacity:1" d="M 505.5,28.5 C 594.323,25.1703 666.156,58.1703 721,127.5C 761.65,183.766 776.317,246.099 765,314.5C 759.551,339.397 750.217,362.73 737,384.5C 716.774,414.059 695.774,443.059 674,471.5C 647.789,507.777 631.122,548.111 624,592.5C 622.913,599.46 622.413,606.46 622.5,613.5C 558.166,613.463 493.832,613.463 429.5,613.5C 427.445,579.167 418.945,546.5 404,515.5C 395.339,498.835 385.672,482.835 375,467.5C 356.614,443.448 338.614,419.115 321,394.5C 275.624,323.955 269.957,250.288 304,173.5C 327.702,124.797 362.869,86.63 409.5,59C 439.548,42.2598 471.548,32.0931 505.5,28.5 Z"/></g>
+                        <g><path style="opacity:1" d="M 420.5,626.5 C 491.167,626.333 561.834,626.5 632.5,627C 642.254,631.67 644.754,638.836 640,648.5C 638.062,651.106 635.562,652.939 632.5,654C 561.833,654.667 491.167,654.667 420.5,654C 410.746,649.33 408.246,642.164 413,632.5C 415.114,629.879 417.614,627.879 420.5,626.5 Z"/></g>
+                        <g><path style="opacity:1" d="M 437.5,664.5 C 442.691,664.005 445.191,666.338 445,671.5C 447.269,696.693 449.769,721.86 452.5,747C 451.853,751.737 449.353,753.237 445,751.5C 443.908,748.956 443.241,746.289 443,743.5C 440.763,718.467 438.263,693.467 435.5,668.5C 435.752,666.927 436.418,665.594 437.5,664.5 Z"/></g>
+                        <g><path style="opacity:1" d="M 602.5,664.5 C 607.331,663.667 609.664,665.667 609.5,670.5C 608.029,696.856 606.196,723.189 604,749.5C 601.633,752.932 598.966,753.265 596,750.5C 596.336,726.128 597.669,701.795 600,677.5C 600.049,672.947 600.883,668.614 602.5,664.5 Z"/></g>
+                        <g><path style="opacity:1" d="M 520.5,686.5 C 539.263,685.098 548.43,693.765 548,712.5C 540.965,726.945 530.132,731.112 515.5,725C 506.213,716.784 504.046,706.95 509,695.5C 512.161,691.491 515.994,688.491 520.5,686.5 Z"/></g>
+                        <g><path style="opacity:1" d="M 522.5,690.5 C 524.857,690.337 527.19,690.503 529.5,691C 530.022,691.561 530.355,692.228 530.5,693C 526.582,694.996 522.582,696.996 518.5,699C 516.348,701.424 515.015,704.257 514.5,707.5C 513.998,708.521 513.332,708.688 512.5,708C 510.584,702.476 511.917,697.81 516.5,694C 518.432,692.541 520.432,691.375 522.5,690.5 Z"/></g>
+                        <g><path style="opacity:1" d="M 610.5,778.5 C 554.875,779.492 499.208,779.825 443.5,779.5C 437.409,777.242 434.909,772.908 436,766.5C 436.948,764.43 438.448,762.93 440.5,762C 463.487,760.879 486.487,760.379 509.5,760.5C 509.666,756.486 509.499,752.486 509,748.5C 502.634,742.469 496.634,736.136 491,729.5C 486.22,722.274 482.22,714.608 479,706.5C 478.163,702.705 478.496,699.039 480,695.5C 482.401,694.398 484.901,694.231 487.5,695C 491.707,702.27 495.54,709.77 499,717.5C 508.838,732.437 522.672,738.27 540.5,735C 548.586,737.133 555.086,741.633 560,748.5C 562.5,752.333 565,756.167 567.5,760C 581.833,760.333 596.167,760.667 610.5,761C 616.612,764.293 618.112,769.127 615,775.5C 613.871,777.141 612.371,778.141 610.5,778.5 Z"/></g>
+                        <g><path style="opacity:1" d="M 610.5,778.5 C 610.389,779.117 610.056,779.617 609.5,780C 553.998,780.832 498.665,780.665 443.5,779.5C 499.208,779.825 554.875,779.492 610.5,778.5 Z"/></g>
+                        <g><path style="opacity:1" d="M 454.5,791.5 C 502.33,790.501 550.33,790.168 598.5,790.5C 598.768,792.099 598.434,793.432 597.5,794.5C 597.5,793.5 597.5,792.5 597.5,791.5C 549.833,791.5 502.167,791.5 454.5,791.5 Z"/></g>
+                        <g><path style="opacity:1" d="M 454.5,791.5 C 502.167,791.5 549.833,791.5 597.5,791.5C 597.5,792.5 597.5,793.5 597.5,794.5C 596.144,799.271 594.811,803.937 593.5,808.5C 593.586,807.504 593.252,806.671 592.5,806C 586.917,805.809 581.417,805.309 576,804.5C 537.132,805.426 497.966,805.759 458.5,805.5C 456.97,800.907 455.637,796.241 454.5,791.5 Z"/></g>
+                        <g><path style="opacity:1" d="M 593.5,808.5 C 592.476,813.929 591.143,819.262 589.5,824.5C 588.12,823.294 586.953,823.627 586,825.5C 577.864,836.936 569.364,848.103 560.5,859C 555.965,859.672 551.465,860.506 547,861.5C 542.054,858.264 537.554,854.431 533.5,850C 512.828,848.75 492.161,847.416 471.5,846C 470.099,845.59 468.766,845.09 467.5,844.5C 464.345,831.546 461.345,818.546 458.5,805.5C 497.966,805.759 537.132,805.426 576,804.5C 581.417,805.309 586.917,805.809 592.5,806C 593.252,806.671 593.586,807.504 593.5,808.5 Z"/></g>
+                        <g><path style="opacity:1" d="M 589.5,824.5 C 588.15,834.605 585.316,844.272 581,853.5C 575.698,860.904 568.532,865.404 559.5,867C 536.167,867.667 512.833,867.667 489.5,867C 478.615,862.949 471.282,855.449 467.5,844.5C 468.766,845.09 470.099,845.59 471.5,846C 492.161,847.416 512.828,848.75 533.5,850C 537.554,854.431 542.054,858.264 547,861.5C 551.465,860.506 555.965,859.672 560.5,859C 569.364,848.103 577.864,836.936 586,825.5C 586.953,823.627 588.12,823.294 589.5,824.5 Z"/></g>
+                        </svg>
                     </div>
                 
 
@@ -1026,7 +1040,7 @@
 
                   <div id="inevitable" style="" class="summary-thumbnail full-bleed animonItem reveal-prehide nav-section" data-nav-section-id="2" >
                     
-                    Making awesome ideas <br>go from <i><quote>« impossible »</quote></i> <br>to <strong><strong>INEVITABLE.</strong></strong>
+                    Where bright ideas <br>go from <i><quote>« impossible »</quote></i> <br>to <strong><strong>INEVITABLE.</strong></strong>
                   </div>
                 </div>
 
@@ -1085,7 +1099,7 @@
             
             <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-5 mt-md-0 pt-9" style="padding: 0;">
               <div class="container">
-              <h2 class="animonItem reveal-prehide">We find the <i>solutions</i>.</h2>
+              <h2 class="animonItem reveal-prehide nav-section" data-nav-section-id="3">We find the <i>solutions</i>.</h2>
               <p class="animonItem reveal-prehide fade-in">
 
                 Our solutions are both robust and evolutive, designed to withstand current challenges while seamlessly adapting to future needs and innovations.
@@ -1095,7 +1109,7 @@
 
            
             <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-0 mt-md-0 pt-5 pb-5 animonItem reveal-prehide" style="padding: 0; text-align: center; background: radial-gradient(20em 20em at 48% 43%, rgba(80, 0, 255, 0.1) 0%, transparent 60%);">
-              <img src="src/cube_color.png" class="floating">
+              <div id="cube"><img src="src/cube_color.png" class="floating"></div>
             </div>
           </div>
 
@@ -1104,7 +1118,7 @@
             <div class="col-12 col-md-6 col-lg-6 mb-gutter mt-gutter mt-0 mt-md-0 mb-0 " style="padding: 0;">
               <div class="techstack-halo animonItem reveal-prehide fade-in">
 
-                <ul class="techstack">
+                <ul class="techstack nav-section" data-nav-section-id="3">
                   <li class="techstack_item">
                     <div class="techstack_icon">
                       <svg viewBox="0 0 128 128">
