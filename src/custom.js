@@ -974,14 +974,15 @@ function spa() {
 
         let widgetFrameIsVisibile = widget.classList.contains('open');
         if (!widget || !widgetFrameIsVisibile){
-          document.body.click();
-          // Give the document focus
-          window.focus();
-
           // Remove focus from any focused element
           if (document.activeElement) {
               document.activeElement.blur();
           }
+          document.body.click();
+          // Give the document focus
+          window.focus();
+
+         
         }
         
       }
