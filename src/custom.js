@@ -123,6 +123,7 @@ function scrollToC(element, from, to, duration) {
 let startTime = 0;
 
 function scrollToX(element, xFrom, xTo, t01, speed, duration, motion, lastTimestamp, kickstart) {
+  
   const now = performance.now();
   let deltaTime = (now - lastTimestamp); 
   if (kickstart){
@@ -143,18 +144,23 @@ function scrollToX(element, xFrom, xTo, t01, speed, duration, motion, lastTimest
   isSmoothScrolling = true;
 
   // Update the element's scrollTop based on the easing motion function
-  element.scrollTop = xFrom - (xFrom - xTo) * motion(t01);
+  let tmpDest = xFrom - (xFrom - xTo) * motion(t01);
+  element.scrollTop = tmpDest;
 
   // Update t01 based on frame delta and speed
   //t01 += speed * ratio * 100;
 
   t01 = Math.min(totalDeltaTime / duration, 1);
 
+  //console.log('scrollToX now ' + xFrom + ' ' + xTo + ' ' + tmpDest + ' ' + t01)
+
   //console.log(`DeltaTime: ${deltaTime.toFixed(3)}, Ratio: ${ratio}, t01: ${t01}`);
 
   // Request the next animation frame
   requestAnimationFrame((newTimestamp) => {
+  //setTimeout(() => {
     scrollToX(element, xFrom, xTo, t01, speed, duration, motion, newTimestamp, false);
+  //}, 16);
   });
 }
 
@@ -303,7 +309,11 @@ function spaStart(){
   
 
   defaultScrollDuration = isSafari ? 2000 : 4000;
-  doCustomScroll = isChrome ? false : true;
+
+  // REM : chrome needs CSS : html {scroll-behavior: auto !important;} else it has a bug
+  // where it delays element.scrollTo until almost end of duration then warp speed to destination scroll
+  //doCustomScroll = isChrome ? false : true;
+  doCustomScroll = true;
 
   const hoverableDelay = 3000;
 
@@ -1463,6 +1473,7 @@ function spa() {
     linksProjects[i].addEventListener('click', (event) => {
       if (doCustomScroll){
         event.preventDefault(); // Prevent default link behavior
+        forceSmoothScrolling = true;
       } else {
         location.hash = '';
       }
@@ -1524,6 +1535,7 @@ function spa() {
     linksAbout[i].addEventListener('click', (event) => {
       if (doCustomScroll){
         event.preventDefault(); // Prevent default link behavior
+        forceSmoothScrolling = true;
       }
       
       const sectionId = event.target.getAttribute('data-nav-section-id-target');
@@ -1569,6 +1581,7 @@ function spa() {
   splashDiv.addEventListener('click', (event) => {
     if (doCustomScroll){
       event.preventDefault(); // Prevent default link behavior
+      forceSmoothScrolling = true;
     } else {
       
         location.hash = '';
@@ -2514,6 +2527,7 @@ function spa() {
         cancelSmoothScrollTo = false;
 
         forceShowHeader = false;
+        forceSmoothScrolling = false;
         
         //alert('end')
         setTimeout(function () {
@@ -2543,6 +2557,7 @@ function spa() {
       if (forceSmoothScrolling){
         ///console.log('force')
         event.preventDefault();
+        event.stopPropagation();
         return false
       }
     
@@ -2581,7 +2596,7 @@ function spa() {
       //scrollTimeout = setTimeout(() => {
         const scrollDuration = performance.now() - scrollStartTime;
 
-        if (scrollDuration >= 1000) {
+        if (scrollDuration >= 10000) {
           cancelSmoothScrollTo = true;  // Cancel smooth scrolling
           isSmoothScrolling = false;
           scrollStartTime = null;  // Reset scroll start time
@@ -2589,8 +2604,8 @@ function spa() {
           
         } else {
           forceSmoothScrolling = true;
-          //event.stopPropagation();
-          //event.preventDefault();
+          event.stopPropagation();
+          event.preventDefault();
         }
       //}, 500);
     } else {
