@@ -396,7 +396,7 @@ a:hover {
   background-repeat: repeat-y;
   background-repeat: round;
 
-  background-size: 100% 800px;
+  background-size: 100% auto;
   background-position: 0 100%; /* Initial position */
   animation: bgScrollDown 40s infinite linear;
 }
@@ -1446,13 +1446,20 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
   pointer-events: none;
 }
 
+#astrodude-container {
+  z-index: 2;
+  
+  background-size: 100%;
+  margin-top: 180px;
+ 
+}
 .astrodude {
   pointer-events: auto;
-  background-size: 100%;
+  
   width: 20%;
-  height: 200px;
+  height: 213px;
   position: absolute;
-  background-repeat: no-repeat;
+  
   max-width: 270px;
   margin-left: 60%;
   margin-top: calc(2000px / 100vh); /* Larger multiplier for a smaller margin as vh increases */
@@ -1461,9 +1468,18 @@ body:not(.js-hidden) .reveal-10:not(.reveal-prehide) {
   cursor: pointer;
 }
 
-.astrodude img {
+#astrodude-container::before {
+  content: '';
+  width: 100%;
+  height: 213px;
+  position: absolute;
+  
+  max-width: 270px;
   animation: float 6s ease-in-out infinite;
   animation-delay: 1s;
+  background: url("./astrodude.png") no-repeat;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .donut {
@@ -2007,8 +2023,10 @@ body:not(.js-hidden) #lightbulb-container:not(.reveal-prehide)::before {
   min-width: 100px;;
 }
 
-.paused, .paused > *, .paused > * > * {
+.paused:not(.reveal-prehide), .paused > *:not(.reveal-prehide), .paused > * > *:not(.reveal-prehide) {
   animation-play-state: paused !important;
+  //transition: none;
+  will-change: unset;
 }
 #reel-wrap {
   position: relative;

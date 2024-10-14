@@ -54,6 +54,7 @@ let cancelSmoothScrollTo = false;
 
 let defaultScrollDuration = 4000;
 let isSmoothScrolling = false;
+let forceSmoothScrolling = true;
 
 
 /*
@@ -112,44 +113,52 @@ function scrollToC(element, from, to, duration) {
   if (duration <= 0) return;
   if (typeof from === "object") from = from.offsetTop;
   if (typeof to === "object") to = to.offsetTop;
-  //alert(to)
-  scrollToX(element, from, to, 0, 1 / duration, 20, easeOutCuaic);
+
+  // Initialize the smooth scrolling with a starting timestamp
+  requestAnimationFrame((timestamp) => {
+    scrollToX(element, from, to, 0, (1 / duration), duration, easeOutCuaic, timestamp, true);
+  });
 }
 
-function scrollToX(element, xFrom, xTo, t01, speed, step, motion) {
+let startTime = 0;
+
+function scrollToX(element, xFrom, xTo, t01, speed, duration, motion, lastTimestamp, kickstart) {
+  const now = performance.now();
+  let deltaTime = (now - lastTimestamp); 
+  if (kickstart){
+    startTime = lastTimestamp;
+  }
+  let totalDeltaTime = now - startTime;
   
-  //scrollLock = true;
-  if (t01 < 0 || t01 > 1 || speed <= 0 || cancelSmoothScrollTo) {
+  // Handle initial frame to avoid large delta on kickstart
+  let ratio = kickstart ? 1 : deltaTime / 16.666; // Normalize deltaTime for 60fps
+  
+  // Stop condition when t01 is out of bounds or animation is canceled
+  if (t01 >= 1 || cancelSmoothScrollTo) {
     element.scrollTop = xTo;
-    // update current section when scrolling is over to prevents problems when scrolling is interupted
-    
-    //alert(section.id)
-    
-    //alert('stop ' + t01 + 'speed ' + speed)
     isSmoothScrolling = false;
     return;
   }
-  element.scrollTop = xFrom - (xFrom - xTo) * motion(t01);
-  t01 += speed * step;
-  //debugger;
-  //alert(cancelSmoothScrollTo)
-  //if (!cancelSmoothScrollTo){
-    isSmoothScrolling = true;
-    requestAnimationFrame(() => {
-      isSmoothScrolling = true;
-      scrollToX(element, xFrom, xTo, t01, speed, step, motion);
-    });
-    /*
-    setTimeout(function() {
-      //scrollLock = true;
-      scrollToX(element, xFrom, xTo, t01, speed, step, motion);
-    }, step);*/
-  //}
-}
-  
-  
-//}
 
+  isSmoothScrolling = true;
+
+  // Update the element's scrollTop based on the easing motion function
+  element.scrollTop = xFrom - (xFrom - xTo) * motion(t01);
+
+  // Update t01 based on frame delta and speed
+  //t01 += speed * ratio * 100;
+
+  t01 = Math.min(totalDeltaTime / duration, 1);
+
+  //console.log(`DeltaTime: ${deltaTime.toFixed(3)}, Ratio: ${ratio}, t01: ${t01}`);
+
+  // Request the next animation frame
+  requestAnimationFrame((newTimestamp) => {
+    scrollToX(element, xFrom, xTo, t01, speed, duration, motion, newTimestamp, false);
+  });
+}
+
+// Easing function
 function easeOutCuaic(t) {
   t--;
   return t * t * t + 1;
@@ -294,7 +303,7 @@ function spaStart(){
   
 
   defaultScrollDuration = isSafari ? 2000 : 4000;
-  doCustomScroll = isChrome || isSafari ? false : true;
+  doCustomScroll = isChrome ? false : true;
 
   const hoverableDelay = 3000;
 
@@ -750,28 +759,7 @@ function spa() {
   /* get the current page position */
   let prevScrollpos = window.pageYOffset;
 
-  /* monitor when the page is being scrolled */
-  window.addEventListener('scroll', () => {
-    /* check if the scroll offset is passed */
-    if (window.pageYOffset > scrollOffset || forceShowHeader) {
-      /* get the new page position after scrolling */
-      let currentScrollPos = window.pageYOffset;
-      /* check the new page position with the old position */
-      if (prevScrollpos > currentScrollPos) {
-        /* if scrolling UP, show the sticky element */
-        headerElem.style.top = '0';
-      } else {
-        /* if scrolling DOWN, hide the sticky element */
-        headerElem.style.top = '-100%';
-      }
-      /* set the page position, so it can be checked the next time */
-      prevScrollpos = currentScrollPos;
-    }
-
-    detectScrollDirection();
-
-    //adjustSunglasses();
-  });
+  
 
   
 
@@ -969,7 +957,7 @@ function spa() {
 
     if (!document.hasFocus() || e.repeat || modal.classList.contains('active') || isScrollingCurrently) {
 
-      if (!document.hasFocus()){
+      if (!document.hasFocus()){ // trying to get focus back after tawk chat widget is minimized, doesnt work
         let widget = document.querySelector('.widget-visible iframe:nth-of-type(2)');
 
         let widgetFrameIsVisibile = widget.classList.contains('open');
@@ -1088,7 +1076,7 @@ function spa() {
   const MINIMUM_DISPLAY_TIME = 4000; // 4s
   const BARE_MINIMUM_DISPLAY_TIME = 1000; // 4s
 
-  const astrodudetip = tippy('#astrodude', {
+  const astrodudetip = tippy('#astrodude-container', {
     content: "Hey there !",
     theme: 'astro',
     allowHTML: true,
@@ -1101,16 +1089,17 @@ function spa() {
     onShow(instance) {
       // Record the time the tooltip is shown
       //if (!lenis.isScrolling){
+      if (!isSmoothScrolling && !isScrollingCurrently){
         // Record the time the tooltip is shown
         instance._startTime = Date.now();
         // Initialize first state to control the sentence flow
         if (instance._state == undefined) {
           instance._state = 'first';
         }
-      //} else {
+      } else {
         // Cancel the current show request
-      //  return false;
-      //}
+        return false;
+      }
       
     },
     onHide(instance) {
@@ -1179,12 +1168,13 @@ function spa() {
     zIndex: 4,
     onShow(instance) {
       //if (!lenis.isScrolling){
+      if (!isSmoothScrolling && !isScrollingCurrently){  
         // Record the time the tooltip is shown
         instance._startTime = Date.now();
-      //} else {
+      } else {
         // Cancel the current show request
-        //return false;
-      //}
+        return false;
+      }
       
     },
     onHide(instance) {
@@ -1241,15 +1231,30 @@ function spa() {
 
   
 
-  function debounce(func){
-    var timer;
-    return function(event){
-      if(timer) clearTimeout(timer);
-      timer = setTimeout(func,100,event);
-    };
-  }
+  const debounce = (fn) => {
 
-  window.addEventListener('resize' ,debounce(function(e) {
+    // This holds the requestAnimationFrame reference, so we can cancel it if we wish
+    let frame;
+  
+    // The debounce function returns a new function that can receive a variable number of arguments
+    return (...params) => {
+      
+      // If the frame variable has been defined, clear it now, and queue for next frame
+      if (frame) { 
+        cancelAnimationFrame(frame);
+      }
+  
+      // Queue our function call for the next frame
+      frame = requestAnimationFrame(() => {
+        
+        // Call our function and pass any params we received
+        fn(...params);
+      });
+  
+    } 
+  };
+
+  window.addEventListener('resize' ,debounce(function() {
     //if (document.body.classList.contains('resizing')){
           //document.body.classList.remove('resizing')
           isResizing = false;
@@ -1574,9 +1579,15 @@ function spa() {
     revealIndex = 0;
     //let target = document.getElementById('projects-reel');
     //scroll.scrollTo(target, defaultScrollDuration);
-    let target = document.getElementById('reel')
-    scrollToCustom(target, defaultScrollDuration)
     slidesContainer.classList.add('locked');
+    requestAnimationFrame(() => {
+    let target = document.getElementById('reel')
+      scrollToCustom(target, defaultScrollDuration)
+      
+
+      const sectionId = 2;
+      setActiveMenuItem(sectionId);
+    });
     /*
     document.body.classList.add('blink');
     setTimeout(function () {
@@ -1585,9 +1596,11 @@ function spa() {
     */
 
     //lenis.scrollTo('#projects-reel', { lerp: 0.02, lock: true });
-
-    setTimeout(() => { astrodudeInstance.show(); }, 6500);
-    setTimeout(() => { astrodudeInstance.hide(); }, 16000);
+    if (astrodudeInstance){
+      setTimeout(() => { astrodudeInstance.show(); }, 6500);
+      setTimeout(() => { astrodudeInstance.hide(); }, 16000);
+    }
+    
     
     /*
     // if mouse is already/still hovering a slide at this point, start crossfading 
@@ -2383,9 +2396,8 @@ function spa() {
   // Initialize current rotation
   let currentRotation = 0;
 
-
-  window.addEventListener('scroll', (event) => {
-    
+  function customScroll(event, astrodudeInstance, donutInstance){
+    //alert('sc')
     // Clear the timeout if it's already set
     clearTimeout(isScrolling);
     //scrollFunction();
@@ -2397,9 +2409,41 @@ function spa() {
     }
 
     isScrollingCurrently = true;
+    
     // hide tooltips on scroll
-    astrodudeInstance.hide();
-    donutInstance.hide();
+    if (astrodudeInstance){
+      astrodudeInstance.hide();
+    }
+    if (donutInstance){
+      donutInstance.hide();
+    }
+    
+    
+     /* check if the scroll offset is passed */
+     //alert(window.pageYOffset + ' / ' + scrollOffset)
+     //if (window.pageYOffset > scrollOffset || forceShowHeader) {
+    if (window.pageYOffset > scrollOffset) {
+      
+      /* get the new page position after scrolling */
+      let currentScrollPos = window.pageYOffset;
+      /* check the new page position with the old position */
+      //if (prevScrollpos > currentScrollPos || forceShowHeader) {
+      if (prevScrollpos > currentScrollPos) {
+        /* if scrolling UP, show the sticky element */
+        headerElem.style.top = '0';
+      } else {
+        /* if scrolling DOWN, hide the sticky element */
+        headerElem.style.top = '-100%';
+      }
+      /* set the page position, so it can be checked the next time */
+      prevScrollpos = currentScrollPos;
+    }
+    
+    if ((forceShowHeader || window.pageYOffset == 0) && headerElem.style.top !== '0'){
+      headerElem.style.top = '0';
+    }
+
+    detectScrollDirection();
     /*
     // Get computed styles of reelwrap's ::before pseudo-element
     let computedStyle = window.getComputedStyle(reelwrap, "::before");
@@ -2416,14 +2460,14 @@ function spa() {
         //yPosition -= 0.06 * (window.innerWidth / window.innerHeight);
         let scrollTarget = document.getElementById('scroll-target')
         scrollTarget.style.marginTop = '-1000px';
-        scrollTarget.style.position = 'absolute';
+        //scrollTarget.style.position = 'absolute';
 
         //currentRotation -= 5;
       } else {
         //yPosition += 0.06 * (window.innerWidth / window.innerHeight);
         let scrollTarget = document.getElementById('scroll-target')
         scrollTarget.style.marginTop = '20vh';
-        scrollTarget.style.position = 'absolute';
+        //scrollTarget.style.position = 'absolute';
         //currentRotation += 5;
       }
       
@@ -2468,9 +2512,10 @@ function spa() {
         isScrollingCurrently = false;
         revealIndex = 0;  // Reset index on scroll end
         cancelSmoothScrollTo = false;
+
+        forceShowHeader = false;
         
-
-
+        //alert('end')
         setTimeout(function () {
           //if (!lenis.isScrolling){
           if (!isSmoothScrolling){
@@ -2494,19 +2539,72 @@ function spa() {
         //event.preventDefault();
         //return false
       }
-    
-    
-  });
 
+      if (forceSmoothScrolling){
+        ///console.log('force')
+        event.preventDefault();
+        return false
+      }
+    
+    
+    
+  }
+
+  window.addEventListener('scroll', () => debounce(customScroll)(event, astrodudeInstance, donutInstance), { passive: true });
+
+
+  // Doesnt work as intended, would need to hijack browser default scroll behavior
+  // Not sure if better or worst than nothing :
   // Event listener to stop default scroll behavior when necessary
+  let scrollStartTime = null; // Track the start time of the wheel event
+  let scrollTimeout;
+
   window.addEventListener('wheel', (event) => {
-    if (scrollLock){
-      event.preventDefault(); // Prevent default scroll behavior
+    
+    //if (scrollLock || isSmoothScrolling) {
+      //event.preventDefault(); // Prevent default scroll behavior while locked
+    //}
+    
+    // If smooth scrolling is active, track the start of user scrolling
+    if (isSmoothScrolling) {
+      event.preventDefault(); // Prevent default scroll behavior while locked
+      event.stopPropagation();
+      if (!scrollStartTime) {
+        scrollStartTime = performance.now(); // Mark the start time of user scroll
+        forceSmoothScrolling = true;
+      }
+
+      // Clear previous timeout if user scrolls again before the 500ms delay
+      clearTimeout(scrollTimeout);
+
+      // Set a timeout to check if the user has been scrolling for more than 500ms
+      //scrollTimeout = setTimeout(() => {
+        const scrollDuration = performance.now() - scrollStartTime;
+
+        if (scrollDuration >= 1000) {
+          cancelSmoothScrollTo = true;  // Cancel smooth scrolling
+          isSmoothScrolling = false;
+          scrollStartTime = null;  // Reset scroll start time
+          forceSmoothScrolling = false;
+          
+        } else {
+          forceSmoothScrolling = true;
+          //event.stopPropagation();
+          //event.preventDefault();
+        }
+      //}, 500);
+    } else {
+      //console.log('NOT')
+      //event.stopPropagation();
+      // If not smooth scrolling, cancel immediately
+      //cancelSmoothScrollTo = true;
+      //isSmoothScrolling = false;
     }
-    cancelSmoothScrollTo = true;
-    isSmoothScrolling = false;
   }, { passive: false });
 
+  window.addEventListener('wheelend', () => {
+    scrollStartTime = null; // Reset when wheel event ends (if detectable)
+  });
   window.addEventListener('touchmove', (event) => {
     if (scrollLock){
       event.preventDefault(); // Prevent default scroll behavior on touch devices
@@ -2516,3 +2614,5 @@ function spa() {
   }, { passive: false });
 
 }
+
+
