@@ -311,7 +311,7 @@ function spaStart(){
   defaultScrollDuration = isSafari ? 2000 : 4000;
 
   // REM : chrome needs CSS : html {scroll-behavior: auto !important;} else it has a bug
-  // where it delays element.scrollTo until almost end of duration then warp speed to destination scroll
+  // where it delays element.scrollTo until almost end of duration then warp speed to destination scroll position
   //doCustomScroll = isChrome ? false : true;
   doCustomScroll = true;
 
@@ -1533,6 +1533,11 @@ function spa() {
   for (let i=0; i < linksAbout.length; i++){
     
     linksAbout[i].addEventListener('click', (event) => {
+
+      if (isSmoothScrolling){
+        return
+      }
+      
       if (doCustomScroll){
         event.preventDefault(); // Prevent default link behavior
         forceSmoothScrolling = true;
@@ -1542,7 +1547,8 @@ function spa() {
       if (!doCustomScroll){
         location.hash = '';
       }
-        
+       
+      
        // return
       //} else {
         
@@ -2439,31 +2445,21 @@ function spa() {
     }
     
     
-     /* check if the scroll offset is passed */
-     //alert(window.pageYOffset + ' / ' + scrollOffset)
-     //if (window.pageYOffset > scrollOffset || forceShowHeader) {
-    if (window.pageYOffset > scrollOffset) {
+    detectScrollDirection();
+
+    if (scrollDirection === 'down'){
+      /* if scrolling DOWN, hide the sticky element */
+      headerElem.style.top = '-100%';
       
-      /* get the new page position after scrolling */
-      let currentScrollPos = window.pageYOffset;
-      /* check the new page position with the old position */
-      //if (prevScrollpos > currentScrollPos || forceShowHeader) {
-      if (prevScrollpos > currentScrollPos) {
-        /* if scrolling UP, show the sticky element */
-        headerElem.style.top = '0';
-      } else {
-        /* if scrolling DOWN, hide the sticky element */
-        headerElem.style.top = '-100%';
-      }
-      /* set the page position, so it can be checked the next time */
-      prevScrollpos = currentScrollPos;
+    } else {
+      
+      headerElem.style.top = '0';
     }
     
     if ((forceShowHeader || window.pageYOffset == 0) && headerElem.style.top !== '0'){
       headerElem.style.top = '0';
     }
 
-    detectScrollDirection();
     /*
     // Get computed styles of reelwrap's ::before pseudo-element
     let computedStyle = window.getComputedStyle(reelwrap, "::before");
