@@ -1569,9 +1569,9 @@ function spa() {
       if (window.getComputedStyle(document.getElementById('toggle-menu-main-mobile')).display != 'none'){
         document.getElementById('close-overlay').click();
       }
-      let target = document.getElementById('contact-us')
+      //let target = document.getElementById('contact-us')
       
-      scrollToCustom(target, defaultScrollDuration)
+      //scrollToCustom(target, defaultScrollDuration)
       
       /*
       //lenis.scrollTo('#contact-us', { lerp: 0.05, easing: 'ease-in', lock: true});
