@@ -1538,7 +1538,7 @@ function spa() {
 
       if (doCustomScroll){
         event.preventDefault(); // Prevent default link behavior
-        if (isSmoothScrolling){
+        if (!isSmoothScrolling){
           forceSmoothScrolling = true;
         }
       }
@@ -1591,7 +1591,12 @@ function spa() {
   splashDiv.addEventListener('click', (event) => {
     if (doCustomScroll){
       event.preventDefault(); // Prevent default link behavior
-      forceSmoothScrolling = true;
+      if (!isSmoothScrolling){
+        forceSmoothScrolling = true;
+      }
+      if (isSmoothScrolling){
+        return
+      }
     } else {
       
         location.hash = '';
@@ -2598,6 +2603,7 @@ function spa() {
     if (isSmoothScrolling) {
       event.preventDefault(); // Prevent default scroll behavior while locked
       event.stopPropagation();
+      /*
       if (!scrollStartTime) {
         scrollStartTime = performance.now(); // Mark the start time of user scroll
         forceSmoothScrolling = true;
@@ -2621,6 +2627,7 @@ function spa() {
           event.stopPropagation();
           event.preventDefault();
         }
+        */
       //}, 500);
     } else {
       //console.log('NOT')
