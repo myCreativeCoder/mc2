@@ -1534,13 +1534,17 @@ function spa() {
     
     linksAbout[i].addEventListener('click', (event) => {
 
-      if (isSmoothScrolling){
-        return
-      }
       
+
       if (doCustomScroll){
         event.preventDefault(); // Prevent default link behavior
-        forceSmoothScrolling = true;
+        if (isSmoothScrolling){
+          forceSmoothScrolling = true;
+        }
+      }
+
+      if (isSmoothScrolling){
+        return
       }
       
       const sectionId = event.target.getAttribute('data-nav-section-id-target');
@@ -1640,8 +1644,15 @@ function spa() {
   for (let i=0; i < linksHome.length; i++){
     
     linksHome[i].addEventListener('click', (event) => {
+
+      
+      
       if (doCustomScroll){
         event.preventDefault(); // Prevent default link behavior
+      }
+
+      if (isSmoothScrolling){
+        return
       }
      
       //lenis.scrollTo('#home', { lerp: 0.025, easing: 'ease-in', lock: true });
