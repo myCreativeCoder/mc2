@@ -2155,11 +2155,18 @@ function spa() {
       let client = childSlide.querySelector('.summary-subtitle').innerHTML;
       let desc = childSlide.querySelector('.summary-description').innerHTML;
 
-      modalDescription.innerHTML = `
-                  <h2 class='modal-title'>${title}</h2>
-                  ${client}<br/>
-                  <div class='desc'>${desc}</div>
-              `;
+      desc = desc.replaceAll('<span class="creator"></span>', 'Amutio Sacha');
+      
+
+      // Create a temporary container to handle the innerHTML without <p> issues
+      const template = document.createElement('template');
+      template.innerHTML = `
+          <h2 class='modal-title'>${title}</h2>
+          ${client}<br/>
+          <div class='desc'>${desc}</div>
+      `;
+
+      modalDescription.innerHTML = template.innerHTML;
 
       modal.classList.remove('show-controls');
       modal.style.visibility = "visible";
@@ -2596,7 +2603,7 @@ function spa() {
       //scrollTimeout = setTimeout(() => {
         const scrollDuration = performance.now() - scrollStartTime;
 
-        if (scrollDuration >= 10000) {
+        if (scrollDuration >= 10000) { // id rather use 1000ms but it doesnt work well, so use 10000 (actually pretty much disables user scrolling while forceSmoothScrolling = true)
           cancelSmoothScrollTo = true;  // Cancel smooth scrolling
           isSmoothScrolling = false;
           scrollStartTime = null;  // Reset scroll start time
