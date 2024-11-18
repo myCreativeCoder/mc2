@@ -1038,7 +1038,7 @@ function spa() {
   */
 
   // handle the onclick event to open the tawk widget
-  document.getElementById('mc_embed_signup').onclick = function (event) {
+  document.getElementById('ct_btn').onclick = function (event) {
     /*
     //Handle the onclick event to generate the mailto link dynamically
       event.preventDefault(); // Prevent default anchor behavior
